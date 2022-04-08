@@ -8,11 +8,11 @@ namespace MusicProject.Models
 {
     public class UserModel
     {
-        private int _userID;
+        private int _ID;
 
-        private int _userWeight;
+        private int _weight;
 
-        private string _userName;
+        private string _name;
 
         private string _password;
 

@@ -8,9 +8,9 @@ namespace MusicProject.Models
 {
     public class SongModel
     {
-        private int _songID;
+        private int _ID;
 
-        private string _songName;
+        private string _name;
 
         private AlbumModel _album;
 
