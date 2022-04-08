@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MusicProject
 {
-    public partial class GoodVibes : Form
+    public partial class MainView : Form
     {
-        public GoodVibes()
+        public MainView()
         {
             InitializeComponent();
         }

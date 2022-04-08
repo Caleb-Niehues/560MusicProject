@@ -16,7 +16,7 @@ namespace MusicProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GoodVibes());
+            Application.Run(new MainView());
         }
     }
 }

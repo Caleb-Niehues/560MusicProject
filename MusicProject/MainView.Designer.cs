@@ -1,7 +1,7 @@
 ﻿
 namespace MusicProject
 {
-    partial class GoodVibes
+    partial class MainView
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace MusicProject
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "GoodVibes";
+            this.Text = "GoodVibes.exe";
         }
 
         #endregion
