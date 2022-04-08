@@ -8,14 +8,16 @@ namespace MusicProject.Models
 {
     public class SongModel
     {
-        private int _reviewID;
+        private int _ID;
 
-        private UserModel _user;
+        private string _name;
 
         private AlbumModel _album;
 
-        private string _albumComment;//needs to be nullable - though the empty string could suffice
+        private GenreModel _genre; //might end up being enum
 
+        private TimeSpan _length;
 
+        private int _trackNumber;
     }
 }

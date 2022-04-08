@@ -14,17 +14,19 @@ namespace MusicProject.Models
         /// <summary>
         /// ID number of the user
         /// </summary>
-        private int _userID;
+
+        private int _ID;
 
         /// <summary>
         /// how important the user is to the industry, bigger the number the more important they are
         /// </summary>
-        private int _userWeight;
+
+        private int _weight;
 
         /// <summary>
         /// username of the user
         /// </summary>
-        private string _userName;
+        private string _name;
 
         /// <summary>
         /// password of the user
