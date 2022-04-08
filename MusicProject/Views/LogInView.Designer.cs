@@ -1,7 +1,6 @@
-﻿
-namespace MusicProject
+﻿namespace MusicProject.Views
 {
-    partial class MainView
+    partial class LogInView
     {
         /// <summary>
         /// Required designer variable.
@@ -32,10 +31,9 @@ namespace MusicProject
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "GoodVibes.exe";
+            this.Text = "LogInView";
         }
 
         #endregion
     }
 }
-

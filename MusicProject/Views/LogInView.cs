@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MusicProject
+namespace MusicProject.Views
 {
-    public partial class MainView : Form
+    public partial class LogInView : Form
     {
-        public MainView()
+        public LogInView()
         {
             InitializeComponent();
         }

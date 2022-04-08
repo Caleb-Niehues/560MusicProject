@@ -52,7 +52,7 @@
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
     <Compile Include="Models\CertificationModel.cs" />
-    <Compile Include="MainController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\ProducerModel.cs" />
@@ -60,14 +60,20 @@
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="MainView.cs">
+    <Compile Include="Views\LogInView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <Compile Include="Views\LogInView.Designer.cs">
+      <DependentUpon>LogInView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
