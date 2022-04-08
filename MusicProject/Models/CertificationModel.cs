@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MusicProject.Models
 {
-    public class CertificationModel
+    public class CertificationModel//might become an enum
     {
+        private int _ID;
+
+        private string _name;
     }
 }

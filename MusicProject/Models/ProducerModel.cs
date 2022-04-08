@@ -8,5 +8,8 @@ namespace MusicProject.Models
 {
     public class ProducerModel
     {
+        private int _ID;
+
+        private string _name;
     }
 }

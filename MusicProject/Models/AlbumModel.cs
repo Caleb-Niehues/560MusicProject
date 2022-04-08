@@ -8,5 +8,8 @@ namespace MusicProject.Models
 {
     public class AlbumModel
     {
+        private int _ID;
+
+        private string _title
     }
 }

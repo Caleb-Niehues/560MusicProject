@@ -8,5 +8,14 @@ namespace MusicProject.Models
 {
     public class PersonModel
     {
+        private int _ID;
+
+        private string _name;
+
+        private DateTime _birthDate;
+
+        private DateTime? _deathDate;
+
+        private string HomeRegion;
     }
 }
