@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicProject.Models
+﻿namespace MusicProject.Models
 {
     /// <summary>
     /// model class for a genre

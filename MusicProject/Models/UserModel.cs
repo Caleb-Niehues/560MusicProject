@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicProject.Models
 {
@@ -39,7 +35,7 @@ namespace MusicProject.Models
         private DateTime _dateAdded;
 
         /// <summary>
-        /// date and time a post was deleted by the user
+        /// date and time a post was deleted by the user, hasn't been deleted if null
         /// </summary>
         private DateTime? _dateDeleted;
     }
