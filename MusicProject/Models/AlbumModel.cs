@@ -20,5 +20,26 @@ namespace MusicProject.Models
         /// title of the album
         /// </summary>
         private string _title;
+
+        /// <summary>
+        /// release date of an album
+        /// </summary>
+        private DateTime _releaseDate;
+
+        /// <summary>
+        /// artist of the album
+        /// </summary>
+        private ArtistModel _artist;
+
+        /// <summary>
+        /// list of all producers involved in the album
+        /// </summary>
+        private List<ProducerModel> _producers;
+
+        /// <summary>
+        /// certification of the album
+        /// </summary>
+        private CertificationModel certification; //might become an enum
+        
     }
 }
