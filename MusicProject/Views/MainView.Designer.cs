@@ -34,6 +34,8 @@
             this.uxRecordLabelRoster = new System.Windows.Forms.Button();
             this.uxUserLabel = new System.Windows.Forms.Label();
             this.uxLookUpText = new System.Windows.Forms.TextBox();
+            this.uxGetArtistReviews = new System.Windows.Forms.Button();
+            this.uxAddToDB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxLogIn
@@ -90,11 +92,31 @@
             this.uxLookUpText.Text = "Look up song/album/artist";
             this.uxLookUpText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uxLookUpText_KeyDown);
             // 
+            // uxGetArtistReviews
+            // 
+            this.uxGetArtistReviews.Location = new System.Drawing.Point(13, 160);
+            this.uxGetArtistReviews.Name = "uxGetArtistReviews";
+            this.uxGetArtistReviews.Size = new System.Drawing.Size(196, 23);
+            this.uxGetArtistReviews.TabIndex = 6;
+            this.uxGetArtistReviews.Text = "Get artist reviews";
+            this.uxGetArtistReviews.UseVisualStyleBackColor = true;
+            // 
+            // uxAddToDB
+            // 
+            this.uxAddToDB.Location = new System.Drawing.Point(50, 254);
+            this.uxAddToDB.Name = "uxAddToDB";
+            this.uxAddToDB.Size = new System.Drawing.Size(75, 23);
+            this.uxAddToDB.TabIndex = 7;
+            this.uxAddToDB.Text = "Add to DB";
+            this.uxAddToDB.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.uxAddToDB);
+            this.Controls.Add(this.uxGetArtistReviews);
             this.Controls.Add(this.uxLookUpText);
             this.Controls.Add(this.uxUserLabel);
             this.Controls.Add(this.uxRecordLabelRoster);
@@ -116,5 +138,7 @@
         private System.Windows.Forms.Button uxRecordLabelRoster;
         private System.Windows.Forms.Label uxUserLabel;
         private System.Windows.Forms.TextBox uxLookUpText;
+        private System.Windows.Forms.Button uxGetArtistReviews;
+        private System.Windows.Forms.Button uxAddToDB;
     }
 }
