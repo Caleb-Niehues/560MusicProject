@@ -16,5 +16,10 @@ namespace MusicProject.Views
         {
             InitializeComponent();
         }
+
+        private void uxLookUpText_KeyDown(object sender, KeyEventArgs e)
+        {
+            //check if enter key pressed and run search
+        }
     }
 }
