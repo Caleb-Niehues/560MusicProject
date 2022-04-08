@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace MusicProject.Models
 {
+    /// <summary>
+    /// model class for an album
+    /// </summary>
     public class AlbumModel
     {
+        /// <summary>
+        /// ID number of the album
+        /// </summary>
         private int _ID;
 
-        private string _title
+        /// <summary>
+        /// title of the album
+        /// </summary>
+        private string _title;
     }
 }
