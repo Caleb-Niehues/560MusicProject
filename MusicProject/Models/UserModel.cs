@@ -8,35 +8,63 @@ namespace MusicProject.Models
     public class UserModel
     {
         /// <summary>
+        /// 
+        /// </summary>
+        private int _ID;
+
+        /// <summary>
         /// ID number of the user
         /// </summary>
+        public int ID => _ID;
 
-        private int _ID;
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _weight;
 
         /// <summary>
         /// how important the user is to the industry, bigger the number the more important they are
         /// </summary>
-
-        private int _weight;
+        public int Weight => _weight;
 
         /// <summary>
-        /// username of the user
+        /// 
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// password of the user
+        /// username of the user
+        /// </summary>
+        public string Name => _name;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _password;
 
         /// <summary>
-        /// date an time a post was added by the user
+        /// The user's password - not at all how it actually should be done, this would only be server-side hash info in practice
+        /// </summary>
+        public string Password => Password;
+
+        /// <summary>
+        /// 
         /// </summary>
         private DateTime _dateAdded;
 
         /// <summary>
-        /// date and time a post was deleted by the user, hasn't been deleted if null
+        /// date an time a post was added by the user
+        /// </summary>
+        public DateTime DateAdded => _dateAdded;
+
+        /// <summary>
+        /// 
         /// </summary>
         private DateTime? _dateDeleted;
+
+        /// <summary>
+        /// date and time a post was deleted by the user, hasn't been deleted if null
+        /// </summary>
+        public DateTime? DateDeleted => _dateDeleted;
     }
 }

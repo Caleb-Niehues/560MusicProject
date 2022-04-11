@@ -52,9 +52,9 @@
     <Compile Include="Models\IDatabaseItem.cs" />
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
-    <Compile Include="Models\CertificationModel.cs" />
+    <Compile Include="Models\Certification.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Models\GenreModel.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\ProducerModel.cs" />
     <Compile Include="Models\RecordLabelModel.cs" />

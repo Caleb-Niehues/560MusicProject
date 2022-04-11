@@ -8,18 +8,33 @@ namespace MusicProject.Models
     public class ArtistModel
     {
         /// <summary>
-        /// ID number for an artist
+        /// 
         /// </summary>
         private int _ID;
 
         /// <summary>
-        /// name of an artist
+        /// ID number for an artist
+        /// </summary>
+        public int ID => _ID;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// the members in the artist group or the artist person himself
+        /// name of an artist
+        /// </summary>
+        public string Name => _name;
+
+        /// <summary>
+        /// 
         /// </summary>
         private List<PersonModel> _members;
+
+        /// <summary>
+        /// the members in the artist group or the artist person himself
+        /// </summary>
+        public List<PersonModel> Members => _members;
     }
 }

@@ -9,34 +9,63 @@ namespace MusicProject.Models
     public class AlbumModel
     {
         /// <summary>
-        /// ID number of the album
+        /// backing field for ID
         /// </summary>
         private int _ID;
 
         /// <summary>
-        /// title of the album
+        /// ID number of the album
+        /// </summary>
+        public int ID => _ID;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _title;
 
         /// <summary>
-        /// release date of an album
+        /// title of the album
+        /// </summary>
+        public string Title => _title;
+
+        /// <summary>
+        /// 
         /// </summary>
         private DateTime _releaseDate;
 
         /// <summary>
-        /// artist of the album
+        /// release date of an album
+        /// </summary>
+        public DateTime ReleaseDate => _releaseDate;
+
+        /// <summary>
+        /// 
         /// </summary>
         private ArtistModel _artist;
 
         /// <summary>
-        /// list of all producers involved in the album
+        /// artist of the album
+        /// </summary>
+        public ArtistModel Artist => _artist;
+
+        /// <summary>
+        /// 
         /// </summary>
         private List<ProducerModel> _producers;
 
         /// <summary>
+        /// list of all producers involved in the album
+        /// </summary>
+        public List<ProducerModel> Producers => _producers;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Certification _certification; //might become an enum
+
+        /// <summary>
         /// certification of the album
         /// </summary>
-        private CertificationModel certification; //might become an enum
-        
+        public Certification Certification => _certification;
     }
 }

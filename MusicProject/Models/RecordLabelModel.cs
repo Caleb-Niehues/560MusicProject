@@ -8,28 +8,53 @@ namespace MusicProject.Models
     public class RecordLabelModel
     {
         /// <summary>
-        /// ID number of a record label
+        /// 
         /// </summary>
         private int _ID;
 
         /// <summary>
-        /// name of the record label
+        /// ID number of a record label
+        /// </summary>
+        public int ID => _ID;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// founding date of the record label
+        /// name of the record label
+        /// </summary>
+        public string Name => _name;
+
+        /// <summary>
+        /// 
         /// </summary>
         private DateTime _dateFounded;
 
         /// <summary>
-        /// closing time of the record label, could be nullable
+        /// founding date of the record label
+        /// </summary>
+        public DateTime DateFounded => _dateFounded;
+
+        /// <summary>
+        /// 
         /// </summary>
         private DateTime? _dateClosed;
 
         /// <summary>
-        /// location of the record label
+        /// closing time of the record label, could be nullable
+        /// </summary>
+        public DateTime? DateClosed => _dateClosed;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _location;
+
+        /// <summary>
+        /// location of the record label, might turn into a home region model and refactor this and person homeregion
+        /// </summary>
+        public string Location => _location;
     }
 }

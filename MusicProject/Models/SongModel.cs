@@ -8,33 +8,63 @@ namespace MusicProject.Models
     public class SongModel
     {
         /// <summary>
-        /// ID number for the song
+        /// 
         /// </summary>
         private int _ID;
 
         /// <summary>
-        /// name of the song
+        /// ID number for the song
+        /// </summary>
+        public int ID => _ID;
+
+        /// <summary>
+        /// 
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// album from where the song comes from
+        /// name of the song
+        /// </summary>
+        public string Name => _name;
+
+        /// <summary>
+        /// 
         /// </summary>
         private AlbumModel _album;
 
         /// <summary>
-        /// genre from where the song comes from
+        /// album from where the song comes from, perhaps have a list of songs in the album class instead?
         /// </summary>
-        private GenreModel _genre; //might end up being enum
+        public AlbumModel Album => _album;
 
         /// <summary>
-        /// time length of the song
+        /// 
+        /// </summary>
+        private Genre _genre; //might end up being enum
+
+        /// <summary>
+        /// genre from where the song comes from
+        /// </summary>
+        public Genre Genre => _genre;
+
+        /// <summary>
+        /// 
         /// </summary>
         private TimeSpan _length;
 
         /// <summary>
-        /// number of the song on the album
+        /// time length of the song
+        /// </summary>
+        public TimeSpan Length => _length;
+
+        /// <summary>
+        /// 
         /// </summary>
         private int _trackNumber;
+
+        /// <summary>
+        /// number of the song on the album, possibly redundant with a procedurally generated ID
+        /// </summary>
+        public int TrackNumber => _trackNumber;
     }
 }
