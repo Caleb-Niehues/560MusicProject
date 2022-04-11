@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class RecordLabelModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -56,5 +57,6 @@ namespace MusicProject.Models
         /// location of the record label, might turn into a home region model and refactor this and person homeregion
         /// </summary>
         public string Location => _location;
+        #endregion
     }
 }

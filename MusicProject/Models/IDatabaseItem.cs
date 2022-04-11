@@ -11,5 +11,8 @@ namespace MusicProject.Models
     /// </summary>
     public interface IDatabaseItem
     {
+        #region Basic Fields
+
+        #endregion
     }
 }

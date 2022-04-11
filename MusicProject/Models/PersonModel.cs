@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class PersonModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -56,5 +57,6 @@ namespace MusicProject.Models
         /// hometown/home region of the artist
         /// </summary>
         public string HomeRegion => _homeRegion;
+        #endregion
     }
 }

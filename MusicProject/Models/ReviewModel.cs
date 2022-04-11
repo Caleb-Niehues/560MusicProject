@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class ReviewModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -76,5 +77,6 @@ namespace MusicProject.Models
         /// time and date of when the review was deleted
         /// </summary>
         public DateTime? DateDeleted => _dateDeleted;
+        #endregion
     }
 }

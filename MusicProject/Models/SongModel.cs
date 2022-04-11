@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class SongModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -66,5 +67,6 @@ namespace MusicProject.Models
         /// number of the song on the album, possibly redundant with a procedurally generated ID
         /// </summary>
         public int TrackNumber => _trackNumber;
+        #endregion
     }
 }

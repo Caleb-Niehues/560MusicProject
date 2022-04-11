@@ -8,6 +8,7 @@ namespace MusicProject.Models
     /// </summary>
     public class AlbumModel
     {
+        #region Basic Fields
         /// <summary>
         /// backing field for ID
         /// </summary>
@@ -67,5 +68,6 @@ namespace MusicProject.Models
         /// certification of the album
         /// </summary>
         public Certification Certification => _certification;
+        #endregion
     }
 }
