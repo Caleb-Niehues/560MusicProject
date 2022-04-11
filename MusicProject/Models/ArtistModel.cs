@@ -39,9 +39,15 @@ namespace MusicProject.Models
         public List<PersonModel> Members => _members;
         #endregion
         
-        public ArtistModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="members"></param>
+        public ArtistModel(string name, List<PersonModel> members)
         {
-        
+            this._name = name;
+            this._members = members;
         }
     }
 }

@@ -69,9 +69,19 @@ namespace MusicProject.Models
         public int TrackNumber => _trackNumber;
         #endregion
 
-        public SongModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="album"></param>
+        /// <param name="genre"></param>
+        /// <param name="length"></param>
+        public SongModel(string name, AlbumModel album, Genre genre, TimeSpan length)
         {
-            
+            this._name = name;
+            this._album = album;
+            this._genre = genre;
+            this._length = length;
         }
     }
 }

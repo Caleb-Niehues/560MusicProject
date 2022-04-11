@@ -59,9 +59,19 @@ namespace MusicProject.Models
         public string Location => _location;
         #endregion
 
-        public RecordLabelModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="dateFounded"></param>
+        /// <param name="dateClosed"></param>
+        /// <param name="location"></param>
+        public RecordLabelModel(string name, DateTime dateFounded, DateTime? dateClosed, string location)
         {
-        
+            this._name = name;
+            this._dateFounded = dateFounded;
+            this._dateClosed = dateClosed;
+            this._location = location;
         }
     }
 }

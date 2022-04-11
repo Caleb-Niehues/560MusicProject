@@ -37,9 +37,13 @@
         public PersonModel Person => _person;
         #endregion
 
-        public ProducerModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Name"></param>
+        public ProducerModel(string Name)
         {
-        
+            this._name = Name;
         }
     }
 }

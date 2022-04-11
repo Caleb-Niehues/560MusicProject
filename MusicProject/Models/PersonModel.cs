@@ -59,9 +59,19 @@ namespace MusicProject.Models
         public string HomeRegion => _homeRegion;
         #endregion
         
-        public PersonModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="birthdate"></param>
+        /// <param name="deathDate"></param>
+        /// <param name="homeRegion"></param>
+        public PersonModel(string name, DateTime birthDate, DateTime? deathDate, string homeRegion)
         {
-            
+            this._name = name;
+            this._birthDate = birthDate;
+            this._deathDate = deathDate;
+            this._homeRegion = homeRegion;
         }
     }
 }

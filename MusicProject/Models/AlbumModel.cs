@@ -52,12 +52,42 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
+        private List<SongModel> _songs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<SongModel> Songs => _songs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private TimeSpan _length;
+
+        /// <summary>
+        /// The total span of all songs on the album - pretabulated from SQL query fort performance
+        /// </summary>
+        public TimeSpan Length => _length;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private List<ProducerModel> _producers;
 
         /// <summary>
         /// list of all producers involved in the album
         /// </summary>
         public List<ProducerModel> Producers => _producers;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<RecordLabelModel> _recordLabels;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<RecordLabelModel> RecordLabels => _recordLabels;
 
         /// <summary>
         /// 
@@ -70,9 +100,27 @@ namespace MusicProject.Models
         public Certification Certification => _certification;
         #endregion
 
-        public AlbumModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="releaseDate"></param>
+        /// <param name="artist"></param>
+        /// <param name="songs"></param>
+        /// <param name="length"></param>
+        /// <param name="producers"></param>
+        /// <param name="recordLabels"></param>
+        /// <param name="certification"></param>
+        public AlbumModel(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification)
         {
-            
+            this._title = title;
+            this._releaseDate = releaseDate;
+            this._artist = artist;
+            this._songs = songs;
+            this._length = length;
+            this._producers = producers;
+            this._recordLabels = recordLabels;
+            this._certification = certification;
         }
     }
 }
