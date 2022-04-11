@@ -36,5 +36,10 @@
         /// </summary>
         public PersonModel Person => _person;
         #endregion
+
+        public ProducerModel()
+        {
+        
+        }
     }
 }

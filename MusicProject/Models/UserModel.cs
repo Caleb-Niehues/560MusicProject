@@ -68,5 +68,10 @@ namespace MusicProject.Models
         /// </summary>
         public DateTime? DateDeleted => _dateDeleted;
         #endregion
+
+        public UserModel()
+        {
+        
+        }
     }
 }

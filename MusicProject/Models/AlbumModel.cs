@@ -69,5 +69,10 @@ namespace MusicProject.Models
         /// </summary>
         public Certification Certification => _certification;
         #endregion
+
+        public AlbumModel()
+        {
+            
+        }
     }
 }

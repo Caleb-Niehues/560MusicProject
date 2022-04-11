@@ -38,5 +38,10 @@ namespace MusicProject.Models
         /// </summary>
         public List<PersonModel> Members => _members;
         #endregion
+        
+        public ArtistModel()
+        {
+        
+        }
     }
 }

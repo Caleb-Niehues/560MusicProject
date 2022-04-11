@@ -58,5 +58,10 @@ namespace MusicProject.Models
         /// </summary>
         public string HomeRegion => _homeRegion;
         #endregion
+        
+        public PersonModel()
+        {
+            
+        }
     }
 }

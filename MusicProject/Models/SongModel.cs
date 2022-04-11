@@ -68,5 +68,10 @@ namespace MusicProject.Models
         /// </summary>
         public int TrackNumber => _trackNumber;
         #endregion
+
+        public SongModel()
+        {
+            
+        }
     }
 }

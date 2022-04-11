@@ -58,5 +58,10 @@ namespace MusicProject.Models
         /// </summary>
         public string Location => _location;
         #endregion
+
+        public RecordLabelModel()
+        {
+        
+        }
     }
 }
