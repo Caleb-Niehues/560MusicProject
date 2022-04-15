@@ -29,7 +29,7 @@ CREATE TABLE MusicProject.Person
 CREATE TABLE MusicProject.Artist
 (
    ArtistID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-   ArtistName NVARCHAR(64) NOT NULL
+   ArtistName NVARCHAR(128) NOT NULL
 );
 
 CREATE TABLE MusicProject.ArtistPerson
@@ -45,13 +45,13 @@ CREATE TABLE MusicProject.ArtistPerson
 CREATE TABLE MusicProject.Producer
 (
    ProducerID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-   ProducerName NVARCHAR(64) NOT NULL
+   ProducerName NVARCHAR(128) NOT NULL
 );
 
 CREATE TABLE MusicProject.RecordLabel
 (
    RecordLabelID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-   RecordLabelName NVARCHAR(64) NOT NULL,
+   RecordLabelName NVARCHAR(128) NOT NULL,
    DateFounded DATE NOT NULL,
    DateClosed DATE,
    RecordLabelLocation NVARCHAR(64) NOT NULL
@@ -78,7 +78,7 @@ CREATE TABLE MusicProject.Certification
 CREATE TABLE MusicProject.Album
 (
    AlbumID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-   AlbumTitle NVARCHAR(64) NOT NULL,
+   AlbumTitle NVARCHAR(128) NOT NULL,
    ReleaseDate DATE NOT NULL,
    ArtistID INT NOT NULL FOREIGN KEY
 		REFERENCES MusicProject.Artist(ArtistID),
