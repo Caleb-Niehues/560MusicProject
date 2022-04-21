@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class ArtistModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -36,5 +37,17 @@ namespace MusicProject.Models
         /// the members in the artist group or the artist person himself
         /// </summary>
         public List<PersonModel> Members => _members;
+        #endregion
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="members"></param>
+        public ArtistModel(string name, List<PersonModel> members)
+        {
+            this._name = name;
+            this._members = members;
+        }
     }
 }

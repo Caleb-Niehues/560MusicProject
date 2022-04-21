@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MusicProject.Controllers
 {
+    /// <summary>
+    /// A class to control the main operations of the program - very vague and likely needs broken up
+    /// </summary>
     public class MainController
     {
         #region Test Album/Load Order
@@ -23,7 +27,7 @@ namespace MusicProject.Controllers
 
         private AlbumModel test;
         
-        public void TestInitialization()
+        public  void TestInitialization()
         {
             members.Add(new PersonModel("Kendrick Lamar Duckworth", new DateTime(1987, 6, 17), null, "Compton, CA, USA"));
             artistModel = new ArtistModel("Kendrick Lamar", members);//could possibly use solo query to match name

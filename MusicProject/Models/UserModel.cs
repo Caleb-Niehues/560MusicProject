@@ -7,6 +7,7 @@ namespace MusicProject.Models
     /// </summary>
     public class UserModel
     {
+        #region Basic Fields
         /// <summary>
         /// 
         /// </summary>
@@ -66,5 +67,11 @@ namespace MusicProject.Models
         /// date and time a post was deleted by the user, hasn't been deleted if null
         /// </summary>
         public DateTime? DateDeleted => _dateDeleted;
+        #endregion
+
+        public UserModel()
+        {
+        
+        }
     }
 }
