@@ -1970,7 +1970,7 @@ VALUES
 	(N'Blues'),
 	(N'Anime'),
 	(N'Folk'),
-	(N'Latin')
+	(N'Latin');
 
 
 
