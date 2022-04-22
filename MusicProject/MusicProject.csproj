@@ -109,5 +109,12 @@
   <ItemGroup>
     <Content Include="README.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Sql\Data\" />
+    <Folder Include="Sql\Procedures\" />
+    <Folder Include="Sql\Schemas\" />
+    <Folder Include="Sql\Tables\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
