@@ -36,6 +36,7 @@
             this.uxLookUpText = new System.Windows.Forms.TextBox();
             this.uxGetArtistReviews = new System.Windows.Forms.Button();
             this.uxAddToDB = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // uxLogIn
@@ -110,11 +111,20 @@
             this.uxAddToDB.Text = "Add to DB";
             this.uxAddToDB.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(256, 46);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.TabIndex = 8;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.uxAddToDB);
             this.Controls.Add(this.uxGetArtistReviews);
             this.Controls.Add(this.uxLookUpText);
@@ -140,5 +150,6 @@
         private System.Windows.Forms.TextBox uxLookUpText;
         private System.Windows.Forms.Button uxGetArtistReviews;
         private System.Windows.Forms.Button uxAddToDB;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
