@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
-using MusicProject.Views;
 using MusicProject.Repositories;
+using MusicProject.Views;
+//using MusicProject.Repositories;
 
 namespace MusicProject
 {
@@ -15,7 +17,9 @@ namespace MusicProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var test = new SqlAlbumRepo("hmm");
+            string testConnect = ConfigurationManager.ConnectionStrings["configConnection"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
+            var testRepo = new SqlArtistRepo(testConnect);
+            var test = testRepo.RetrieveArtists();
             Application.Run(new MainView());
         }
     }

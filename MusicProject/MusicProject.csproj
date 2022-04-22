@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +63,9 @@
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Repositories\IArtistRepo.cs" />
     <Compile Include="Repositories\IAlbumRepo.cs" />
+    <Compile Include="Repositories\SqlArtistRepo.cs" />
     <Compile Include="Repositories\SqlAlbumRepo.cs" />
     <Compile Include="Views\AlterDatabaseView.cs">
       <SubType>Form</SubType>
@@ -115,10 +118,11 @@
     <Content Include="Sql\FinalProjectReviewInserts.sql" />
     <Content Include="Sql\FinalProjectSongInserts.sql" />
     <Content Include="Sql\FinalProjectTables.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
+    <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />
-    <Folder Include="Sql\Procedures\" />
     <Folder Include="Sql\Schemas\" />
     <Folder Include="Sql\Tables\" />
   </ItemGroup>
