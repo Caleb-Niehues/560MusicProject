@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using MusicProject.Views;
+using MusicProject.Repositories;
 
 namespace MusicProject
 {
@@ -14,6 +15,7 @@ namespace MusicProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var test = new SqlAlbumRepo("hmm");
             Application.Run(new MainView());
         }
     }

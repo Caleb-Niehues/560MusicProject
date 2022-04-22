@@ -1,7 +1,7 @@
-USE [ashleyrediger]; -- Your database here.
+USE [CalebNiehues]; -- Your database here.
 
---IF SCHEMA_ID(N'MusicProject') IS NULL
---   EXEC(N'CREATE SCHEMA [MusicProject];');
+IF SCHEMA_ID(N'MusicProject') IS NULL
+  EXEC(N'CREATE SCHEMA [MusicProject];');
 
 DROP TABLE IF EXISTS MusicProject.Review;
 DROP TABLE IF EXISTS MusicProject.[User];

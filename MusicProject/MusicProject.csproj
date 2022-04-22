@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +62,8 @@
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Repositories\IAlbumRepo.cs" />
+    <Compile Include="Repositories\SqlAlbumRepo.cs" />
     <Compile Include="Views\AlterDatabaseView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,7 +117,6 @@
     <Content Include="Sql\FinalProjectTables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
     <Folder Include="Sql\Data\" />
     <Folder Include="Sql\Procedures\" />
     <Folder Include="Sql\Schemas\" />
