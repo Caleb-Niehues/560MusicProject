@@ -108,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
+    <Content Include="Sql\FinalProjectInserts.sql" />
+    <Content Include="Sql\FinalProjectReviewInserts.sql" />
+    <Content Include="Sql\FinalProjectSongInserts.sql" />
+    <Content Include="Sql\FinalProjectTables.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
