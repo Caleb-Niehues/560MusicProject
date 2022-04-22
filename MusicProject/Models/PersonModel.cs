@@ -73,5 +73,10 @@ namespace MusicProject.Models
             this._deathDate = deathDate;
             this._homeRegion = homeRegion;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

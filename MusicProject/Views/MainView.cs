@@ -92,6 +92,8 @@ namespace MusicProject.Views
             //check if enter key pressed and run search
             uxSongList.DataSource = test.Songs;
             uxProducerList.DataSource = test.Producers;
+            uxPersonList.DataSource = members.ToString();
+            uxRecordLabelList.DataSource = recordLabels.ToString();
         }
     }
 }

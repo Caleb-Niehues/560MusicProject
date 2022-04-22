@@ -40,6 +40,12 @@
             this.uxSongsLabel = new System.Windows.Forms.Label();
             this.uxProducerLabel = new System.Windows.Forms.Label();
             this.uxProducerList = new System.Windows.Forms.ListBox();
+            this.uxRecordLabelList = new System.Windows.Forms.ListBox();
+            this.uxPersonList = new System.Windows.Forms.ListBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.uxRecordLabel = new System.Windows.Forms.Label();
+            this.uxPersonLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxLogIn
@@ -148,11 +154,68 @@
             this.uxProducerList.Size = new System.Drawing.Size(120, 95);
             this.uxProducerList.TabIndex = 11;
             // 
+            // uxRecordLabelList
+            // 
+            this.uxRecordLabelList.FormattingEnabled = true;
+            this.uxRecordLabelList.Location = new System.Drawing.Point(442, 46);
+            this.uxRecordLabelList.Name = "uxRecordLabelList";
+            this.uxRecordLabelList.Size = new System.Drawing.Size(120, 95);
+            this.uxRecordLabelList.TabIndex = 12;
+            // 
+            // uxPersonList
+            // 
+            this.uxPersonList.FormattingEnabled = true;
+            this.uxPersonList.Location = new System.Drawing.Point(442, 221);
+            this.uxPersonList.Name = "uxPersonList";
+            this.uxPersonList.Size = new System.Drawing.Size(120, 95);
+            this.uxPersonList.TabIndex = 13;
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.Location = new System.Drawing.Point(614, 130);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(120, 95);
+            this.listBox3.TabIndex = 14;
+            // 
+            // uxRecordLabel
+            // 
+            this.uxRecordLabel.AutoSize = true;
+            this.uxRecordLabel.Location = new System.Drawing.Point(442, 29);
+            this.uxRecordLabel.Name = "uxRecordLabel";
+            this.uxRecordLabel.Size = new System.Drawing.Size(71, 13);
+            this.uxRecordLabel.TabIndex = 15;
+            this.uxRecordLabel.Text = "Record Label";
+            // 
+            // uxPersonLabel
+            // 
+            this.uxPersonLabel.AutoSize = true;
+            this.uxPersonLabel.Location = new System.Drawing.Point(442, 204);
+            this.uxPersonLabel.Name = "uxPersonLabel";
+            this.uxPersonLabel.Size = new System.Drawing.Size(40, 13);
+            this.uxPersonLabel.TabIndex = 16;
+            this.uxPersonLabel.Text = "Person";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(611, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "label3";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.uxPersonLabel);
+            this.Controls.Add(this.uxRecordLabel);
+            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.uxPersonList);
+            this.Controls.Add(this.uxRecordLabelList);
             this.Controls.Add(this.uxProducerList);
             this.Controls.Add(this.uxProducerLabel);
             this.Controls.Add(this.uxSongsLabel);
@@ -186,5 +249,11 @@
         private System.Windows.Forms.Label uxSongsLabel;
         private System.Windows.Forms.Label uxProducerLabel;
         private System.Windows.Forms.ListBox uxProducerList;
+        private System.Windows.Forms.ListBox uxRecordLabelList;
+        private System.Windows.Forms.ListBox uxPersonList;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Label uxRecordLabel;
+        private System.Windows.Forms.Label uxPersonLabel;
+        private System.Windows.Forms.Label label3;
     }
 }
