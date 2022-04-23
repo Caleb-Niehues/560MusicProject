@@ -1,5 +1,8 @@
 ﻿namespace MusicProject.Repositories
 {
+    /// <summary>
+    /// don't know if this class is necessary
+    /// </summary>
     public interface IGenreRepo
     {
         //take start and end date in years and see top 5 performing genres in that span - major problem since we moved genre off of album
