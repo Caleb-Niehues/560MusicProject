@@ -41,9 +41,9 @@
         /// 
         /// </summary>
         /// <param name="Name"></param>
-        public ProducerModel(string Name)
+        public ProducerModel(string name)
         {
-            this._name = Name;
+            this._name = name;
         }
     }
 }

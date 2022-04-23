@@ -79,9 +79,13 @@ namespace MusicProject.Models
         public DateTime? DateDeleted => _dateDeleted;
         #endregion
 
-        public ReviewModel()
+        public ReviewModel(UserModel user, AlbumModel album, string comment, decimal rating, DateTime dateAdded)
         {
-        
+            this._user = user;
+            this._album = album;
+            this._comment = comment;
+            this._rating = rating;
+            this._dateAdded = dateAdded;
         }
     }
 }
