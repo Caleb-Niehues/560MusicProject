@@ -13,6 +13,28 @@ namespace MusicProject.Repositories
         /// <returns></returns>
         IReadOnlyList<ReviewModel> RetrieveReviews(string albumName);
 
-        void EditReview(ReviewModel review);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="album"></param>
+        /// <param name="comment"></param>
+        /// <param name="rating"></param>
+        /// <param name="dateAdded"></param>
+        /// <returns></returns>
+        ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating, DateTime dateAdded);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
+        ReviewModel SaveReview(ReviewModel review);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        void DeleteReview(string userName);
     }
 }
