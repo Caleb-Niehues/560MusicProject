@@ -21,5 +21,7 @@ namespace MusicProject.Repositories
         /// <param name="endYear">Ending point of the window</param>
         /// <returns></returns>
         IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear);
+
+        ArtistModel CreateArtist(string name, List<PersonModel> members);
     }
 }

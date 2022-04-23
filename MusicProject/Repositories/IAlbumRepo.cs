@@ -21,5 +21,19 @@ namespace MusicProject.Repositories
         /// <param name="number">number of albums displayed</param>
         /// <returns></returns>
         IReadOnlyList<AlbumModel> GetBestPerforming(DateTime startYear, DateTime endYear, int number);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="releaseDate"></param>
+        /// <param name="artist"></param>
+        /// <param name="songs"></param>
+        /// <param name="length"></param>
+        /// <param name="producers"></param>
+        /// <param name="recordLabels"></param>
+        /// <param name="certification"></param>
+        /// <returns></returns>
+        AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification);
     }
 }

@@ -11,12 +11,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _ID;
+        private string _name;
 
         /// <summary>
-        /// ID number of the user
+        /// username of the user
         /// </summary>
-        public int ID => _ID;
+        public string Name => _name;
 
         /// <summary>
         /// 
@@ -31,47 +31,19 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// username of the user
-        /// </summary>
-        public string Name => _name;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private string _password;
-
-        /// <summary>
-        /// The user's password - not at all how it actually should be done, this would only be server-side hash info in practice
-        /// </summary>
-        public string Password => Password;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private DateTime _dateAdded;
 
         /// <summary>
         /// date an time a post was added by the user
         /// </summary>
         public DateTime DateAdded => _dateAdded;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DateTime? _dateDeleted;
-
-        /// <summary>
-        /// date and time a post was deleted by the user, hasn't been deleted if null
-        /// </summary>
-        public DateTime? DateDeleted => _dateDeleted;
         #endregion
 
-        public UserModel()
+        public UserModel(string name, int weight, DateTime dateAdded)
         {
-        
+            this._name = name;
+            this._weight = weight;
+            this._dateAdded = dateAdded;
         }
     }
 }

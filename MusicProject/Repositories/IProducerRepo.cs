@@ -11,5 +11,12 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <returns></returns>
         ProducerModel FetchProducer();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        ProducerModel CreateProducer(string name);
     }
 }
