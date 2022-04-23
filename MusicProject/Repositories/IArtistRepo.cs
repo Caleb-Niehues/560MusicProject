@@ -1,13 +1,25 @@
-﻿using System;
+﻿using MusicProject.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicProject.Repositories
 {
     public interface IArtistRepo
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        ArtistModel FetchArtist(string name);
 
+        /// <summary>
+        /// Gets all artists that released an album with a given record label over a given time window - replaces GetActiveArtists
+        /// </summary>
+        /// <param name="labelName">The name of the record label</param>
+        /// <param name="startYear">Starting point of window</param>
+        /// <param name="endYear">Ending point of the window</param>
+        /// <returns></returns>
+        IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear);
     }
 }
