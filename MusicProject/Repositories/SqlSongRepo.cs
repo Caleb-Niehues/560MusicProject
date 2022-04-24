@@ -6,6 +6,13 @@ namespace MusicProject.Repositories
 {
     public class SqlSongRepo : ISongRepo
     {
+        private readonly string connectionString;
+
+        public SqlSongRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public SongModel CreateSong(string name, AlbumModel album, Genre genre, TimeSpan length)
         {
             throw new NotImplementedException();

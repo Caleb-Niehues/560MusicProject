@@ -11,6 +11,11 @@ namespace MusicProject.Repositories
     /// </summary>
     public class SqlGenreRepo: IGenreRepo
     {
+        private readonly string connectionString;
 
+        public SqlGenreRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
     }
 }

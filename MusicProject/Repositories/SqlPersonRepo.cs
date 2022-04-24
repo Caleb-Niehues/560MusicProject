@@ -6,6 +6,13 @@ namespace MusicProject.Repositories
 {
     public class SqlPersonRepo : IPersonRepo
     {
+        private readonly string connectionString;
+
+        public SqlPersonRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public PersonModel FetchPerson(string name)
         {
             throw new NotImplementedException();

@@ -6,6 +6,13 @@ namespace MusicProject.Repositories
 {
     public class SqlUserRepo : IUserRepo
     {
+        private readonly string connectionString;
+
+        public SqlUserRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public UserModel CreateUser(string name, int weight, DateTime dateAdded)
         {
             throw new NotImplementedException();

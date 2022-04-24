@@ -6,6 +6,13 @@ namespace MusicProject.Repositories
 {
     public class SqlReviewRepo : IReviewRepo
     {
+        private readonly string connectionString;
+
+        public SqlReviewRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating, DateTime dateAdded)
         {
             throw new NotImplementedException();

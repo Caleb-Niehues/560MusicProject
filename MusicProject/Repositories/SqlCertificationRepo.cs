@@ -11,6 +11,11 @@ namespace MusicProject.Repositories
     /// </summary>
     public class SqlCertificationRepo : ICertificationRepo
     {
+        private readonly string connectionString;
 
+        public SqlCertificationRepo(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
     }
 }
