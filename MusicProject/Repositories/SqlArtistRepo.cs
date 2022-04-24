@@ -16,7 +16,7 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public void AddArtist(string name)
+        public ArtistModel CreateArtist(string name, List<PersonModel> members)
         {
             // Verify parameters.
             //if (string.IsNullOrWhiteSpace(name))
@@ -48,8 +48,26 @@ namespace MusicProject.Repositories
                     }
                 }
             }
+
+            if(false)
+                return new ArtistModel(name, members);
+            return null;
         }
 
+        public ArtistModel FetchArtist(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// test - don't think this is actually necessary
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<ArtistModel> RetrieveArtists()
         {
             using (var connection = new SqlConnection(connectionString))
@@ -66,6 +84,11 @@ namespace MusicProject.Repositories
             }
         }
 
+        /// <summary>
+        /// helper method for Retrieval
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         private IReadOnlyList<ArtistModel> TranslatePersons(SqlDataReader reader)
         {
             var artists = new List<ArtistModel>();

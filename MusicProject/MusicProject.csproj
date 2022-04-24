@@ -74,6 +74,14 @@
     <Compile Include="Repositories\IUserRepo.cs" />
     <Compile Include="Repositories\SqlArtistRepo.cs" />
     <Compile Include="Repositories\SqlAlbumRepo.cs" />
+    <Compile Include="Repositories\SqlCertificationRepo.cs" />
+    <Compile Include="Repositories\SqlGenreRepo.cs" />
+    <Compile Include="Repositories\SqlPersonRepo.cs" />
+    <Compile Include="Repositories\SqlProducerRepo.cs" />
+    <Compile Include="Repositories\SqlRecordLabelRepo.cs" />
+    <Compile Include="Repositories\SqlReviewRepo.cs" />
+    <Compile Include="Repositories\SqlSongRepo.cs" />
+    <Compile Include="Repositories\SqlUserRepo.cs" />
     <Compile Include="Views\AlterDatabaseView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +133,7 @@
     <Content Include="Sql\FinalProjectReviewInserts.sql" />
     <Content Include="Sql\FinalProjectSongInserts.sql" />
     <Content Include="Sql\FinalProjectTables.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
   </ItemGroup>
