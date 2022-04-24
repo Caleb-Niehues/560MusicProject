@@ -22,7 +22,7 @@ namespace MusicProject.Repositories
         /// <param name="weight"></param>
         /// <param name="dateAdded"></param>
         /// <returns></returns>
-        UserModel CreateUser(string name, int weight, DateTime dateAdded);
+        UserModel CreateUser(string name, string password, int weight);
 
         /// <summary>
         /// 

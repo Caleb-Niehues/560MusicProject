@@ -39,11 +39,16 @@ namespace MusicProject.Models
         public DateTime DateAdded => _dateAdded;
         #endregion
 
-        public UserModel(string name, int weight, DateTime dateAdded)
+        /// <summary>
+        /// The constructor used in CreateUser
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="weight"></param>
+        public UserModel(string name, int weight)
         {
             this._name = name;
             this._weight = weight;
-            this._dateAdded = dateAdded;
+            this._dateAdded = DateTime.Now;
         }
     }
 }
