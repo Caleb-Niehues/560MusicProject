@@ -134,6 +134,7 @@
     <Content Include="Sql\FinalProjectSongInserts.sql" />
     <Content Include="Sql\FinalProjectTables.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.DeleteUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
   </ItemGroup>

@@ -58,9 +58,37 @@ namespace MusicProject.Repositories
             }
         }
 
+        /// <summary>
+        /// perhaps a return is necessary to validate user deletion
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
         public void DeleteUser(string name, string password)
         {
-            throw new NotImplementedException();
+            //need to double dip to check password match
+
+
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.DeleteUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+                        command.Parameters.AddWithValue("Password", password);
+
+                        connection.Open();
+
+                        command.ExecuteNonQuery();
+
+                        transaction.Complete();
+                    }
+                }
+            }
         }
 
         public bool LoginSuccesful(string name, string password, out UserModel user)
