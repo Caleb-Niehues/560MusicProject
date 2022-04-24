@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mic\DatabaseProxy.cs" />
     <Compile Include="Models\IDatabaseItem.cs" />
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Views\AddView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddView.Designer.cs">
+      <DependentUpon>AddView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AlterDatabaseView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +97,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\AddView.resx">
+      <DependentUpon>AddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LogInView.resx">
+      <DependentUpon>LogInView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

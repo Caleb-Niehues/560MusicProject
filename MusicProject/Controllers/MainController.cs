@@ -1,6 +1,7 @@
 ﻿using MusicProject.Models;
 using System;
 using System.Collections.Generic;
+using MusicProject.Mic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +77,25 @@ namespace MusicProject.Controllers
             #endregion
 
             test = new AlbumModel("To Pimp A Butterfly", new DateTime(2015, 3, 15), artistModel, songs, new TimeSpan(0,78,51), producerModels, recordLabels, Certification.Platinum);
+        }
+        #endregion
+
+        #region Login
+        public SuccessfulLogin successfulLogin;
+
+        public MainController(SuccessfulLogin sL)
+        {
+            successfulLogin = sL;
+        }
+
+        public bool CredentialCheck(string password, string username, DatabaseProxy proxy)
+        {
+            if (proxy.credentials.ContainsKey(username) && proxy.credentials.ContainsValue(password))
+            {
+                successfulLogin();
+                return true;
+            }
+            return false;
         }
         #endregion
     }

@@ -56,6 +56,7 @@
             this.uxLogIn.TabIndex = 0;
             this.uxLogIn.Text = "Log in";
             this.uxLogIn.UseVisualStyleBackColor = true;
+            this.uxLogIn.Click += new System.EventHandler(this.uxLogIn_Click);
             // 
             // uxGenreTimeline
             // 

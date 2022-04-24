@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicProject.Controllers;
 using MusicProject.Models;
+using MusicProject.Mic;
 using System.Windows.Forms;
 
 namespace MusicProject.Views
@@ -81,6 +82,10 @@ namespace MusicProject.Views
         }
         #endregion
 
+
+        public uxLogInView login;
+        public DatabaseProxy proxy;
+        public CheckCredentials check;
         public MainView()
         {
             InitializeComponent();
@@ -92,8 +97,14 @@ namespace MusicProject.Views
             //check if enter key pressed and run search
             uxSongList.DataSource = test.Songs;
             uxProducerList.DataSource = test.Producers;
-            uxPersonList.DataSource = members.ToString();
-            uxRecordLabelList.DataSource = recordLabels.ToString();
+            uxPersonList.DataSource = members;
+            uxRecordLabelList.DataSource = recordLabels;
+        }
+
+        private void uxLogIn_Click(object sender, EventArgs e)
+        {
+            login = new uxLogInView(proxy, check);
+            login.Show();
         }
     }
 }
