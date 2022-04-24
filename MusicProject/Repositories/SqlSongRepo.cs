@@ -37,7 +37,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.FetchUser", connection))
+                    using (var command = new SqlCommand("MusicProject.FetchSong", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -63,13 +63,13 @@ namespace MusicProject.Repositories
             var albumTitleOrdinal = reader.GetOrdinal("AlbumTitle");
             var artistNameOrdinal = reader.GetOrdinal("ArtistName");
             var genreNameOrdinal = reader.GetOrdinal("GenreName");
-            var songLengthOrdinal = reader.GetOrdinal("[Length]");
+            var songLengthOrdinal = reader.GetOrdinal("Length");
 
             while (reader.Read())
             {
                 songs.Add(new SongModel(reader.GetString(songNameOrdinal), reader.GetString(albumTitleOrdinal),
                             reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)), 
-                            TimeSpan.Parse(reader.GetString(songLengthOrdinal))));
+                            reader.GetTimeSpan(songLengthOrdinal)));
             }
 
             return songs;
