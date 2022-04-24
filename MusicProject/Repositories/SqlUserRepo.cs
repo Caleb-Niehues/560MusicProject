@@ -93,6 +93,14 @@ namespace MusicProject.Repositories
 
         public bool LoginSuccesful(string name, string password, out UserModel user)
         {
+            bool success = false;
+            user = null;
+
+
+
+            if (success)
+                user = null;// new UserModel();
+            return success;
             throw new NotImplementedException();
         }
 
