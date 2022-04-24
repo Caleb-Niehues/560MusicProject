@@ -6,7 +6,7 @@ namespace MusicProject.Repositories
 {
     public interface ISongRepo
     {
-        SongModel FetchSong(string name);
+        IReadOnlyList<SongModel> FetchSong(string name);
 
         /// <summary>
         /// maybe have an override that retrieves all for an artist?
