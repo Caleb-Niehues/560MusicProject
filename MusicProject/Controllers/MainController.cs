@@ -1,11 +1,7 @@
 ﻿using MusicProject.Models;
-using System;
 using System.Collections.Generic;
-using MusicProject.Mic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MusicProject.Repositories;
+using System.Configuration;
 
 namespace MusicProject.Controllers
 {
@@ -14,88 +10,50 @@ namespace MusicProject.Controllers
     /// </summary>
     public class MainController
     {
-        #region Test Album/Load Order
-        private ReviewModel reviewModel = null;
-        private UserModel user = null;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
+        private SqlUserRepo SqlUser;
+        private SqlReviewRepo SqlReview;
+        private SqlPersonRepo SqlPerson;
+        private SqlArtistRepo SqlArtist;
+        private SqlSongRepo SqlSong;
+        private SqlProducerRepo SqlProducer;
+        private SqlRecordLabelRepo SqlRecordLabel;
+        private SqlAlbumRepo SqlAlbum;
 
-        private List<PersonModel> members = new List<PersonModel>();
-        private ArtistModel artistModel;
-
-        private List<SongModel> songs = new List<SongModel>();
-
-        private List<ProducerModel> producerModels = new List<ProducerModel>();
-        
-        private List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
-
-        private AlbumModel test;
-        
-        public  void TestInitialization()
-        {
-            members.Add(new PersonModel("Kendrick Lamar Duckworth", new DateTime(1987, 6, 17), null, "Compton, CA, USA"));
-            artistModel = new ArtistModel("Kendrick Lamar", members);//could possibly use solo query to match name
-
-            #region Adding Songs
-            //songs.Add(new SongModel("Wesley's Theory", test, Genre.HipHop, new TimeSpan(0, 4, 47)));
-            //songs.Add(new SongModel("For Free? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 2, 10)));
-            //songs.Add(new SongModel("King Kunta", test, Genre.HipHop, new TimeSpan(0, 3, 54)));
-            //songs.Add(new SongModel("Institutionalized", test, Genre.HipHop, new TimeSpan(0, 4, 31)));
-            //songs.Add(new SongModel("These Walls", test, Genre.HipHop, new TimeSpan(0, 5, 0)));
-            //songs.Add(new SongModel("U", test, Genre.HipHop, new TimeSpan(0, 4, 28)));
-            //songs.Add(new SongModel("Alright", test, Genre.HipHop, new TimeSpan(0, 3, 39)));
-            //songs.Add(new SongModel("For Sale? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 4, 51)));
-            //songs.Add(new SongModel("Momma", test, Genre.HipHop, new TimeSpan(0, 4, 43)));
-            //songs.Add(new SongModel("Hood Politics", test, Genre.HipHop, new TimeSpan(0, 4, 52)));
-            //songs.Add(new SongModel("How Much a Dollar Cost", test, Genre.HipHop, new TimeSpan(0, 4, 21)));
-            //songs.Add(new SongModel("Complexion (A Zulu Love)", test, Genre.HipHop, new TimeSpan(0, 4, 23)));
-            //songs.Add(new SongModel("The Blacker the Berry", test, Genre.HipHop, new TimeSpan(0, 5, 28)));
-            //songs.Add(new SongModel("You Ain't Gotta Lie", test, Genre.HipHop, new TimeSpan(0, 4, 1)));
-            //songs.Add(new SongModel("I", test, Genre.HipHop, new TimeSpan(0, 5, 36)));
-            //songs.Add(new SongModel("Mortal Man", test, Genre.HipHop, new TimeSpan(0, 12, 7)));
-            #endregion
-
-            recordLabels.Add(new RecordLabelModel("TDE", new DateTime(2004, 1, 1), null, "Carson, CA, USA"));
-            recordLabels.Add(new RecordLabelModel("Aftermath Entertainment", new DateTime(1996, 3, 22), null, "Santa Monica, CA, USA"));
-            recordLabels.Add(new RecordLabelModel("Interscope Records", new DateTime(1990, 1, 1), null, "Santa Monica, CA, USA"));
-
-            #region Adding Producers
-            producerModels.Add(new ProducerModel("Boi-1da"));
-            producerModels.Add(new ProducerModel("Flippa"));
-            producerModels.Add(new ProducerModel("Flying Lotus"));
-            producerModels.Add(new ProducerModel("Knxledge"));
-            producerModels.Add(new ProducerModel("KOZ"));
-            producerModels.Add(new ProducerModel("Larrance"));
-            producerModels.Add(new ProducerModel("Dopson"));
-            producerModels.Add(new ProducerModel("LoveDragon"));
-            producerModels.Add(new ProducerModel("Pharrel Williams"));
-            producerModels.Add(new ProducerModel("Rahki"));
-            producerModels.Add(new ProducerModel("Sounwave"));
-            producerModels.Add(new ProducerModel("Tae Beast"));
-            producerModels.Add(new ProducerModel("Taz Arnold"));
-            producerModels.Add(new ProducerModel("Terrace Martin"));
-            producerModels.Add(new ProducerModel("Thundercat"));
-            producerModels.Add(new ProducerModel("Tommy Black"));
-            producerModels.Add(new ProducerModel("Whoarei"));
-            #endregion
-
-            test = new AlbumModel("To Pimp A Butterfly", new DateTime(2015, 3, 15), artistModel, songs, new TimeSpan(0,78,51), producerModels, recordLabels, Certification.Platinum);
-        }
-        #endregion
-
-        #region Login
-        //private string connect;
-        public SqlUserRepo SqlUser;
-        public SqlReviewRepo SqlReview;
-
-        private UserModel _activeUser;
+        #region Load Order
+        private UserModel _activeUser = null;
         public UserModel ActiveUser => _activeUser;
 
-        public MainController(string connectionString)
-        {
-            //connect = connectionString;
-            SqlUser = new SqlUserRepo(connectionString);
+        private ReviewModel _reviewModel = null;
 
+        private IReadOnlyList<PersonModel> _members = new List<PersonModel>();
+
+        private IReadOnlyList<ArtistModel> _artists = new List<ArtistModel>();
+
+        private IReadOnlyList<SongModel> _songs = new List<SongModel>();
+        public IReadOnlyList<SongModel> Songs => _songs;
+
+        private IReadOnlyList<ProducerModel> _producers = new List<ProducerModel>();
+
+        private IReadOnlyList<RecordLabelModel> _recordLabels = new List<RecordLabelModel>();
+
+        private IReadOnlyList<AlbumModel> _albums = new List<AlbumModel>();
+
+        #endregion
+
+        public MainController()
+        {
+            SqlUser = new SqlUserRepo(connectionString);
+            SqlReview = new SqlReviewRepo(connectionString);
+            SqlPerson = new SqlPersonRepo(connectionString);
+            SqlArtist = new SqlArtistRepo(connectionString);
+            SqlSong = new SqlSongRepo(connectionString);
+            SqlProducer = new SqlProducerRepo(connectionString);
+            SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
+            SqlAlbum = new SqlAlbumRepo(connectionString);
         }
 
+        #region Login        
         public UserModel CredentialCheck(string userName, string password)
         {
             bool temp = SqlUser.FetchUser(userName, password, out _activeUser);
@@ -116,6 +74,30 @@ namespace MusicProject.Controllers
                 return true;
             }
             return false;
+        }
+        #endregion
+
+        #region Search Bar
+        public bool Search(string name)
+        {
+            bool success = false;
+
+            //_artists = SqlArtist.FetchArtist(name);
+            success = success || _artists.Count > 0;
+
+            _songs = SqlSong.FetchSong(name);
+            success = success || _songs.Count > 0;
+
+            //_producers = SqlProducer.FetchProducer(name);
+            success = success || _producers.Count > 0;
+
+            //_recordLabels = SqlRecordLabel.FetchRecordLabel(name);
+            success = success || _recordLabels.Count > 0;
+
+            //_albums = SqlAlbum.FetchAlbum(name);
+            success = success || _albums.Count > 0;
+
+            return success;
         }
         #endregion
     }
