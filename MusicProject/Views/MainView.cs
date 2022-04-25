@@ -38,7 +38,6 @@ namespace MusicProject.Views
         {
             InitializeComponent();
             search = controller.Search;
-            songs = controller.Songs;
         }
 
         private void RegisterLogin(UserModel user)
@@ -50,13 +49,21 @@ namespace MusicProject.Views
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
         }
 
-        private void uxLookUpText_KeyDown(object sender, KeyEventArgs e)
+        public void RegisterSearch(IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<ProducerModel> producers, IReadOnlyList<AlbumModel> albums)
+        {
+            uxArtistListBox.DataSource = artists;
+            uxSongList.DataSource = songs;
+            uxProducerList.DataSource = producers;
+            ux
+        }
+
+        private void uxSearch_HitEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (search(uxLookUpText.Text))
                 {
-                    uxSongList.DataSource = songs;
+                    
                 }
                 else MessageBox.Show("No name found on data base - needs to be an exact match");
             }

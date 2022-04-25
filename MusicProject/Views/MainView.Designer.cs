@@ -42,11 +42,13 @@
             this.uxProducerList = new System.Windows.Forms.ListBox();
             this.uxRecordLabelList = new System.Windows.Forms.ListBox();
             this.uxPersonList = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.uxArtistListBox = new System.Windows.Forms.ListBox();
             this.uxRecordLabel = new System.Windows.Forms.Label();
             this.uxPersonLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.uxArtistsLabel = new System.Windows.Forms.Label();
             this.uxLeaveReview = new System.Windows.Forms.Button();
+            this.uxAlbumsLabel = new System.Windows.Forms.Label();
+            this.uxAlbumListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // uxLogIn
@@ -108,7 +110,7 @@
             this.uxLookUpText.Size = new System.Drawing.Size(261, 22);
             this.uxLookUpText.TabIndex = 5;
             this.uxLookUpText.Text = "Look up song/album/artist";
-            this.uxLookUpText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uxLookUpText_KeyDown);
+            this.uxLookUpText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uxSearch_HitEnter);
             // 
             // uxGetArtistReviews
             // 
@@ -134,7 +136,7 @@
             // 
             this.uxSongList.FormattingEnabled = true;
             this.uxSongList.ItemHeight = 16;
-            this.uxSongList.Location = new System.Drawing.Point(344, 57);
+            this.uxSongList.Location = new System.Drawing.Point(589, 71);
             this.uxSongList.Margin = new System.Windows.Forms.Padding(4);
             this.uxSongList.Name = "uxSongList";
             this.uxSongList.Size = new System.Drawing.Size(159, 116);
@@ -143,7 +145,7 @@
             // uxSongsLabel
             // 
             this.uxSongsLabel.AutoSize = true;
-            this.uxSongsLabel.Location = new System.Drawing.Point(344, 37);
+            this.uxSongsLabel.Location = new System.Drawing.Point(589, 51);
             this.uxSongsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxSongsLabel.Name = "uxSongsLabel";
             this.uxSongsLabel.Size = new System.Drawing.Size(48, 17);
@@ -153,7 +155,7 @@
             // uxProducerLabel
             // 
             this.uxProducerLabel.AutoSize = true;
-            this.uxProducerLabel.Location = new System.Drawing.Point(344, 251);
+            this.uxProducerLabel.Location = new System.Drawing.Point(589, 253);
             this.uxProducerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxProducerLabel.Name = "uxProducerLabel";
             this.uxProducerLabel.Size = new System.Drawing.Size(66, 17);
@@ -164,7 +166,7 @@
             // 
             this.uxProducerList.FormattingEnabled = true;
             this.uxProducerList.ItemHeight = 16;
-            this.uxProducerList.Location = new System.Drawing.Point(344, 272);
+            this.uxProducerList.Location = new System.Drawing.Point(589, 274);
             this.uxProducerList.Margin = new System.Windows.Forms.Padding(4);
             this.uxProducerList.Name = "uxProducerList";
             this.uxProducerList.Size = new System.Drawing.Size(159, 116);
@@ -174,7 +176,7 @@
             // 
             this.uxRecordLabelList.FormattingEnabled = true;
             this.uxRecordLabelList.ItemHeight = 16;
-            this.uxRecordLabelList.Location = new System.Drawing.Point(589, 57);
+            this.uxRecordLabelList.Location = new System.Drawing.Point(834, 71);
             this.uxRecordLabelList.Margin = new System.Windows.Forms.Padding(4);
             this.uxRecordLabelList.Name = "uxRecordLabelList";
             this.uxRecordLabelList.Size = new System.Drawing.Size(159, 116);
@@ -184,26 +186,26 @@
             // 
             this.uxPersonList.FormattingEnabled = true;
             this.uxPersonList.ItemHeight = 16;
-            this.uxPersonList.Location = new System.Drawing.Point(589, 272);
+            this.uxPersonList.Location = new System.Drawing.Point(834, 274);
             this.uxPersonList.Margin = new System.Windows.Forms.Padding(4);
             this.uxPersonList.Name = "uxPersonList";
             this.uxPersonList.Size = new System.Drawing.Size(159, 116);
             this.uxPersonList.TabIndex = 13;
             // 
-            // listBox3
+            // uxArtistListBox
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(819, 160);
-            this.listBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(159, 116);
-            this.listBox3.TabIndex = 14;
+            this.uxArtistListBox.FormattingEnabled = true;
+            this.uxArtistListBox.ItemHeight = 16;
+            this.uxArtistListBox.Location = new System.Drawing.Point(344, 274);
+            this.uxArtistListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.uxArtistListBox.Name = "uxArtistListBox";
+            this.uxArtistListBox.Size = new System.Drawing.Size(159, 116);
+            this.uxArtistListBox.TabIndex = 14;
             // 
             // uxRecordLabel
             // 
             this.uxRecordLabel.AutoSize = true;
-            this.uxRecordLabel.Location = new System.Drawing.Point(589, 36);
+            this.uxRecordLabel.Location = new System.Drawing.Point(834, 50);
             this.uxRecordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxRecordLabel.Name = "uxRecordLabel";
             this.uxRecordLabel.Size = new System.Drawing.Size(93, 17);
@@ -213,22 +215,22 @@
             // uxPersonLabel
             // 
             this.uxPersonLabel.AutoSize = true;
-            this.uxPersonLabel.Location = new System.Drawing.Point(589, 251);
+            this.uxPersonLabel.Location = new System.Drawing.Point(834, 253);
             this.uxPersonLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxPersonLabel.Name = "uxPersonLabel";
             this.uxPersonLabel.Size = new System.Drawing.Size(53, 17);
             this.uxPersonLabel.TabIndex = 16;
             this.uxPersonLabel.Text = "Person";
             // 
-            // label3
+            // uxArtistsLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(815, 140);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "label3";
+            this.uxArtistsLabel.AutoSize = true;
+            this.uxArtistsLabel.Location = new System.Drawing.Point(341, 253);
+            this.uxArtistsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.uxArtistsLabel.Name = "uxArtistsLabel";
+            this.uxArtistsLabel.Size = new System.Drawing.Size(47, 17);
+            this.uxArtistsLabel.TabIndex = 17;
+            this.uxArtistsLabel.Text = "Artists";
             // 
             // uxLeaveReview
             // 
@@ -241,16 +243,38 @@
             this.uxLeaveReview.UseVisualStyleBackColor = true;
             this.uxLeaveReview.Click += new System.EventHandler(this.uxLeaveReview_Click);
             // 
+            // uxAlbumsLabel
+            // 
+            this.uxAlbumsLabel.AutoSize = true;
+            this.uxAlbumsLabel.Location = new System.Drawing.Point(341, 50);
+            this.uxAlbumsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.uxAlbumsLabel.Name = "uxAlbumsLabel";
+            this.uxAlbumsLabel.Size = new System.Drawing.Size(54, 17);
+            this.uxAlbumsLabel.TabIndex = 20;
+            this.uxAlbumsLabel.Text = "Albums";
+            // 
+            // uxAlbumListBox
+            // 
+            this.uxAlbumListBox.FormattingEnabled = true;
+            this.uxAlbumListBox.ItemHeight = 16;
+            this.uxAlbumListBox.Location = new System.Drawing.Point(344, 71);
+            this.uxAlbumListBox.Margin = new System.Windows.Forms.Padding(4);
+            this.uxAlbumListBox.Name = "uxAlbumListBox";
+            this.uxAlbumListBox.Size = new System.Drawing.Size(159, 116);
+            this.uxAlbumListBox.TabIndex = 19;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.uxAlbumsLabel);
+            this.Controls.Add(this.uxAlbumListBox);
             this.Controls.Add(this.uxLeaveReview);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.uxArtistsLabel);
             this.Controls.Add(this.uxPersonLabel);
             this.Controls.Add(this.uxRecordLabel);
-            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.uxArtistListBox);
             this.Controls.Add(this.uxPersonList);
             this.Controls.Add(this.uxRecordLabelList);
             this.Controls.Add(this.uxProducerList);
@@ -289,10 +313,12 @@
         private System.Windows.Forms.ListBox uxProducerList;
         private System.Windows.Forms.ListBox uxRecordLabelList;
         private System.Windows.Forms.ListBox uxPersonList;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox uxArtistListBox;
         private System.Windows.Forms.Label uxRecordLabel;
         private System.Windows.Forms.Label uxPersonLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label uxArtistsLabel;
         private System.Windows.Forms.Button uxLeaveReview;
+        private System.Windows.Forms.Label uxAlbumsLabel;
+        private System.Windows.Forms.ListBox uxAlbumListBox;
     }
 }

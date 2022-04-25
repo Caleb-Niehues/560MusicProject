@@ -10,6 +10,7 @@ namespace MusicProject.Controllers
     /// </summary>
     public class MainController
     {
+        #region Load Order
         private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
@@ -20,7 +21,6 @@ namespace MusicProject.Controllers
         private SqlRecordLabelRepo SqlRecordLabel;
         private SqlAlbumRepo SqlAlbum;
 
-        #region Load Order
         private UserModel _activeUser = null;
         public UserModel ActiveUser => _activeUser;
 
@@ -99,6 +99,8 @@ namespace MusicProject.Controllers
 
             return success;
         }
+
+
         #endregion
     }
 }

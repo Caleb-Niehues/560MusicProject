@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using MusicProject.Models;
 using MusicProject.Views;
 using MusicProject.Controllers;
+using System.Collections.Generic;
 
 namespace MusicProject
 {
@@ -10,7 +11,7 @@ namespace MusicProject
     public delegate UserModel CreateUser(string userName, string password, int weight);
     public delegate bool DeleteUser(string userName, string password);
     public delegate bool Search(string name);
-    
+
     static class Program
     {
         /// <summary>
