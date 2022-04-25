@@ -152,6 +152,7 @@
     <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchArtist.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchProducer.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchRecordLabel.sql" />
