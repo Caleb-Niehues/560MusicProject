@@ -11,7 +11,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        ArtistModel FetchArtist(string name);
+        IReadOnlyList<ArtistModel> FetchArtist(string name);
 
         /// <summary>
         /// Gets all artists that released an album with a given record label over a given time window - replaces GetActiveArtists

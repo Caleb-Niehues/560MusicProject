@@ -77,5 +77,10 @@ namespace MusicProject.Models
             this._rating = rating;
             this._dateAdded = dateAdded;
         }
+
+        public override string ToString()
+        {
+            return Comment;
+        }
     }
 }

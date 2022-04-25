@@ -10,7 +10,7 @@ namespace MusicProject.Repositories
         /// 
         /// </summary>
         /// <returns></returns>
-        ProducerModel FetchProducer(string name);
+        IReadOnlyList<ProducerModel> FetchProducer(string name);
 
         /// <summary>
         /// 

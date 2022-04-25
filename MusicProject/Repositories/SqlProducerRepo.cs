@@ -28,16 +28,11 @@ namespace MusicProject.Repositories
 
                         command.Parameters.AddWithValue("Name", name);
 
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
-
                         connection.Open();
 
                         command.ExecuteNonQuery();
 
                         transaction.Complete();
-
-                        //var personId = (int)command.Parameters["PersonId"].Value;
 
                         return new ProducerModel(name);
                     }
@@ -45,7 +40,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public ProducerModel FetchProducer(string name)
+        public IReadOnlyList<ProducerModel> FetchProducer(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
@@ -61,9 +56,6 @@ namespace MusicProject.Repositories
 
                         command.Parameters.AddWithValue("Name", name);
 
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
-
                         connection.Open();
 
                         using (var reader = command.ExecuteReader())
@@ -73,14 +65,16 @@ namespace MusicProject.Repositories
             }
         }
 
-        private ProducerModel TranslateFetchProducer(SqlDataReader reader)
+        private IReadOnlyList<ProducerModel> TranslateFetchProducer(SqlDataReader reader)
         {
+            var producers = new List<ProducerModel>();
+
             var recordLabelNameOrdinal = reader.GetOrdinal("ProducerName");
             while (reader.Read())
             {
-                return new ProducerModel(reader.GetString(recordLabelNameOrdinal));
+                producers.Add(new ProducerModel(reader.GetString(recordLabelNameOrdinal)));
             }
-            return null;
+            return producers;
         }
     }
 }
