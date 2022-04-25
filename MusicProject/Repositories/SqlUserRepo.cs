@@ -91,12 +91,42 @@ namespace MusicProject.Repositories
             }
         }
 
-        public bool LoginSuccesful(string name, string password, out UserModel user)
+        private bool checkPassword(string name, string password)
         {
             bool success = false;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("MusicProject.FetchPassword", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var PasswordOrdinal = reader.GetOrdinal("ArtistId");
+                        var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+
+                        while (reader.Read())
+                        {
+                            artists.Add(new ArtistModel(reader.GetString(artistNameOrdinal), null));
+                        }
+
+                        return artists;
+                    }
+                }
+            }
+
+            return success;
+        }
+
+        public bool LoginSuccesful(string name, string password, out UserModel user)
+        {
+            bool success = checkPassword(name, password);
             user = null;
 
-
+            
 
             if (success)
                 user = null;// new UserModel();
