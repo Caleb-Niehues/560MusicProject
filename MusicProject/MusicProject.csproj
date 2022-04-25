@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mic\DatabaseProxy.cs" />
+    <Compile Include="Models\IDatabaseItem.cs" />
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
     <Compile Include="Models\Certification.cs" />
@@ -82,6 +84,12 @@
     <Compile Include="Repositories\SqlReviewRepo.cs" />
     <Compile Include="Repositories\SqlSongRepo.cs" />
     <Compile Include="Repositories\SqlUserRepo.cs" />
+    <Compile Include="Views\AddSongView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddSongView.Designer.cs">
+      <DependentUpon>AddSongView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AlterDatabaseView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +119,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\AddSongView.resx">
+      <DependentUpon>AddSongView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LogInView.resx">
+      <DependentUpon>LogInView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>

@@ -73,5 +73,10 @@ namespace MusicProject.Models
             this._dateClosed = dateClosed;
             this._location = location;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
