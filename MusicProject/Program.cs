@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows.Forms;
+using MusicProject.Models;
 using MusicProject.Repositories;
 using MusicProject.Views;
 using MusicProject.Mic;
@@ -21,11 +22,12 @@ namespace MusicProject
             Application.SetCompatibleTextRenderingDefault(false);
             string testConnect = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
 
-            //var testRepo = new SqlUserRepo(testConnect);
-            //var test = testRepo.CreateUser("Ashley Redy", "hunter2", 2);
+            var testRepo = new SqlUserRepo(testConnect);
+            UserModel testUser;
+            if (testRepo.FetchUser("3ero8x", "swordfish", out testUser));
             DatabaseProxy proxy = new DatabaseProxy();
           
-            Application.Run(new MainView());
+            Application.Run(new MainView());//confirmed issue of needing to run - does this mean the powershell stuff is required?
         }
     }
 }
