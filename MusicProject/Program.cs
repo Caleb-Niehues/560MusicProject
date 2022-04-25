@@ -24,7 +24,7 @@ namespace MusicProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            string testConnect = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
+            string testConnect = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
             MainController controller = new MainController(testConnect);
             LogInView.InitializeDelegates(controller.CredentialCheck, controller.CreateUser, controller.DeleteUser);
             //var testRepo = new SqlUserRepo(testConnect);
