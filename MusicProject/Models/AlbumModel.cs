@@ -122,5 +122,10 @@ namespace MusicProject.Models
             this._recordLabels = recordLabels;
             this._certification = certification;
         }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

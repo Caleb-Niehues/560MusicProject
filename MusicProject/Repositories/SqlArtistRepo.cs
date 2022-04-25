@@ -52,7 +52,7 @@ namespace MusicProject.Repositories
             return new ArtistModel(name, members);
         }
 
-        public ArtistModel FetchArtist(string name) //changing this to return list of albums instead of artistmodel
+        public IReadOnlyList<ArtistModel> FetchArtist(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
@@ -68,9 +68,6 @@ namespace MusicProject.Repositories
 
                         command.Parameters.AddWithValue("Name", name);
 
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
-
                         connection.Open();
 
                         using (var reader = command.ExecuteReader())
@@ -80,14 +77,16 @@ namespace MusicProject.Repositories
             }
         }
 
-        private ArtistModel TranslateFetchArtist(SqlDataReader reader)
+        private IReadOnlyList<ArtistModel> TranslateFetchArtist(SqlDataReader reader)
         {
+            var artists = new List<ArtistModel>();
+
             var artistNameOrdinal = reader.GetOrdinal("ArtistName");
             while (reader.Read())
             {
-                return new ArtistModel(reader.GetString(artistNameOrdinal), null);
+                artists.Add(new ArtistModel(reader.GetString(artistNameOrdinal), null));
             }
-            return null;
+            return artists;
         }
 
         public IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear)

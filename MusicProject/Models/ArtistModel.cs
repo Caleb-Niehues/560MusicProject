@@ -49,5 +49,10 @@ namespace MusicProject.Models
             this._name = name;
             this._members = members;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

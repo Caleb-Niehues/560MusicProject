@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE MusicProject.CreateUser
+﻿CREATE OR ALTER PROCEDURE MusicProject.CreateUser
    @Name NVARCHAR(32),
    @Password NVARCHAR(32),
    @Weight INT

@@ -95,7 +95,7 @@ namespace MusicProject.Controllers
             //_albums = SqlAlbum.FetchAlbum(name);
             success = success || _albums.Count > 0;
 
-            //_artists = SqlArtist.FetchArtist(name);
+            _artists = SqlArtist.FetchArtist(name);
             success = success || _artists.Count > 0;
 
             _songs = SqlSong.FetchSong(name);
@@ -104,10 +104,10 @@ namespace MusicProject.Controllers
             //_people = SqlPerson.FetchPerson(name);
             success = success || _people.Count > 0;
 
-            //_producers = SqlProducer.FetchProducer(name);
+            _producers = SqlProducer.FetchProducer(name);
             success = success || _producers.Count > 0;
 
-            //_recordLabels = SqlRecordLabel.FetchRecordLabel(name);
+            _recordLabels = SqlRecordLabel.FetchRecordLabel(name);
             success = success || _recordLabels.Count > 0;
 
             if (success) update(_albums, _artists, _songs, _people, _producers, _recordLabels);

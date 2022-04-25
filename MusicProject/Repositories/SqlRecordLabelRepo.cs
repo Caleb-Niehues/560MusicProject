@@ -48,7 +48,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public RecordLabelModel FetchRecordLabel(string name)
+        public IReadOnlyList<RecordLabelModel> FetchRecordLabel(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
@@ -76,8 +76,10 @@ namespace MusicProject.Repositories
             }
         }
 
-        private RecordLabelModel TranslateFetchRecordLabel(SqlDataReader reader)
+        private IReadOnlyList<RecordLabelModel> TranslateFetchRecordLabel(SqlDataReader reader)
         {
+            var recordLabels = new List<RecordLabelModel>();
+
             var recordLabelNameOrdinal = reader.GetOrdinal("RecordLabelName");
             var dateFoundedOrdinal = reader.GetOrdinal("DateFounded");
             var dateClosedOrdinal = reader.GetOrdinal("DateClosed");
@@ -87,17 +89,18 @@ namespace MusicProject.Repositories
             {
                 if (!reader.IsDBNull(dateClosedOrdinal))
                 {
-                    return new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
-                        reader.GetDateTime(dateClosedOrdinal), reader.GetString(recordLabelLocationOrdinal));
+                    recordLabels.Add(new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
+                        reader.GetDateTime(dateClosedOrdinal), reader.GetString(recordLabelLocationOrdinal)));
                 }
                 else
                 {
                     Nullable<DateTime> d = null;
-                    return new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
-                       d, reader.GetString(recordLabelLocationOrdinal));
+                    recordLabels.Add(new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
+                       d, reader.GetString(recordLabelLocationOrdinal)));
                 }                
             }
-            return null;
+
+            return recordLabels;
         }
     }
 }
