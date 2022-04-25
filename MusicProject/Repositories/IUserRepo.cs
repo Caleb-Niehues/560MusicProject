@@ -56,7 +56,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <param name="password"></param>
-        void DeleteUser(string name, string password);
+        bool DeleteUser(string name, string password);
 
         /// <summary>
         /// Gets the most active reviewers of a given artist

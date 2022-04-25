@@ -85,7 +85,8 @@ namespace MusicProject.Views
 
         private void RegisterLogin(UserModel user)
         {
-            uxUserLabel.Text = "Logged in as: " + user.Name;
+            if (user == null) uxUserLabel.Text = "Not logged in";
+            else uxUserLabel.Text = "Logged in as: " + user.Name;
         }
 
         public LogInView login;

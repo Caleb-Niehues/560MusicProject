@@ -88,20 +88,34 @@ namespace MusicProject.Controllers
 
         private UserModel _activeUser;
         public UserModel ActiveUser => _activeUser;
-        
-        public SuccessfulLogin successfulLogin;
 
         public MainController(string connectionString)
         {
             //connect = connectionString;
             SqlUser = new SqlUserRepo(connectionString);
-            //successfulLogin = sL;
+
         }
 
         public UserModel CredentialCheck(string userName, string password)
         {
             bool temp = SqlUser.FetchUser(userName, password, out _activeUser);
             return _activeUser;
+        }
+
+        public UserModel CreateUser(string userName, string password, int weight)
+        {
+            _activeUser = SqlUser.CreateUser(userName, password, weight);
+            return _activeUser;
+        }
+
+        public bool DeleteUser(string userName, string password)
+        {
+            if (SqlUser.DeleteUser(userName, password))
+            {
+                _activeUser = null;
+                return true;
+            }
+            return false;
         }
         #endregion
     }
