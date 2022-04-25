@@ -1,6 +1,7 @@
 ﻿using MusicProject.Models;
 using System;
 using System.Collections.Generic;
+using MusicProject.Mic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,22 +34,22 @@ namespace MusicProject.Controllers
             artistModel = new ArtistModel("Kendrick Lamar", members);//could possibly use solo query to match name
 
             #region Adding Songs
-            songs.Add(new SongModel("Wesley's Theory", test, Genre.HipHop, new TimeSpan(0, 4, 47)));
-            songs.Add(new SongModel("For Free? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 2, 10)));
-            songs.Add(new SongModel("King Kunta", test, Genre.HipHop, new TimeSpan(0, 3, 54)));
-            songs.Add(new SongModel("Institutionalized", test, Genre.HipHop, new TimeSpan(0, 4, 31)));
-            songs.Add(new SongModel("These Walls", test, Genre.HipHop, new TimeSpan(0, 5, 0)));
-            songs.Add(new SongModel("U", test, Genre.HipHop, new TimeSpan(0, 4, 28)));
-            songs.Add(new SongModel("Alright", test, Genre.HipHop, new TimeSpan(0, 3, 39)));
-            songs.Add(new SongModel("For Sale? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 4, 51)));
-            songs.Add(new SongModel("Momma", test, Genre.HipHop, new TimeSpan(0, 4, 43)));
-            songs.Add(new SongModel("Hood Politics", test, Genre.HipHop, new TimeSpan(0, 4, 52)));
-            songs.Add(new SongModel("How Much a Dollar Cost", test, Genre.HipHop, new TimeSpan(0, 4, 21)));
-            songs.Add(new SongModel("Complexion (A Zulu Love)", test, Genre.HipHop, new TimeSpan(0, 4, 23)));
-            songs.Add(new SongModel("The Blacker the Berry", test, Genre.HipHop, new TimeSpan(0, 5, 28)));
-            songs.Add(new SongModel("You Ain't Gotta Lie", test, Genre.HipHop, new TimeSpan(0, 4, 1)));
-            songs.Add(new SongModel("I", test, Genre.HipHop, new TimeSpan(0, 5, 36)));
-            songs.Add(new SongModel("Mortal Man", test, Genre.HipHop, new TimeSpan(0, 12, 7)));
+            //songs.Add(new SongModel("Wesley's Theory", test, Genre.HipHop, new TimeSpan(0, 4, 47)));
+            //songs.Add(new SongModel("For Free? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 2, 10)));
+            //songs.Add(new SongModel("King Kunta", test, Genre.HipHop, new TimeSpan(0, 3, 54)));
+            //songs.Add(new SongModel("Institutionalized", test, Genre.HipHop, new TimeSpan(0, 4, 31)));
+            //songs.Add(new SongModel("These Walls", test, Genre.HipHop, new TimeSpan(0, 5, 0)));
+            //songs.Add(new SongModel("U", test, Genre.HipHop, new TimeSpan(0, 4, 28)));
+            //songs.Add(new SongModel("Alright", test, Genre.HipHop, new TimeSpan(0, 3, 39)));
+            //songs.Add(new SongModel("For Sale? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 4, 51)));
+            //songs.Add(new SongModel("Momma", test, Genre.HipHop, new TimeSpan(0, 4, 43)));
+            //songs.Add(new SongModel("Hood Politics", test, Genre.HipHop, new TimeSpan(0, 4, 52)));
+            //songs.Add(new SongModel("How Much a Dollar Cost", test, Genre.HipHop, new TimeSpan(0, 4, 21)));
+            //songs.Add(new SongModel("Complexion (A Zulu Love)", test, Genre.HipHop, new TimeSpan(0, 4, 23)));
+            //songs.Add(new SongModel("The Blacker the Berry", test, Genre.HipHop, new TimeSpan(0, 5, 28)));
+            //songs.Add(new SongModel("You Ain't Gotta Lie", test, Genre.HipHop, new TimeSpan(0, 4, 1)));
+            //songs.Add(new SongModel("I", test, Genre.HipHop, new TimeSpan(0, 5, 36)));
+            //songs.Add(new SongModel("Mortal Man", test, Genre.HipHop, new TimeSpan(0, 12, 7)));
             #endregion
 
             recordLabels.Add(new RecordLabelModel("TDE", new DateTime(2004, 1, 1), null, "Carson, CA, USA"));
@@ -76,6 +77,25 @@ namespace MusicProject.Controllers
             #endregion
 
             test = new AlbumModel("To Pimp A Butterfly", new DateTime(2015, 3, 15), artistModel, songs, new TimeSpan(0,78,51), producerModels, recordLabels, Certification.Platinum);
+        }
+        #endregion
+
+        #region Login
+        public SuccessfulLogin successfulLogin;
+
+        public MainController(SuccessfulLogin sL)
+        {
+            successfulLogin = sL;
+        }
+
+        public bool CredentialCheck(string password, string username, DatabaseProxy proxy)
+        {
+            if (proxy.credentials.ContainsKey(username) && proxy.credentials.ContainsValue(password))
+            {
+                successfulLogin();
+                return true;
+            }
+            return false;
         }
         #endregion
     }

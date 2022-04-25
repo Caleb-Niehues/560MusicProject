@@ -19,7 +19,12 @@ namespace MusicProject.Repositories
 
         public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification)
         {
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(title));
+
             throw new NotImplementedException();
+            //FINISH
         }
 
         public AlbumModel FetchAlbum(string name)

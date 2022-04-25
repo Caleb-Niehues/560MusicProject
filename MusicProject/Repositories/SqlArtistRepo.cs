@@ -49,19 +49,82 @@ namespace MusicProject.Repositories
                 }
             }
 
-            if(false)
-                return new ArtistModel(name, members);
+            if(false) return new ArtistModel(name, members);
             return null;
         }
 
-        public ArtistModel FetchArtist(string name)
+        public ArtistModel FetchArtist(string name) //changing this to return list of albums instead of artistmodel
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.FetchArtist", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateFetchArtist(reader);
+                    }
+                }
+            }
+        }
+
+        private ArtistModel TranslateFetchArtist(SqlDataReader reader)
+        {
+            var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+            return new ArtistModel(reader.GetString(artistNameOrdinal), null);
         }
 
         public IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear)
         {
-            throw new NotImplementedException();
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.GetArtistsInWindow", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("LabelName", labelName);
+                        command.Parameters.AddWithValue("StartYear", startYear);
+                        command.Parameters.AddWithValue("EndYear", endYear);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateGetArtistsInWindow(reader);
+                    }
+                }
+            }
+        }
+
+        private IReadOnlyList<ArtistModel> TranslateGetArtistsInWindow(SqlDataReader reader)
+        {
+            var artists = new List<ArtistModel>();
+
+            var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+
+            while (reader.Read())
+            {
+                artists.Add(new ArtistModel(reader.GetString(artistNameOrdinal), null));
+            }
+
+            return artists;
         }
 
         /// <summary>
