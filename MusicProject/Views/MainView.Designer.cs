@@ -46,12 +46,13 @@
             this.uxRecordLabel = new System.Windows.Forms.Label();
             this.uxPersonLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.uxLeaveReview = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxLogIn
             // 
-            this.uxLogIn.Location = new System.Drawing.Point(179, 15);
-            this.uxLogIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxLogIn.Location = new System.Drawing.Point(17, 15);
+            this.uxLogIn.Margin = new System.Windows.Forms.Padding(4);
             this.uxLogIn.Name = "uxLogIn";
             this.uxLogIn.Size = new System.Drawing.Size(100, 28);
             this.uxLogIn.TabIndex = 0;
@@ -61,8 +62,8 @@
             // 
             // uxGenreTimeline
             // 
-            this.uxGenreTimeline.Location = new System.Drawing.Point(16, 89);
-            this.uxGenreTimeline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxGenreTimeline.Location = new System.Drawing.Point(15, 104);
+            this.uxGenreTimeline.Margin = new System.Windows.Forms.Padding(4);
             this.uxGenreTimeline.Name = "uxGenreTimeline";
             this.uxGenreTimeline.Size = new System.Drawing.Size(263, 28);
             this.uxGenreTimeline.TabIndex = 1;
@@ -71,8 +72,8 @@
             // 
             // uxArtistTimeline
             // 
-            this.uxArtistTimeline.Location = new System.Drawing.Point(16, 124);
-            this.uxArtistTimeline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxArtistTimeline.Location = new System.Drawing.Point(17, 140);
+            this.uxArtistTimeline.Margin = new System.Windows.Forms.Padding(4);
             this.uxArtistTimeline.Name = "uxArtistTimeline";
             this.uxArtistTimeline.Size = new System.Drawing.Size(263, 28);
             this.uxArtistTimeline.TabIndex = 2;
@@ -81,8 +82,8 @@
             // 
             // uxRecordLabelRoster
             // 
-            this.uxRecordLabelRoster.Location = new System.Drawing.Point(16, 160);
-            this.uxRecordLabelRoster.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxRecordLabelRoster.Location = new System.Drawing.Point(17, 174);
+            this.uxRecordLabelRoster.Margin = new System.Windows.Forms.Padding(4);
             this.uxRecordLabelRoster.Name = "uxRecordLabelRoster";
             this.uxRecordLabelRoster.Size = new System.Drawing.Size(263, 28);
             this.uxRecordLabelRoster.TabIndex = 3;
@@ -92,7 +93,7 @@
             // uxUserLabel
             // 
             this.uxUserLabel.AutoSize = true;
-            this.uxUserLabel.Location = new System.Drawing.Point(12, 21);
+            this.uxUserLabel.Location = new System.Drawing.Point(186, 21);
             this.uxUserLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxUserLabel.Name = "uxUserLabel";
             this.uxUserLabel.Size = new System.Drawing.Size(92, 17);
@@ -101,8 +102,8 @@
             // 
             // uxLookUpText
             // 
-            this.uxLookUpText.Location = new System.Drawing.Point(16, 57);
-            this.uxLookUpText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxLookUpText.Location = new System.Drawing.Point(17, 246);
+            this.uxLookUpText.Margin = new System.Windows.Forms.Padding(4);
             this.uxLookUpText.Name = "uxLookUpText";
             this.uxLookUpText.Size = new System.Drawing.Size(261, 22);
             this.uxLookUpText.TabIndex = 5;
@@ -111,8 +112,8 @@
             // 
             // uxGetArtistReviews
             // 
-            this.uxGetArtistReviews.Location = new System.Drawing.Point(17, 197);
-            this.uxGetArtistReviews.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxGetArtistReviews.Location = new System.Drawing.Point(19, 210);
+            this.uxGetArtistReviews.Margin = new System.Windows.Forms.Padding(4);
             this.uxGetArtistReviews.Name = "uxGetArtistReviews";
             this.uxGetArtistReviews.Size = new System.Drawing.Size(261, 28);
             this.uxGetArtistReviews.TabIndex = 6;
@@ -122,7 +123,7 @@
             // uxAddToDB
             // 
             this.uxAddToDB.Location = new System.Drawing.Point(67, 313);
-            this.uxAddToDB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxAddToDB.Margin = new System.Windows.Forms.Padding(4);
             this.uxAddToDB.Name = "uxAddToDB";
             this.uxAddToDB.Size = new System.Drawing.Size(100, 28);
             this.uxAddToDB.TabIndex = 7;
@@ -134,7 +135,7 @@
             this.uxSongList.FormattingEnabled = true;
             this.uxSongList.ItemHeight = 16;
             this.uxSongList.Location = new System.Drawing.Point(344, 57);
-            this.uxSongList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxSongList.Margin = new System.Windows.Forms.Padding(4);
             this.uxSongList.Name = "uxSongList";
             this.uxSongList.Size = new System.Drawing.Size(159, 116);
             this.uxSongList.TabIndex = 8;
@@ -164,7 +165,7 @@
             this.uxProducerList.FormattingEnabled = true;
             this.uxProducerList.ItemHeight = 16;
             this.uxProducerList.Location = new System.Drawing.Point(344, 272);
-            this.uxProducerList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxProducerList.Margin = new System.Windows.Forms.Padding(4);
             this.uxProducerList.Name = "uxProducerList";
             this.uxProducerList.Size = new System.Drawing.Size(159, 116);
             this.uxProducerList.TabIndex = 11;
@@ -174,7 +175,7 @@
             this.uxRecordLabelList.FormattingEnabled = true;
             this.uxRecordLabelList.ItemHeight = 16;
             this.uxRecordLabelList.Location = new System.Drawing.Point(589, 57);
-            this.uxRecordLabelList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxRecordLabelList.Margin = new System.Windows.Forms.Padding(4);
             this.uxRecordLabelList.Name = "uxRecordLabelList";
             this.uxRecordLabelList.Size = new System.Drawing.Size(159, 116);
             this.uxRecordLabelList.TabIndex = 12;
@@ -184,7 +185,7 @@
             this.uxPersonList.FormattingEnabled = true;
             this.uxPersonList.ItemHeight = 16;
             this.uxPersonList.Location = new System.Drawing.Point(589, 272);
-            this.uxPersonList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxPersonList.Margin = new System.Windows.Forms.Padding(4);
             this.uxPersonList.Name = "uxPersonList";
             this.uxPersonList.Size = new System.Drawing.Size(159, 116);
             this.uxPersonList.TabIndex = 13;
@@ -194,7 +195,7 @@
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 16;
             this.listBox3.Location = new System.Drawing.Point(819, 160);
-            this.listBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox3.Margin = new System.Windows.Forms.Padding(4);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(159, 116);
             this.listBox3.TabIndex = 14;
@@ -229,11 +230,23 @@
             this.label3.TabIndex = 17;
             this.label3.Text = "label3";
             // 
+            // uxLeaveReview
+            // 
+            this.uxLeaveReview.Location = new System.Drawing.Point(13, 57);
+            this.uxLeaveReview.Margin = new System.Windows.Forms.Padding(4);
+            this.uxLeaveReview.Name = "uxLeaveReview";
+            this.uxLeaveReview.Size = new System.Drawing.Size(263, 28);
+            this.uxLeaveReview.TabIndex = 18;
+            this.uxLeaveReview.Text = "Leave Review";
+            this.uxLeaveReview.UseVisualStyleBackColor = true;
+            this.uxLeaveReview.Click += new System.EventHandler(this.uxLeaveReview_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.uxLeaveReview);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.uxPersonLabel);
             this.Controls.Add(this.uxRecordLabel);
@@ -252,7 +265,7 @@
             this.Controls.Add(this.uxArtistTimeline);
             this.Controls.Add(this.uxGenreTimeline);
             this.Controls.Add(this.uxLogIn);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "GoodVibes.exe";
             this.ResumeLayout(false);
@@ -280,5 +293,6 @@
         private System.Windows.Forms.Label uxRecordLabel;
         private System.Windows.Forms.Label uxPersonLabel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button uxLeaveReview;
     }
 }

@@ -57,7 +57,8 @@ namespace MusicProject.Repositories
             }
 
             //Album doesn't exist.
-            throw new ArgumentException("The album does not exist.", nameof(album));
+            return null;
+            //throw new ArgumentException("The album does not exist.", nameof(album));
         }
 
         public string CheckAlbumExists(string albumName)
@@ -86,9 +87,6 @@ namespace MusicProject.Repositories
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("Name", name);
-
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
 
                         connection.Open();
 

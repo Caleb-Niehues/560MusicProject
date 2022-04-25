@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using MusicProject.Mic;
-using MusicProject.Models;
 
 namespace MusicProject.Views
 {
@@ -11,7 +9,6 @@ namespace MusicProject.Views
         private static CreateUser create;
         private static DeleteUser delete;
         private UpdateUser updateMain;
-        private DatabaseProxy proxy;
 
         public LogInView(UpdateUser user)
         {
