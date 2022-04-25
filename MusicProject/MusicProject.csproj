@@ -141,6 +141,7 @@
     <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveReviewsByAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
   </ItemGroup>
   <ItemGroup>

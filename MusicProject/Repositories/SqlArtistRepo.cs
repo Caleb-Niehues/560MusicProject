@@ -79,7 +79,7 @@ namespace MusicProject.Repositories
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
-                        return TranslatePersons(reader);
+                        return TranslateArtists(reader);
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private IReadOnlyList<ArtistModel> TranslatePersons(SqlDataReader reader)
+        private IReadOnlyList<ArtistModel> TranslateArtists(SqlDataReader reader)
         {
             var artists = new List<ArtistModel>();
 
