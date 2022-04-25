@@ -147,9 +147,13 @@
     <Content Include="Sql\FinalProjectReviewInserts.sql" />
     <Content Include="Sql\FinalProjectSongInserts.sql" />
     <Content Include="Sql\FinalProjectTables.sql" />
+    <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSongs.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />
