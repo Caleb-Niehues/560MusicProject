@@ -21,8 +21,8 @@ namespace MusicProject
             Application.SetCompatibleTextRenderingDefault(false);
             string testConnect = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
 
-            //var testRepo = new SqlUserRepo(testConnect);
-            //var test = testRepo.CreateUser("Ashley Redy", "hunter2", 2);
+            //var testRepo = new SqlSongRepo(testConnect);
+            //var test = testRepo.FetchSong("No Guidance");
             DatabaseProxy proxy = new DatabaseProxy();
           
             Application.Run(new MainView());

@@ -36,7 +36,7 @@ namespace MusicProject.Views
             artistModel = new ArtistModel("Kendrick Lamar", members);//could possibly use solo query to match name
 
             #region Adding Songs
-            songs.Add(new SongModel("Wesley's Theory", test, Genre.HipHop, new TimeSpan(0, 4, 47)));
+            /*songs.Add(new SongModel("Wesley's Theory", test, Genre.HipHop, new TimeSpan(0, 4, 47)));
             songs.Add(new SongModel("For Free? (Interlude)", test, Genre.HipHop, new TimeSpan(0, 2, 10)));
             songs.Add(new SongModel("King Kunta", test, Genre.HipHop, new TimeSpan(0, 3, 54)));
             songs.Add(new SongModel("Institutionalized", test, Genre.HipHop, new TimeSpan(0, 4, 31)));
@@ -51,7 +51,7 @@ namespace MusicProject.Views
             songs.Add(new SongModel("The Blacker the Berry", test, Genre.HipHop, new TimeSpan(0, 5, 28)));
             songs.Add(new SongModel("You Ain't Gotta Lie", test, Genre.HipHop, new TimeSpan(0, 4, 1)));
             songs.Add(new SongModel("I", test, Genre.HipHop, new TimeSpan(0, 5, 36)));
-            songs.Add(new SongModel("Mortal Man", test, Genre.HipHop, new TimeSpan(0, 12, 7)));
+            songs.Add(new SongModel("Mortal Man", test, Genre.HipHop, new TimeSpan(0, 12, 7)));*/
             #endregion
 
             recordLabels.Add(new RecordLabelModel("TDE", new DateTime(2004, 1, 1), null, "Carson, CA, USA"));
