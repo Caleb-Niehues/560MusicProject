@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Transactions;
 
 namespace MusicProject.Repositories
@@ -27,7 +28,7 @@ namespace MusicProject.Repositories
             //FINISH
         }
 
-        public AlbumModel FetchAlbum(string name)
+        public IReadOnlyList<AlbumModel> FetchAlbum(string name)
         {
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -52,8 +53,9 @@ namespace MusicProject.Repositories
             }
         }
 
-        private AlbumModel TranslateFetchAlbum(SqlDataReader reader)
+        private IReadOnlyList<AlbumModel> TranslateFetchAlbum(SqlDataReader reader)
         {
+            var albums = new Dictionary<string, AlbumModel>();
             var albumTitleOrdinal = reader.GetOrdinal("AlbumTitle");
             var releaseDateOrdinal = reader.GetOrdinal("ReleaseDate");
             var artistNameOrdinal = reader.GetOrdinal("ArtistName");
@@ -69,8 +71,8 @@ namespace MusicProject.Repositories
 
             List<SongModel> songs = new List<SongModel>();
             TimeSpan length = new TimeSpan();
-            List<ProducerModel> producers = new List<ProducerModel>();
-            List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+            Dictionary<string, ProducerModel> producers = new Dictionary<string, ProducerModel>();
+            Dictionary<string, RecordLabelModel> recordLabels = new Dictionary<string, RecordLabelModel>();
             string title = null;
             DateTime releaseDate = DateTime.Now;
             ArtistModel artist = null;
@@ -82,18 +84,30 @@ namespace MusicProject.Repositories
                 releaseDate = reader.GetDateTime(releaseDateOrdinal);
                 artist = new ArtistModel(reader.GetString(artistNameOrdinal), null);
                 certification = (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationOrdinal));
+                string producer = reader.GetString(producerNameOrdinal);
+                string recordLabel = reader.GetString(recordLabelNameOrdinal);
 
                 songs.Add(new SongModel(reader.GetString(songNameOrdinal), title,
                     artist.ToString(), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
                     reader.GetTimeSpan(songLengthOrdinal)));
                 length += reader.GetTimeSpan(songLengthOrdinal);
-                producers.Add(new ProducerModel(reader.GetString(producerNameOrdinal)));
-                recordLabels.Add(new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
-                    reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
-            }
 
-            return new AlbumModel(title, releaseDate, artist,
-                songs, length, producers, recordLabels, certification);
+                if (!producers.ContainsKey(producer)) producers.Add(producer, new ProducerModel(producer));
+
+                if (!recordLabels.ContainsKey(recordLabel)) 
+                {
+                    recordLabels.Add(recordLabel, new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal),
+                        reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
+                }
+                
+                if (!albums.ContainsKey(title))
+                {
+                    albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
+                        producers.Values.ToList<ProducerModel>(), recordLabels.Values.ToList<RecordLabelModel>(), certification));
+
+                }
+            }
+            return albums.Values.ToList<AlbumModel>();
            }
 
         public IReadOnlyList<AlbumModel> GetBestPerforming(DateTime startYear, DateTime endYear, int number)
