@@ -28,7 +28,7 @@ namespace MusicProject.Repositories
 
                         command.Parameters.AddWithValue("Name", name);
                         command.Parameters.AddWithValue("DateFounded", dateFounded);
-                        command.Parameters.AddWithValue("DateClosed", dateClosed);
+                        command.Parameters.AddWithValue("DateClosed", dateClosed ?? (object)DBNull.Value);
                         command.Parameters.AddWithValue("Location", location);
 
                         //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
@@ -78,15 +78,26 @@ namespace MusicProject.Repositories
 
         private RecordLabelModel TranslateFetchRecordLabel(SqlDataReader reader)
         {
-            var songs = new List<SongModel>();
-
             var recordLabelNameOrdinal = reader.GetOrdinal("RecordLabelName");
             var dateFoundedOrdinal = reader.GetOrdinal("DateFounded");
             var dateClosedOrdinal = reader.GetOrdinal("DateClosed");
             var recordLabelLocationOrdinal = reader.GetOrdinal("RecordLabelLocation");
-
-            return new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
-                reader.GetDateTime(dateClosedOrdinal), reader.GetString(recordLabelLocationOrdinal));
+            
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(dateClosedOrdinal))
+                {
+                    return new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
+                        reader.GetDateTime(dateClosedOrdinal), reader.GetString(recordLabelLocationOrdinal));
+                }
+                else
+                {
+                    Nullable<DateTime> d = null;
+                    return new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(dateFoundedOrdinal),
+                       d, reader.GetString(recordLabelLocationOrdinal));
+                }                
+            }
+            return null;
         }
     }
 }

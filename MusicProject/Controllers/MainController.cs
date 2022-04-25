@@ -10,7 +10,7 @@ namespace MusicProject.Controllers
     /// </summary>
     public class MainController
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -51,6 +51,9 @@ namespace MusicProject.Controllers
             SqlProducer = new SqlProducerRepo(connectionString);
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
+
+            AlbumModel test = SqlAlbum.FetchAlbum("To Pimp a Butterfly");
+            test.ToString();
         }
 
         #region Login        

@@ -66,7 +66,7 @@ namespace MusicProject.Models
         /// <param name="dateFounded"></param>
         /// <param name="dateClosed"></param>
         /// <param name="location"></param>
-        public RecordLabelModel(string name, DateTime dateFounded, DateTime? dateClosed, string location)
+        public RecordLabelModel(string name, DateTime dateFounded, Nullable<DateTime> dateClosed, string location)
         {
             this._name = name;
             this._dateFounded = dateFounded;

@@ -9,7 +9,7 @@ SELECT R.RecordLabelName, R.DateFounded, R.DateClosed, R.RecordLabelLocation
 FROM
 	(
 		VALUES
-			(@Name, @DateFounded, @DateClosed, @Location))
+			(@Name, @DateFounded, @DateFounded, @Location))
 			R(RecordLabelName, DateFounded, DateClosed, RecordLabelLocation)
 
 GO

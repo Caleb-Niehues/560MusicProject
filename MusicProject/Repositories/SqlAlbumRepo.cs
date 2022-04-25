@@ -71,10 +71,20 @@ namespace MusicProject.Repositories
             TimeSpan length = new TimeSpan();
             List<ProducerModel> producers = new List<ProducerModel>();
             List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+            string title = null;
+            DateTime releaseDate = DateTime.Now;
+            ArtistModel artist = null;
+            Certification certification = Certification.None;
+
             while (reader.Read())
             {
-                songs.Add(new SongModel(reader.GetString(songNameOrdinal), reader.GetString(albumTitleOrdinal),
-                    reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
+                title = reader.GetString(albumTitleOrdinal);
+                releaseDate = reader.GetDateTime(releaseDateOrdinal);
+                artist = new ArtistModel(reader.GetString(artistNameOrdinal), null);
+                certification = (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationOrdinal));
+
+                songs.Add(new SongModel(reader.GetString(songNameOrdinal), title,
+                    artist.ToString(), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
                     reader.GetTimeSpan(songLengthOrdinal)));
                 length += reader.GetTimeSpan(songLengthOrdinal);
                 producers.Add(new ProducerModel(reader.GetString(producerNameOrdinal)));
@@ -82,9 +92,9 @@ namespace MusicProject.Repositories
                     reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
             }
 
-            return new AlbumModel(reader.GetString(albumTitleOrdinal), reader.GetDateTime(releaseDateOrdinal), new ArtistModel(reader.GetString(artistNameOrdinal), null),
-                songs, length, producers, recordLabels, (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationOrdinal)));
-        }
+            return new AlbumModel(title, releaseDate, artist,
+                songs, length, producers, recordLabels, certification);
+           }
 
         public IReadOnlyList<AlbumModel> GetBestPerforming(DateTime startYear, DateTime endYear, int number)
         {

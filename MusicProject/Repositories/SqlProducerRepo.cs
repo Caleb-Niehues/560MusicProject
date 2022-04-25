@@ -76,7 +76,11 @@ namespace MusicProject.Repositories
         private ProducerModel TranslateFetchProducer(SqlDataReader reader)
         {
             var recordLabelNameOrdinal = reader.GetOrdinal("ProducerName");
-            return new ProducerModel(reader.GetString(recordLabelNameOrdinal));
+            while (reader.Read())
+            {
+                return new ProducerModel(reader.GetString(recordLabelNameOrdinal));
+            }
+            return null;
         }
     }
 }
