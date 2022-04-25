@@ -53,6 +53,9 @@ namespace MusicProject.Controllers
             SqlProducer = new SqlProducerRepo(connectionString);
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
+
+            AlbumModel test = SqlAlbum.FetchAlbum("To Pimp a Butterfly");
+            test.ToString();
         }
 
         public void InitializeDelegates(UpdateSearch update)

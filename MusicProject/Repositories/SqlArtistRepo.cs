@@ -33,8 +33,8 @@ namespace MusicProject.Repositories
 
                         command.Parameters.AddWithValue("ArtistName", name);
 
-                        var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        p.Direction = ParameterDirection.Output;
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
 
                         connection.Open();
 
@@ -42,15 +42,14 @@ namespace MusicProject.Repositories
 
                         transaction.Complete();
 
-                        var personId = (int)command.Parameters["PersonId"].Value;
+                        //var personId = (int)command.Parameters["PersonId"].Value;
 
                         //return new Person(personId, firstName, lastName, email);
                     }
                 }
             }
 
-            if(false) return new ArtistModel(name, members);
-            return null;
+            return new ArtistModel(name, members);
         }
 
         public ArtistModel FetchArtist(string name) //changing this to return list of albums instead of artistmodel
@@ -84,7 +83,11 @@ namespace MusicProject.Repositories
         private ArtistModel TranslateFetchArtist(SqlDataReader reader)
         {
             var artistNameOrdinal = reader.GetOrdinal("ArtistName");
-            return new ArtistModel(reader.GetString(artistNameOrdinal), null);
+            while (reader.Read())
+            {
+                return new ArtistModel(reader.GetString(artistNameOrdinal), null);
+            }
+            return null;
         }
 
         public IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear)
