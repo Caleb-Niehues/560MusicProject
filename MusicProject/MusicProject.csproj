@@ -139,6 +139,7 @@
     <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSongs.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />
