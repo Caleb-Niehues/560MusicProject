@@ -68,7 +68,6 @@ namespace MusicProject.Repositories
             //need to double dip to check password match
 
 
-
             // Save to database.
             using (var transaction = new TransactionScope())
             {

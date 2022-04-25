@@ -135,11 +135,13 @@
     <Content Include="Sql\FinalProjectTables.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.DeleteReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.DeleteUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchPassword.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />
