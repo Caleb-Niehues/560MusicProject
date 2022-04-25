@@ -5,6 +5,7 @@ using MusicProject.Mic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicProject.Repositories;
 
 namespace MusicProject.Controllers
 {
@@ -81,21 +82,24 @@ namespace MusicProject.Controllers
         #endregion
 
         #region Login
+        //private string connect;
+        public SqlUserRepo SqlUser;
+        public SqlReviewRepo SqlReview;
+        
         public SuccessfulLogin successfulLogin;
 
-        public MainController(SuccessfulLogin sL)
+        public MainController(string connectionString)
         {
-            successfulLogin = sL;
+            //connect = connectionString;
+            SqlUser = new SqlUserRepo(connectionString);
+            //successfulLogin = sL;
         }
 
-        public bool CredentialCheck(string password, string username, DatabaseProxy proxy)
+        public UserModel CredentialCheck(string userName, string password)
         {
-            if (proxy.credentials.ContainsKey(username) && proxy.credentials.ContainsValue(password))
-            {
-                successfulLogin();
-                return true;
-            }
-            return false;
+            UserModel user;
+            if (SqlUser.FetchUser(userName, password, out user)) return user;
+            else return null;
         }
         #endregion
     }

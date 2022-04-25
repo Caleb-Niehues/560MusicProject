@@ -1,6 +1,6 @@
 ﻿namespace MusicProject.Views
 {
-    partial class uxLogInView
+    partial class LogInView
     {
         /// <summary>
         /// Required designer variable.

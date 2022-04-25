@@ -1,43 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MusicProject.Mic;
+using MusicProject.Models;
 
 namespace MusicProject.Views
 {
-    public partial class uxLogInView : Form
+    public partial class LogInView : Form
     {
-        public CheckCredentials check;
+        private static CheckCredentials check;
         private DatabaseProxy proxy;
 
-        public uxLogInView(DatabaseProxy proxy, CheckCredentials check)
+        public LogInView(DatabaseProxy proxy, CheckCredentials check)
         {
             InitializeComponent();
-            proxy = this.proxy;
-            check = this.check;
+            //proxy = this.proxy;
+            //check = this.check;
+        }
+
+        public static void InitializeDelegates(CheckCredentials checkProxy)
+        {
+            check = checkProxy;
         }
 
         private void uxLoginButton_Click(object sender, EventArgs e)
         {
-            if (check(uxPasswordText.Text, uxUsernameText.Text, proxy))
+            UserModel temp = check(uxUsernameText.Text, uxPasswordText.Text);
+            if (temp != null)
             {
-                //this.Hide();
                 this.Close();
-                //View v = new View(proxy);
-                //v.Show();
             }
             else
             {
                 MessageBox.Show("Incorrect password or username");
+                uxPasswordText.Clear();
+                //uxUsernameText.Clear();
             }
-            uxPasswordText.Clear();
-            uxUsernameText.Clear();
         }
     }
 }
