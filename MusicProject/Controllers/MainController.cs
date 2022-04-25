@@ -26,17 +26,18 @@ namespace MusicProject.Controllers
 
         private ReviewModel _reviewModel = null;
 
-        private List<PersonModel> _members = new List<PersonModel>();
+        private IReadOnlyList<PersonModel> _members = new List<PersonModel>();
 
-        private ArtistModel _artistModel;
+        private IReadOnlyList<ArtistModel> _artists = new List<ArtistModel>();
 
-        private List<SongModel> _songs = new List<SongModel>();
+        private IReadOnlyList<SongModel> _songs = new List<SongModel>();
+        public IReadOnlyList<SongModel> Songs => _songs;
 
-        private List<ProducerModel> producerModels = new List<ProducerModel>();
-        
-        private List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        private IReadOnlyList<ProducerModel> _producers = new List<ProducerModel>();
 
-        private AlbumModel _album;
+        private IReadOnlyList<RecordLabelModel> _recordLabels = new List<RecordLabelModel>();
+
+        private IReadOnlyList<AlbumModel> _albums = new List<AlbumModel>();
 
         #endregion
 
@@ -50,8 +51,6 @@ namespace MusicProject.Controllers
             SqlProducer = new SqlProducerRepo(connectionString);
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
-
-
         }
 
         #region Login        
@@ -78,6 +77,28 @@ namespace MusicProject.Controllers
         }
         #endregion
 
+        #region Search Bar
+        public bool Search(string name)
+        {
+            bool success = false;
 
+            //_artists = SqlArtist.FetchArtist(name);
+            success = success || _artists.Count > 0;
+
+            _songs = SqlSong.FetchSong(name);
+            success = success || _songs.Count > 0;
+
+            //_producers = SqlProducer.FetchProducer(name);
+            success = success || _producers.Count > 0;
+
+            //_recordLabels = SqlRecordLabel.FetchRecordLabel(name);
+            success = success || _recordLabels.Count > 0;
+
+            //_albums = SqlAlbum.FetchAlbum(name);
+            success = success || _albums.Count > 0;
+
+            return success;
+        }
+        #endregion
     }
 }

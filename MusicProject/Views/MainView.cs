@@ -15,31 +15,30 @@ namespace MusicProject.Views
     public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
-        public LogInView login;
-        public CheckCredentials check;
+        private LogInView login;
+        private Search search;
 
-        private UserModel activeUser;
-        
-        private ReviewModel reviewModel = null;
+        private UserModel activeUser = null;
 
-        private List<PersonModel> members = new List<PersonModel>();
-        
-        private ArtistModel artistModel;
+        private ReviewModel _reviewModel = null;
 
-        private List<SongModel> songs = new List<SongModel>();
+        private IReadOnlyList<PersonModel> members = new List<PersonModel>();
 
-        private List<ProducerModel> producerModels = new List<ProducerModel>();
+        private IReadOnlyList<ArtistModel> artists = new List<ArtistModel>();
 
-        private List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        private IReadOnlyList<SongModel> songs = new List<SongModel>();
 
-        private AlbumModel selectedAlbum;
+        private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
+
+        private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+
+        private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
 
         public MainView(MainController controller)
         {
             InitializeComponent();
-            activeUser = controller.ActiveUser;
-            login = new LogInView(RegisterLogin);
-            login.Show();
+            search = controller.Search;
+            songs = controller.Songs;
         }
 
         private void RegisterLogin(UserModel user)
@@ -53,11 +52,14 @@ namespace MusicProject.Views
 
         private void uxLookUpText_KeyDown(object sender, KeyEventArgs e)
         {
-            //check if enter key pressed and run search
-            //uxSongList.DataSource = test.Songs;
-            //uxProducerList.DataSource = test.Producers;
-            //uxPersonList.DataSource = members;
-            //uxRecordLabelList.DataSource = recordLabels;
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (search(uxLookUpText.Text))
+                {
+                    uxSongList.DataSource = songs;
+                }
+                else MessageBox.Show("No name found on data base - needs to be an exact match");
+            }
         }
 
         private void uxLogIn_Click(object sender, EventArgs e)

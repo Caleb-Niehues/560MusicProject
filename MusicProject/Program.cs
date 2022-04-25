@@ -9,6 +9,7 @@ namespace MusicProject
     public delegate UserModel CheckCredentials(string userName, string password);
     public delegate UserModel CreateUser(string userName, string password, int weight);
     public delegate bool DeleteUser(string userName, string password);
+    public delegate bool Search(string name);
     
     static class Program
     {
