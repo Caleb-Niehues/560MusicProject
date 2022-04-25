@@ -45,5 +45,10 @@
         {
             this._name = name;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
