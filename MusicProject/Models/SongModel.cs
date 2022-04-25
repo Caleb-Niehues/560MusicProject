@@ -83,5 +83,10 @@ namespace MusicProject.Models
             this._genre = genre;
             this._length = length;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
