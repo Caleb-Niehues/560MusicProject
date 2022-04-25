@@ -101,19 +101,22 @@ namespace MusicProject.Repositories
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.AddWithValue("Name", name);
+
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
                     {
-                        var PasswordOrdinal = reader.GetOrdinal("ArtistId");
-                        var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+                        var passwordOrdinal = reader.GetOrdinal("Password");
+
+                        string test;
 
                         while (reader.Read())
                         {
-                            artists.Add(new ArtistModel(reader.GetString(artistNameOrdinal), null));
-                        }
+                            test = reader.GetString(passwordOrdinal);
 
-                        return artists;
+                            success = test.Equals(password);
+                        }
                     }
                 }
             }
@@ -121,17 +124,40 @@ namespace MusicProject.Repositories
             return success;
         }
 
-        public bool LoginSuccesful(string name, string password, out UserModel user)
+        public bool FetchUser(string name, string password, out UserModel user)
         {
             bool success = checkPassword(name, password);
             user = null;
 
-            
-
             if (success)
-                user = null;// new UserModel();
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.FetchUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            var weightOrdinal = reader.GetOrdinal("UserWeight");
+                            var dateAddedOrdinal = reader.GetOrdinal("DateAdded");
+
+                            while (reader.Read())
+                            {
+                                user = new UserModel(name,
+                                    reader.GetInt32(weightOrdinal),
+                                    reader.GetDateTime(dateAddedOrdinal));
+                            }
+                        }
+                    }
+                }
+            }
+
             return success;
-            throw new NotImplementedException();
         }
 
         public IReadOnlyList<UserModel> RetrieveSuperFans(string artistName)

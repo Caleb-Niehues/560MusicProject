@@ -16,7 +16,7 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating, DateTime dateAdded)
+        public ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating)
         {
             throw new NotImplementedException();
         }
