@@ -239,6 +239,7 @@
             this.uxLeaveReview.TabIndex = 18;
             this.uxLeaveReview.Text = "Leave Review";
             this.uxLeaveReview.UseVisualStyleBackColor = true;
+            this.uxLeaveReview.Click += new System.EventHandler(this.uxLeaveReview_Click);
             // 
             // MainView
             // 

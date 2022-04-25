@@ -15,10 +15,15 @@ namespace MusicProject.Views
     public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
+        public LogInView login;
+        public CheckCredentials check;
+
         private UserModel activeUser;
+        
         private ReviewModel reviewModel = null;
 
         private List<PersonModel> members = new List<PersonModel>();
+        
         private ArtistModel artistModel;
 
         private List<SongModel> songs = new List<SongModel>();
@@ -29,6 +34,14 @@ namespace MusicProject.Views
 
         private AlbumModel selectedAlbum;
 
+        public MainView(MainController controller)
+        {
+            InitializeComponent();
+            activeUser = controller.ActiveUser;
+            login = new LogInView(RegisterLogin);
+            login.Show();
+        }
+
         private void RegisterLogin(UserModel user)
         {
             activeUser = user;
@@ -36,16 +49,6 @@ namespace MusicProject.Views
                 uxUserLabel.Text = "Not logged in";
             else
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
-        }
-
-        public LogInView login;
-        public CheckCredentials check;
-        public MainView(MainController controller)
-        {
-            InitializeComponent();
-            activeUser = controller.ActiveUser;
-            login = new LogInView(RegisterLogin);
-            login.Show();
         }
 
         private void uxLookUpText_KeyDown(object sender, KeyEventArgs e)
@@ -61,6 +64,11 @@ namespace MusicProject.Views
         {
             login = new LogInView(RegisterLogin);
             login.Show();
+        }
+
+        private void uxLeaveReview_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
