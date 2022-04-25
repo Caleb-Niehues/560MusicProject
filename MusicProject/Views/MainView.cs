@@ -13,11 +13,12 @@ using System.Windows.Forms;
 
 namespace MusicProject.Views
 {
+    public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
         #region Test Album/Load Order
         private ReviewModel reviewModel = null;
-        private UserModel user = null;
+        private UserModel user;
 
         private List<PersonModel> members = new List<PersonModel>();
         private ArtistModel artistModel;
@@ -82,14 +83,19 @@ namespace MusicProject.Views
         }
         #endregion
 
+        private void RegisterLogin(UserModel user)
+        {
+            uxUserLabel.Text = "Logged in as: " + user.Name;
+        }
 
         public LogInView login;
         public DatabaseProxy proxy;
         public CheckCredentials check;
-        public MainView()
+        public MainView(MainController controller)
         {
             InitializeComponent();
-            TestInitialization();
+            user = controller.ActiveUser;
+            //TestInitialization();
         }
 
         private void uxLookUpText_KeyDown(object sender, KeyEventArgs e)
@@ -103,7 +109,7 @@ namespace MusicProject.Views
 
         private void uxLogIn_Click(object sender, EventArgs e)
         {
-            login = new LogInView(proxy, check);
+            login = new LogInView(RegisterLogin);
             login.Show();
         }
     }

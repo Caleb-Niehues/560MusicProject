@@ -85,6 +85,9 @@ namespace MusicProject.Controllers
         //private string connect;
         public SqlUserRepo SqlUser;
         public SqlReviewRepo SqlReview;
+
+        private UserModel _activeUser;
+        public UserModel ActiveUser => _activeUser;
         
         public SuccessfulLogin successfulLogin;
 
@@ -97,9 +100,8 @@ namespace MusicProject.Controllers
 
         public UserModel CredentialCheck(string userName, string password)
         {
-            UserModel user;
-            if (SqlUser.FetchUser(userName, password, out user)) return user;
-            else return null;
+            bool temp = SqlUser.FetchUser(userName, password, out _activeUser);
+            return _activeUser;
         }
         #endregion
     }

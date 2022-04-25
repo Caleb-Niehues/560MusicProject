@@ -22,15 +22,15 @@ namespace MusicProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
             string testConnect = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
-            MainController test = new MainController(testConnect);
-            LogInView.InitializeDelegates(test.CredentialCheck);
+            MainController controller = new MainController(testConnect);
+            LogInView.InitializeDelegates(controller.CredentialCheck);
             //var testRepo = new SqlUserRepo(testConnect);
             //UserModel testUser;
             //if (testRepo.FetchUser("3ero8x", "meestamastae3", out testUser));
-            DatabaseProxy proxy = new DatabaseProxy();
           
-            Application.Run(new MainView());//confirmed issue of needing to run - does this mean the powershell stuff is required?
+            Application.Run(new MainView(controller));//confirmed issue of needing to run - does this mean the powershell stuff is required?
         }
     }
 }

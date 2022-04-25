@@ -8,13 +8,13 @@ namespace MusicProject.Views
     public partial class LogInView : Form
     {
         private static CheckCredentials check;
+        private UpdateUser updateMain;
         private DatabaseProxy proxy;
 
-        public LogInView(DatabaseProxy proxy, CheckCredentials check)
+        public LogInView(UpdateUser user)
         {
             InitializeComponent();
-            //proxy = this.proxy;
-            //check = this.check;
+            updateMain = user;
         }
 
         public static void InitializeDelegates(CheckCredentials checkProxy)
@@ -24,9 +24,11 @@ namespace MusicProject.Views
 
         private void uxLoginButton_Click(object sender, EventArgs e)
         {
-            UserModel temp = check(uxUsernameText.Text, uxPasswordText.Text);
+            var temp = check(uxUsernameText.Text, uxPasswordText.Text);
             if (temp != null)
             {
+                //MessageBox.Show("Logged in as: " + temp.Name);
+                updateMain(temp);
                 this.Close();
             }
             else
