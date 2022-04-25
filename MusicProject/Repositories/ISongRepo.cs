@@ -23,6 +23,6 @@ namespace MusicProject.Repositories
         /// <param name="genre"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        SongModel CreateSong(string name, AlbumModel album, Genre genre, TimeSpan length, int trackNumber);
+        SongModel CreateSong(string name, string album, Genre genre, TimeSpan length, int trackNumber);
     }
 }

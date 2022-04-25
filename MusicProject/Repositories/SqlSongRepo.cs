@@ -16,27 +16,58 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public SongModel CreateSong(string name, AlbumModel album, Genre genre, TimeSpan length, int trackNumber)
+        public SongModel CreateSong(string name, string album, Genre genre, TimeSpan length, int trackNumber)
         {
             // Verify parameters.
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
-            if (CheckAlbumExists(album.Title))
+
+            string checkAlbumResult = CheckAlbumExists(album);
+            if (checkAlbumResult != null)
             {
+                using (var transaction = new TransactionScope())
+                {
+                    using (var connection = new SqlConnection(connectionString))
+                    {
+                        using (var command = new SqlCommand("MusicProject.CreateSongAlbumExists", connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
 
+                            command.Parameters.AddWithValue("SongName", name);
+                            command.Parameters.AddWithValue("AlbumID", album);
+                            command.Parameters.AddWithValue("GenreID", genre);
+                            command.Parameters.AddWithValue("Length", length);
+                            command.Parameters.AddWithValue("TrackNumber", trackNumber);
+
+                            //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                            //p.Direction = ParameterDirection.Output;
+
+                            connection.Open();
+
+                            command.ExecuteNonQuery();
+
+                            transaction.Complete();
+
+                            //var personId = (int)command.Parameters["PersonId"].Value;
+
+                            return new SongModel(name, album, checkAlbumResult, genre, length);
+                        }
+                    }
+                }
             }
-            else //create new album and insert song
-            {
 
-            }
-
-            //FINISH 
-            throw new NotImplementedException();
+            //Album doesn't exist.
+            throw new ArgumentException("The album does not exist.", nameof(album));
         }
 
-        public bool CheckAlbumExists(string albumName)
+        public string CheckAlbumExists(string albumName)
         {
-             return (RetrieveSongs(albumName) == null);
+            IReadOnlyList<SongModel> s = RetrieveSongs(albumName);
+            if (s != null)
+            {
+                return s[0].Artist;
+            }
+            return null;
         }
 
         public IReadOnlyList<SongModel> FetchSong(string name)

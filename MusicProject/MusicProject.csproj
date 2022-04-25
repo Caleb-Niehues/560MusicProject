@@ -137,6 +137,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Sql\Procedures\MusicProject.CreateSongAlbumExists.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -150,7 +151,9 @@
     <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchArtist.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.GetArtistsInWindow.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveSongs.sql" />
