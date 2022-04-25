@@ -11,6 +11,7 @@ namespace MusicProject
     public delegate UserModel CreateUser(string userName, string password, int weight);
     public delegate bool DeleteUser(string userName, string password);
     public delegate bool Search(string name);
+    public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
 
     static class Program
     {
@@ -24,9 +25,11 @@ namespace MusicProject
             Application.SetCompatibleTextRenderingDefault(false);
             
             var controller = new MainController();
+            var view = new MainView(controller);
             LogInView.InitializeDelegates(controller.CredentialCheck, controller.CreateUser, controller.DeleteUser);
-          
-            Application.Run(new MainView(controller));//confirmed issue of needing to run - does this mean the powershell stuff is required?
+            controller.InitializeDelegates(view.RegisterSearch);
+
+            Application.Run(view);//confirmed issue of needing to run - does this mean the powershell stuff is required?
         }
     }
 }

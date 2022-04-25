@@ -21,12 +21,14 @@ namespace MusicProject.Controllers
         private SqlRecordLabelRepo SqlRecordLabel;
         private SqlAlbumRepo SqlAlbum;
 
+        private UpdateSearch update;
+
         private UserModel _activeUser = null;
         public UserModel ActiveUser => _activeUser;
 
         private ReviewModel _reviewModel = null;
 
-        private IReadOnlyList<PersonModel> _members = new List<PersonModel>();
+        private IReadOnlyList<PersonModel> _people = new List<PersonModel>();
 
         private IReadOnlyList<ArtistModel> _artists = new List<ArtistModel>();
 
@@ -51,6 +53,11 @@ namespace MusicProject.Controllers
             SqlProducer = new SqlProducerRepo(connectionString);
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
+        }
+
+        public void InitializeDelegates(UpdateSearch update)
+        {
+            this.update = update;
         }
 
         #region Login        
@@ -82,11 +89,17 @@ namespace MusicProject.Controllers
         {
             bool success = false;
 
+            //_albums = SqlAlbum.FetchAlbum(name);
+            success = success || _albums.Count > 0;
+
             //_artists = SqlArtist.FetchArtist(name);
             success = success || _artists.Count > 0;
 
             _songs = SqlSong.FetchSong(name);
             success = success || _songs.Count > 0;
+
+            //_people = SqlPerson.FetchPerson(name);
+            success = success || _people.Count > 0;
 
             //_producers = SqlProducer.FetchProducer(name);
             success = success || _producers.Count > 0;
@@ -94,8 +107,7 @@ namespace MusicProject.Controllers
             //_recordLabels = SqlRecordLabel.FetchRecordLabel(name);
             success = success || _recordLabels.Count > 0;
 
-            //_albums = SqlAlbum.FetchAlbum(name);
-            success = success || _albums.Count > 0;
+            if (success) update(_albums, _artists, _songs, _people, _producers, _recordLabels);
 
             return success;
         }

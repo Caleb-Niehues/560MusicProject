@@ -49,24 +49,20 @@ namespace MusicProject.Views
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
         }
 
-        public void RegisterSearch(IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<ProducerModel> producers, IReadOnlyList<AlbumModel> albums)
+        public void RegisterSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels)
         {
+            uxAlbumListBox.DataSource = albums;
             uxArtistListBox.DataSource = artists;
             uxSongList.DataSource = songs;
+            uxPersonList.DataSource = people;
             uxProducerList.DataSource = producers;
-            ux
+            uxRecordLabelList.DataSource = recordLabels;
         }
 
         private void uxSearch_HitEnter(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (search(uxLookUpText.Text))
-                {
-                    
-                }
-                else MessageBox.Show("No name found on data base - needs to be an exact match");
-            }
+            if (e.KeyCode == Keys.Enter && !search(uxLookUpText.Text)) //update is called by search
+                    MessageBox.Show("No name found on data base - needs to be an exact match");
         }
 
         private void uxLogIn_Click(object sender, EventArgs e)
