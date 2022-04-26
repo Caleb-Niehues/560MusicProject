@@ -12,16 +12,6 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _weight;
-
-        /// <summary>
-        /// how important the user is to the industry, bigger the number the more important they are
-        /// </summary>
-        public int Weight => _weight;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private int _score;
 
         /// <summary>
@@ -41,7 +31,7 @@ namespace MusicProject.Models
 
         private UserModel _user;
 
-        public UserModel User;
+        public UserModel User => _user;
         #endregion
 
 

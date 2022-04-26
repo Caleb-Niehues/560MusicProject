@@ -54,7 +54,7 @@ namespace MusicProject.Controllers
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
 
-            IReadOnlyList<SuperFanModel> test = SqlUser.RetrieveSuperFans("Bob Dylan");
+            IReadOnlyList<BestPerformingAlbumModel> test = SqlAlbum.GetBestPerforming("The Beatles");
             test.ToString();
         }
 

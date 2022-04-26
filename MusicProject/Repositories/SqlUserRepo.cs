@@ -213,7 +213,7 @@ namespace MusicProject.Repositories
             while (reader.Read())
             {
                 fans.Add(new SuperFanModel(new UserModel(reader.GetString(userNameOrdinal), 
-                    reader.GetInt32(userWeightOrdinal)), reader.GetInt32(userWeightOrdinal), 
+                    reader.GetInt32(userWeightOrdinal)), reader.GetInt32(userScoreOrdinal), 
                     reader.GetInt32(commentCountOrdinal)));
             }
             return fans;

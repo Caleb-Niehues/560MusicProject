@@ -26,7 +26,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateSong", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateSongAlbumExists", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -35,9 +35,6 @@ namespace MusicProject.Repositories
                         command.Parameters.AddWithValue("GenreName", Enum.GetName(typeof(Genre), genre));
                         command.Parameters.AddWithValue("Length", length);
                         command.Parameters.AddWithValue("TrackNumber", trackNumber);
-
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
 
                         connection.Open();
 
@@ -50,12 +47,8 @@ namespace MusicProject.Repositories
                         return new SongModel(name, album.Title, album.Artist.Name, genre, length);
                     }
                 }
-                
-            }
 
-            //Album doesn't exist.
-            return null;
-            //throw new ArgumentException("The album does not exist.", nameof(album));
+            }
         }
 
         public string CheckAlbumExists(string albumName)
@@ -159,6 +152,7 @@ namespace MusicProject.Repositories
                             reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
                             reader.GetTimeSpan(songLengthOrdinal)));
             }
+
             return songs;
         }
     }
