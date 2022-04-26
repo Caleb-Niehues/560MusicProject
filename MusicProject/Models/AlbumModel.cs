@@ -82,12 +82,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private List<RecordLabelModel> _recordLabels;
+        private RecordLabelModel _recordLabels;
 
         /// <summary>
         /// 
         /// </summary>
-        public List<RecordLabelModel> RecordLabels => _recordLabels;
+        public RecordLabelModel RecordLabels => _recordLabels;
 
         /// <summary>
         /// 
@@ -111,7 +111,7 @@ namespace MusicProject.Models
         /// <param name="producers"></param>
         /// <param name="recordLabels"></param>
         /// <param name="certification"></param>
-        public AlbumModel(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification)
+        public AlbumModel(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabels, Certification certification)
         {
             this._title = title;
             this._releaseDate = releaseDate;

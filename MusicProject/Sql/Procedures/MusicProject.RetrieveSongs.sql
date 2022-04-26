@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE MusicProject.FetchSong
+﻿CREATE OR ALTER PROCEDURE MusicProject.RetrieveSongs
    @Name NVARCHAR(32)
 AS
 

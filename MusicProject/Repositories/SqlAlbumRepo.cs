@@ -18,14 +18,63 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification)
+        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, 
+            TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
         {
             // Verify parameters.
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(title));
 
-            throw new NotImplementedException();
-            //FINISH
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.CreateAlbum", connection))
+                    {
+                        //check for param existence
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("AlbumTitle", title);
+                        command.Parameters.AddWithValue("ReleaseDate", releaseDate);
+                        command.Parameters.AddWithValue("ArtistName", artist.Name);
+                        command.Parameters.AddWithValue("RecordLabelName", recordLabel.Name);
+                        command.Parameters.AddWithValue("CertificationName", Enum.GetName(typeof(Certification), certification));
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        command.ExecuteNonQuery();
+
+                        transaction.Complete();
+
+                        AlbumModel currAlbum = new AlbumModel(title, releaseDate, artist, new List<SongModel>(), 
+                            new TimeSpan(0), producers, recordLabel, certification);
+                    
+
+                        SqlSongRepo songRepo = new SqlSongRepo(connectionString);
+                        TimeSpan albumLength = new TimeSpan();
+                        foreach (var song in songs)
+                        {
+                            songRepo.CreateSong(song.Name, currAlbum, song.Genre, song.Length, song.TrackNumber);
+                            albumLength += song.Length;
+                        }
+
+                        SqlProducerRepo producerRepo = new SqlProducerRepo(connectionString);
+                        foreach (var producer in producers)
+                        {
+                            producerRepo.CreateProducer(producer.Name);
+                        }
+
+
+
+                        //var personId = (int)command.Parameters["PersonId"].Value;
+                        
+                        return new AlbumModel(title, releaseDate, artist, songs, albumLength, producers, recordLabel, certification);
+                    }
+                }
+            }
         }
 
         public IReadOnlyList<AlbumModel> FetchAlbum(string name)
@@ -72,7 +121,7 @@ namespace MusicProject.Repositories
             List<SongModel> songs = new List<SongModel>();
             TimeSpan length = new TimeSpan();
             Dictionary<string, ProducerModel> producers = new Dictionary<string, ProducerModel>();
-            Dictionary<string, RecordLabelModel> recordLabels = new Dictionary<string, RecordLabelModel>();
+            //Dictionary<string, RecordLabelModel> recordLabels = new Dictionary<string, RecordLabelModel>();
             string title = null;
             DateTime releaseDate = DateTime.Now;
             ArtistModel artist = null;
@@ -94,16 +143,19 @@ namespace MusicProject.Repositories
 
                 if (!producers.ContainsKey(producer)) producers.Add(producer, new ProducerModel(producer));
 
-                if (!recordLabels.ContainsKey(recordLabel)) 
+                /*if (!recordLabels.ContainsKey(recordLabel)) 
                 {
                     recordLabels.Add(recordLabel, new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal),
                         reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
-                }
+                }*/
                 
                 if (!albums.ContainsKey(title))
                 {
                     albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
-                        producers.Values.ToList<ProducerModel>(), recordLabels.Values.ToList<RecordLabelModel>(), certification));
+                        producers.Values.ToList<ProducerModel>(), 
+                        new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal), 
+                        reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)),
+                        certification));
 
                 }
             }

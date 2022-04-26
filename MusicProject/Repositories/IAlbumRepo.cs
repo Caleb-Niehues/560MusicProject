@@ -34,6 +34,6 @@ namespace MusicProject.Repositories
         /// <param name="recordLabels"></param>
         /// <param name="certification"></param>
         /// <returns></returns>
-        AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, List<RecordLabelModel> recordLabels, Certification certification);
+        AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification);
     }
 }
