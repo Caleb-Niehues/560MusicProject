@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
+    <Compile Include="Models\BestPerformingAlbumModel.cs" />
     <Compile Include="Models\Certification.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Models\RecordLabelModel.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SongModel.cs" />
+    <Compile Include="Models\SuperFanModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Repositories\IArtistRepo.cs" />
     <Compile Include="Repositories\IAlbumRepo.cs" />
@@ -166,6 +168,7 @@
     <Content Include="Sql\Procedures\MusicProject.CreateProducer.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -185,6 +188,7 @@
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveReviewsByAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSuperFans.sql" />
     <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />

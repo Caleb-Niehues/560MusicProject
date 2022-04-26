@@ -11,7 +11,7 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private string _name;
+        protected string _name;
 
         /// <summary>
         /// username of the user
@@ -21,7 +21,7 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _weight;
+        protected int _weight;
 
         /// <summary>
         /// how important the user is to the industry, bigger the number the more important they are
@@ -31,7 +31,7 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private DateTime _dateAdded;
+        protected DateTime _dateAdded;
 
         /// <summary>
         /// date an time a post was added by the user

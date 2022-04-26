@@ -12,15 +12,15 @@ namespace MusicProject.Repositories
         /// <param name="name"></param>
         /// <returns></returns>
         IReadOnlyList<AlbumModel> FetchAlbum(string name);
-        
+
         /// <summary>
-        /// 
+        /// Gets the best performing album(s) of a given artist. That is,
+        /// an album that has received at least a Platinum Certification
+        /// and has an average rating from users of at least 3.0.
         /// </summary>
-        /// <param name="startYear">can be left null to see best seller since earliest time </param>
-        /// <param name="endYear">can be left null to count as this year</param>
-        /// <param name="number">number of albums displayed</param>
+        /// <param name="artistName">Artist name to query.</param>
         /// <returns></returns>
-        IReadOnlyList<AlbumModel> GetBestPerforming(DateTime startYear, DateTime endYear, int number);
+        IReadOnlyList<BestPerformingAlbumModel> GetBestPerforming(string artistName);
 
         /// <summary>
         /// 

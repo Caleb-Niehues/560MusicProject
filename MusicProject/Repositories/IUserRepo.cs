@@ -63,6 +63,6 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="artistName"></param>
         /// <returns></returns>
-        IReadOnlyList<UserModel> RetrieveSuperFans(string artistName);
+        IReadOnlyList<SuperFanModel> RetrieveSuperFans(string artistName);
     }
 }
