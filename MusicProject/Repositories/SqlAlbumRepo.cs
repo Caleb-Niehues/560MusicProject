@@ -18,8 +18,8 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs,
-                   TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
+        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, 
+            TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
         {
             // Verify parameters.
             if (string.IsNullOrWhiteSpace(title))
@@ -49,9 +49,9 @@ namespace MusicProject.Repositories
 
                         transaction.Complete();
 
-                        AlbumModel currAlbum = new AlbumModel(title, releaseDate, artist, new List<SongModel>(),
+                        AlbumModel currAlbum = new AlbumModel(title, releaseDate, artist, new List<SongModel>(), 
                             new TimeSpan(0), producers, recordLabel, certification);
-
+                    
 
                         SqlSongRepo songRepo = new SqlSongRepo(connectionString);
                         TimeSpan albumLength = new TimeSpan();
@@ -67,8 +67,10 @@ namespace MusicProject.Repositories
                             producerRepo.CreateProducer(producer.Name);
                         }
 
-                        //var personId = (int)command.Parameters["PersonId"].Value;
 
+
+                        //var personId = (int)command.Parameters["PersonId"].Value;
+                        
                         return new AlbumModel(title, releaseDate, artist, songs, albumLength, producers, recordLabel, certification);
                     }
                 }
@@ -149,16 +151,16 @@ namespace MusicProject.Repositories
                 
                 if (!albums.ContainsKey(title))
                 {
-                    albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length,
-                        producers.Values.ToList<ProducerModel>(),
-                        new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal),
+                    albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
+                        producers.Values.ToList<ProducerModel>(), 
+                        new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal), 
                         reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)),
                         certification));
 
                 }
             }
             return albums.Values.ToList<AlbumModel>();
-           }
+        }
 
         /// <summary>
         /// Gets the best performing album(s) of a given artist. That is,
@@ -201,11 +203,11 @@ namespace MusicProject.Repositories
             var averageRatingOrdinal = reader.GetOrdinal("AverageRating");
             var certificationNameOrdinal = reader.GetOrdinal("CertificationName");
 
-           
+
             while (reader.Read())
             {
                 albums.Add(new BestPerformingAlbumModel(reader.GetString(artistNameOrdinal), reader.GetString(albumTitleOrdinal),
-                    reader.GetDecimal(averageRatingOrdinal), 
+                    reader.GetDecimal(averageRatingOrdinal),
                     (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationNameOrdinal))));
             }
             return albums;

@@ -17,9 +17,9 @@ namespace MusicProject.Repositories
         /// Gets the best performing album(s) of a given artist. That is,
         /// an album that has received at least a Platinum Certification
         /// and has an average rating from users of at least 3.0.
-        /// </summary>
         /// <param name="artistName">Artist name to query.</param>
         /// <returns></returns>
+        /// </summary>
         IReadOnlyList<BestPerformingAlbumModel> GetBestPerforming(string artistName);
 
         /// <summary>
