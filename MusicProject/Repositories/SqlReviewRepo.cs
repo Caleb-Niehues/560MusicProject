@@ -16,14 +16,14 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating)
+        public ReviewModel CreateOrEditReview(string userName, string albumTitle, string comment, decimal rating)
         {
             // Verify parameters. Need to call fetch album and user to check real
-            if (user == null)
-                throw new ArgumentException("The parameter cannot be null.", nameof(user));
+            if (string.IsNullOrWhiteSpace(userName))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(userName));
 
-            if (album == null)
-                throw new ArgumentException("The parameter cannot be null.", nameof(album));
+            if (string.IsNullOrWhiteSpace(albumTitle))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumTitle));
 
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(comment));
@@ -36,12 +36,12 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateUser", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateOrEditReview", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("UserName", user.Name);
-                        command.Parameters.AddWithValue("AlbumName", album.Title);
+                        command.Parameters.AddWithValue("UserName", userName);
+                        command.Parameters.AddWithValue("AlbumName", albumTitle);
                         command.Parameters.AddWithValue("Comment", comment);
                         command.Parameters.AddWithValue("Rating", rating);
 
@@ -51,7 +51,7 @@ namespace MusicProject.Repositories
 
                         transaction.Complete();
 
-                        return new ReviewModel(user.Name, album.Title, comment, rating, DateTime.Now);
+                        return new ReviewModel(userName, albumTitle, comment, rating, DateTime.Now);
                     }
                 }
             }
@@ -110,7 +110,11 @@ namespace MusicProject.Repositories
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
-                        return TranslateReviews(reader)[0];
+                    {
+                        var temp = TranslateReviews(reader);
+                        if (temp.Count == 1) return temp[0];
+                        return null;
+                    }
                 }
             }
         }
@@ -136,34 +140,6 @@ namespace MusicProject.Repositories
                     ));
             }
             return reviews;
-        }
-
-        public ReviewModel SaveReview(ReviewModel review)
-        {
-            using (var transaction = new TransactionScope())
-            {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    using (var command = new SqlCommand("MusicProject.SaveReview", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("UserName", review.UserName);
-                        command.Parameters.AddWithValue("AlbumName", review.AlbumTitle);
-                        command.Parameters.AddWithValue("Comment", review.Comment);
-                        command.Parameters.AddWithValue("Rating", review.Rating);
-                        //command.Parameters.AddWithValue("DateAdded", review.DateAdded);
-
-                        connection.Open();
-
-                        command.ExecuteNonQuery();
-
-                        transaction.Complete();
-
-                        return review;
-                    }
-                }
-            }
         }
     }
 }

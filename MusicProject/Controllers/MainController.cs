@@ -98,7 +98,7 @@ namespace MusicProject.Controllers
 
         public ReviewModel SaveReview(ReviewModel review)
         {
-            return SqlReview.SaveReview(review);
+            return SqlReview.CreateOrEditReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
         }
         #endregion
 

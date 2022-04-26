@@ -1,6 +1,7 @@
 ﻿using MusicProject.Models;
 using System.Windows.Forms;
 using System;
+using System.Collections.Generic;
 
 namespace MusicProject.Views
 {
@@ -52,6 +53,8 @@ namespace MusicProject.Views
         private void uxGetReviewButton_Click(object sender, EventArgs e)
         {
             activeReview = fetch(user.Name);
+            uxIndividualTextLabel.Text = "Review by " + user.Name;
+
             if (activeReview != null)
             {
                 uxComment.Text = activeReview.Comment;
@@ -60,7 +63,7 @@ namespace MusicProject.Views
             else
             {
                 uxComment.Text = "";
-                uxRatingText.Text = "0.0";
+                uxRatingText.Text = "5.0";
             }
 
             uxSaveButton.Enabled = true;
@@ -76,7 +79,9 @@ namespace MusicProject.Views
                 if(Decimal.TryParse(uxRatingText.Text, out var temp2))
                 activeReview = new ReviewModel(user.Name, album.Title, uxComment.Text, temp2, temp);
             }
+            
             save(activeReview);
+            uxReviewsList.DataSource = get(album);
         }
 
         private void uxCloseButton_Click(object sender, EventArgs e)

@@ -100,7 +100,6 @@ namespace MusicProject.Views
             // 
             // uxCloseButton
             // 
-            this.uxCloseButton.Enabled = false;
             this.uxCloseButton.Location = new System.Drawing.Point(624, 390);
             this.uxCloseButton.Name = "uxCloseButton";
             this.uxCloseButton.Size = new System.Drawing.Size(137, 40);
