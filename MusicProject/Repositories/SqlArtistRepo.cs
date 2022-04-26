@@ -89,6 +89,12 @@ namespace MusicProject.Repositories
             return artists;
         }
 
+        /// <summary>
+        /// Gets all artists that released an album with a given record label over a given time window - replaces GetActiveArtists
+        /// </summary>
+        /// <param name="labelName">The name of the record label</param>
+        /// <param name="startYear">Starting point of window</param>
+        /// <param name="endYear">Ending point of the window</param>
         public IReadOnlyList<ArtistModel> GetArtistsInWindow(string labelName, DateTime startYear, DateTime endYear)
         {
             using (var transaction = new TransactionScope())

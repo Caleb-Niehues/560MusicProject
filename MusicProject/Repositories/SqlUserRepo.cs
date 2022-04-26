@@ -164,9 +164,59 @@ namespace MusicProject.Repositories
             return success;
         }
 
-        public IReadOnlyList<UserModel> RetrieveSuperFans(string artistName)
+        /// <summary>
+        /// Returns a list of Users for a given artist's super fans. 
+        /// Calculated by multiplying the user's weight and number of 
+        /// comments they left for that artist's albums.
+        /// </summary>
+        /// <param name="artistName">Given artist to query.</param>
+        /// <returns></returns>
+        public IReadOnlyList<SuperFanModel> RetrieveSuperFans(string artistName)
         {
-            throw new NotImplementedException();
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(artistName))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(artistName));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.RetrieveSuperFans", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("ArtistName", artistName);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateRetrieveSuperFans(reader);
+                    }
+                }
+            }
+        }
+
+        private IReadOnlyList<SuperFanModel> TranslateRetrieveSuperFans(SqlDataReader reader)
+        {
+            var fans = new List<SuperFanModel>();
+
+            var userIDOrdinal = reader.GetOrdinal("UserID");
+            var userNameOrdinal = reader.GetOrdinal("UserName");
+            var userScoreOrdinal = reader.GetOrdinal("UserScore");
+            var userWeightOrdinal = reader.GetOrdinal("UserWeight");
+            var commentCountOrdinal = reader.GetOrdinal("CommentCount");
+
+            while (reader.Read())
+            {
+                fans.Add(new SuperFanModel(new UserModel(reader.GetString(userNameOrdinal), 
+                    reader.GetInt32(userWeightOrdinal)), reader.GetInt32(userWeightOrdinal), 
+                    reader.GetInt32(commentCountOrdinal)));
+            }
+            return fans;
         }
 
         public UserModel UpdatePassword(string name, string oldPassword, string newPassword)

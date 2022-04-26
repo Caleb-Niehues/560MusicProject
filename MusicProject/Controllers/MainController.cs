@@ -11,7 +11,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -54,21 +54,7 @@ namespace MusicProject.Controllers
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
 
-            List<SongModel> songs = new List<SongModel>();
-            songs.Add(new SongModel("100", "Gold Mouf", "Kanye West", Genre.Rap, new System.TimeSpan(0, 3, 50)));
-            songs.Add(new SongModel("GED", "Gold Mouf", "Kanye West", Genre.Rap, new System.TimeSpan(0, 2, 34)));
-            songs.Add(new SongModel("Myself", "Gold Mouf", "Kanye West", Genre.Rap, new System.TimeSpan(0, 2, 52)));
-
-            List<ProducerModel> producers = new List<ProducerModel>();
-            producers.Add(new ProducerModel("Abdul Keith"));
-            producers.Add(new ProducerModel("Abigail Colon"));
-
-            List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
-            recordLabels.Add(new RecordLabelModel("Eu Limited", new System.DateTime(2010, 12, 01), null, "South Carolina"));
-
-            //var test = SqlSong.RetrieveSongs("nonenenene");
-            AlbumModel test = SqlAlbum.CreateAlbum("Gold Mouf", new System.DateTime(2021, 10, 04), new ArtistModel("Kanye West", null), 
-                songs, new System.TimeSpan(43), producers, recordLabels[0], Certification.None);
+            IReadOnlyList<SuperFanModel> test = SqlUser.RetrieveSuperFans("Bob Dylan");
             test.ToString();
         }
 
@@ -106,7 +92,7 @@ namespace MusicProject.Controllers
         {
             bool success = false;
 
-            _albums = SqlAlbum.FetchAlbum(name);
+            //_albums = SqlAlbum.FetchAlbum(name);
             success = success || _albums.Count > 0;
 
             _artists = SqlArtist.FetchArtist(name);
