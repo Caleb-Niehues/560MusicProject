@@ -8,6 +8,7 @@
         None = 0,
         Gold,
         Platinum,
-        DoublePlatinum,
+        MultiPlatinum,
+        Diamond
     }
 }

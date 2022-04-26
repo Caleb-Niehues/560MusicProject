@@ -11,32 +11,22 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _ID;
-
-        /// <summary>
-        /// Id number of the review
-        /// </summary>
-        public int ID => _ID;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private UserModel _user;
+        private string _userName;
 
         /// <summary>
         /// user of the review
         /// </summary>
-        public UserModel User => _user;
+        public string UserName => _userName;
 
         /// <summary>
         /// 
         /// </summary>
-        private AlbumModel _album;
+        private string _albumTitle;
 
         /// <summary>
         /// album that is being reviewed
         /// </summary>
-        public AlbumModel Album => _album;
+        public string AlbumTitle => _albumTitle;
 
         /// <summary>
         /// 
@@ -79,13 +69,18 @@ namespace MusicProject.Models
         public DateTime? DateDeleted => _dateDeleted;
         #endregion
 
-        public ReviewModel(UserModel user, AlbumModel album, string comment, decimal rating, DateTime dateAdded)
+        public ReviewModel(string userName, string albumTitle, string comment, decimal rating, DateTime dateAdded)
         {
-            this._user = user;
-            this._album = album;
+            this._userName = userName;
+            this._albumTitle = albumTitle;
             this._comment = comment;
             this._rating = rating;
             this._dateAdded = dateAdded;
+        }
+
+        public override string ToString()
+        {
+            return Comment;
         }
     }
 }

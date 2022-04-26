@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Configuration;
 using System.Windows.Forms;
-using MusicProject.Repositories;
+using MusicProject.Models;
 using MusicProject.Views;
-using MusicProject.Mic;
+using MusicProject.Controllers;
+using System.Collections.Generic;
 
 namespace MusicProject
 {
-    public delegate bool CheckCredentials(string password, string username, DatabaseProxy dbp);
-    public delegate void SuccessfulLogin();
+    public delegate UserModel CheckCredentials(string userName, string password);
+    public delegate UserModel CreateUser(string userName, string password, int weight);
+    public delegate bool DeleteUser(string userName, string password);
+    public delegate bool Search(string name);
+    public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
+
     static class Program
     {
         /// <summary>
@@ -19,11 +23,13 @@ namespace MusicProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string testConnect = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;//just one call in maincontroller and pass throughout in actual practice
-            //var testRepo = new SqlUserRepo(testConnect);
-            //var test = testRepo.CreateUser("Ashley Redy", "hunter2", 2);
-            DatabaseProxy proxy = new DatabaseProxy();
-            Application.Run(new MainView());
+            
+            var controller = new MainController();
+            var view = new MainView(controller);
+            LogInView.InitializeDelegates(controller.CredentialCheck, controller.CreateUser, controller.DeleteUser);
+            controller.InitializeDelegates(view.RegisterSearch);
+
+            Application.Run(view);//confirmed issue of needing to run - does this mean the powershell stuff is required?
         }
     }
 }

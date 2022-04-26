@@ -163,6 +163,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Sql\FinalProjectSPs.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateProducer.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateSongAlbumExists.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -173,9 +177,25 @@
     <Content Include="Sql\FinalProjectReviewInserts.sql" />
     <Content Include="Sql\FinalProjectSongInserts.sql" />
     <Content Include="Sql\FinalProjectTables.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.DeleteReview.sql" />
+    <Content Include="Sql\Procedures\MusicProject.DeleteUser.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchPassword.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveReviewsByAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
+    <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchProducer.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchRecordLabel.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.GetArtistsInWindow.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSongs.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />

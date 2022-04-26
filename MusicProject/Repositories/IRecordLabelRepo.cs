@@ -11,7 +11,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        RecordLabelModel FetchRecordLabel(string name);
+        IReadOnlyList<RecordLabelModel> FetchRecordLabel(string name);
 
         /// <summary>
         /// 

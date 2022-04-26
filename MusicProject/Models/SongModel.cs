@@ -11,12 +11,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _ID;
+        private string _artist;
 
         /// <summary>
-        /// ID number for the song
+        /// artist of the song
         /// </summary>
-        public int ID => _ID;
+        public string Artist => _artist;
 
         /// <summary>
         /// 
@@ -31,12 +31,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private AlbumModel _album;
+        private string _albumName;
 
         /// <summary>
         /// album from where the song comes from, perhaps have a list of songs in the album class instead?
         /// </summary>
-        public AlbumModel Album => _album;
+        public string AlbumName => _albumName;
 
         /// <summary>
         /// 
@@ -76,10 +76,11 @@ namespace MusicProject.Models
         /// <param name="album"></param>
         /// <param name="genre"></param>
         /// <param name="length"></param>
-        public SongModel(string name, AlbumModel album, Genre genre, TimeSpan length)
+        public SongModel(string name, string album, string artist, Genre genre, TimeSpan length)
         {
             this._name = name;
-            this._album = album;
+            this._albumName = album;
+            this._artist = artist;
             this._genre = genre;
             this._length = length;
         }

@@ -16,19 +16,154 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public SongModel CreateSong(string name, AlbumModel album, Genre genre, TimeSpan length)
+        public SongModel CreateSong(string name, string album, Genre genre, TimeSpan length, int trackNumber)
         {
-            throw new NotImplementedException();
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
+
+            string checkAlbumResult = CheckAlbumExists(album);
+            if (checkAlbumResult != null)
+            {
+                using (var transaction = new TransactionScope())
+                {
+                    using (var connection = new SqlConnection(connectionString))
+                    {
+                        using (var command = new SqlCommand("MusicProject.CreateSongAlbumExists", connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+
+                            command.Parameters.AddWithValue("SongName", name);
+                            command.Parameters.AddWithValue("AlbumID", album);
+                            command.Parameters.AddWithValue("GenreID", genre);
+                            command.Parameters.AddWithValue("Length", length);
+                            command.Parameters.AddWithValue("TrackNumber", trackNumber);
+
+                            //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                            //p.Direction = ParameterDirection.Output;
+
+                            connection.Open();
+
+                            command.ExecuteNonQuery();
+
+                            transaction.Complete();
+
+                            //var personId = (int)command.Parameters["PersonId"].Value;
+
+                            return new SongModel(name, album, checkAlbumResult, genre, length);
+                        }
+                    }
+                }
+            }
+
+            //Album doesn't exist.
+            return null;
+            //throw new ArgumentException("The album does not exist.", nameof(album));
         }
 
-        public SongModel FetchSong(string name)
+        public string CheckAlbumExists(string albumName)
         {
-            throw new NotImplementedException();
+            IReadOnlyList<SongModel> s = RetrieveSongs(albumName);
+            if (s != null)
+            {
+                return s[0].Artist;
+            }
+            return null;
+        }
+
+        public IReadOnlyList<SongModel> FetchSong(string name)
+        {
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.FetchSong", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateFetchSongs(reader);
+                    }
+                }
+            }
+        }
+
+        private List<SongModel> TranslateFetchSongs(SqlDataReader reader)
+        {
+            var songs = new List<SongModel>();
+
+            var songNameOrdinal = reader.GetOrdinal("SongName");
+            var albumTitleOrdinal = reader.GetOrdinal("AlbumTitle");
+            var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+            var genreNameOrdinal = reader.GetOrdinal("GenreName");
+            var songLengthOrdinal = reader.GetOrdinal("Length");
+
+            while (reader.Read())
+            {
+                songs.Add(new SongModel(reader.GetString(songNameOrdinal), reader.GetString(albumTitleOrdinal),
+                            reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)), 
+                            reader.GetTimeSpan(songLengthOrdinal)));
+            }
+
+            return songs;
         }
 
         public IReadOnlyList<SongModel> RetrieveSongs(string albumName)
         {
-            throw new NotImplementedException();
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(albumName))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumName));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.RetrieveSongs", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", albumName);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateRetrieveSongs(reader);
+                    }
+                }
+            }
+        }
+
+        private List<SongModel> TranslateRetrieveSongs(SqlDataReader reader)
+        {
+            var songs = new List<SongModel>();
+
+            var songNameOrdinal = reader.GetOrdinal("SongName");
+            var albumTitleOrdinal = reader.GetOrdinal("AlbumTitle");
+            var artistNameOrdinal = reader.GetOrdinal("ArtistName");
+            var genreNameOrdinal = reader.GetOrdinal("GenreName");
+            var songLengthOrdinal = reader.GetOrdinal("Length");
+
+            while (reader.Read())
+            {
+                songs.Add(new SongModel(reader.GetString(songNameOrdinal), reader.GetString(albumTitleOrdinal),
+                            reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
+                            reader.GetTimeSpan(songLengthOrdinal)));
+            }
+
+            return songs;
         }
     }
 }

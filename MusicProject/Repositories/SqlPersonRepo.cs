@@ -16,7 +16,7 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public PersonModel FetchPerson(string name)
+        public IReadOnlyList<PersonModel> FetchPerson(string name)
         {
             throw new NotImplementedException();
         }

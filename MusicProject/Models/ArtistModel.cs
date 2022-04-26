@@ -38,7 +38,7 @@ namespace MusicProject.Models
         /// </summary>
         public List<PersonModel> Members => _members;
         #endregion
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,6 +48,11 @@ namespace MusicProject.Models
         {
             this._name = name;
             this._members = members;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

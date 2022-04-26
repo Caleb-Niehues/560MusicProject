@@ -13,7 +13,7 @@ namespace MusicProject.Repositories
         /// <param name="password"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        bool LoginSuccesful(string name, string password, out UserModel user);
+        bool FetchUser(string name, string password, out UserModel user);
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <param name="password"></param>
-        void DeleteUser(string name, string password);
+        bool DeleteUser(string name, string password);
 
         /// <summary>
         /// Gets the most active reviewers of a given artist

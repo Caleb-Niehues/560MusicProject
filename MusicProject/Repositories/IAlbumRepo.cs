@@ -11,7 +11,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        AlbumModel FetchAlbum(string name);
+        IReadOnlyList<AlbumModel> FetchAlbum(string name);
         
         /// <summary>
         /// 

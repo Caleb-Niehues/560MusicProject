@@ -1,43 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MusicProject.Mic;
 
 namespace MusicProject.Views
 {
-    public partial class uxLogInView : Form
+    public partial class LogInView : Form
     {
-        public CheckCredentials check;
-        private DatabaseProxy proxy;
+        private static CheckCredentials check;
+        private static CreateUser create;
+        private static DeleteUser delete;
+        private UpdateUser updateMain;
 
-        public uxLogInView(DatabaseProxy proxy, CheckCredentials check)
+        public LogInView(UpdateUser user)
         {
             InitializeComponent();
-            proxy = this.proxy;
-            check = this.check;
+            updateMain = user;
+        }
+
+        public static void InitializeDelegates(CheckCredentials checkDel, CreateUser createDel, DeleteUser deleteDel)
+        {
+            check = checkDel;
+            create = createDel;
+            delete = deleteDel;
         }
 
         private void uxLoginButton_Click(object sender, EventArgs e)
         {
-            if (check(uxPasswordText.Text, uxUsernameText.Text, proxy))
+            var temp = check(uxUsernameText.Text, uxPasswordText.Text);
+            if (temp != null)
             {
-                //this.Hide();
+                //MessageBox.Show("Logged in as: " + temp.Name);
+                updateMain(temp);
                 this.Close();
-                //View v = new View(proxy);
-                //v.Show();
             }
             else
             {
                 MessageBox.Show("Incorrect password or username");
+                uxPasswordText.Clear();
+                //uxUsernameText.Clear();
             }
-            uxPasswordText.Clear();
-            uxUsernameText.Clear();
+        }
+
+        private void uxCreateUser_Click(object sender, EventArgs e)
+        {
+            int tempInt;
+            if (Int32.TryParse(uxUserWeight.Text, out tempInt))
+            {
+                updateMain(create(uxUsernameText.Text, uxPasswordText.Text, tempInt));
+                this.Close();
+            }
+            else MessageBox.Show("You must enter a number for the weight");
+        }
+
+        private void uxDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (delete(uxUsernameText.Text, uxPasswordText.Text))
+            {
+                updateMain(null);
+                this.Close();
+            }
+            else MessageBox.Show("Account could not be deleted");
         }
     }
 }

@@ -50,5 +50,18 @@ namespace MusicProject.Models
             this._weight = weight;
             this._dateAdded = DateTime.Now;
         }
+
+        /// <summary>
+        /// The constructor used in FetchUser - date time is prepopulated
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="weight"></param>
+        /// <param name="dateAdded"></param>
+        public UserModel(string name, int weight, DateTime dateAdded)
+        {
+            this._name = name;
+            this._weight = weight;
+            this._dateAdded = dateAdded;
+        }
     }
 }

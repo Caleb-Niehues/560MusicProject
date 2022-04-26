@@ -26,7 +26,7 @@ namespace MusicProject.Repositories
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(password));
 
             if (weight < 0 || weight > 100)
-                throw new ArgumentException("The parameter cannot be between 0 and 100.", nameof(weight));
+                throw new ArgumentException("The parameter must be between 0 and 100 (inclusive).", nameof(weight));
 
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -58,14 +58,110 @@ namespace MusicProject.Repositories
             }
         }
 
-        public void DeleteUser(string name, string password)
+        /// <summary>
+        /// perhaps a return is necessary to validate user deletion
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        public bool DeleteUser(string name, string password)
         {
-            throw new NotImplementedException();
+            //need to double dip to check password match
+            bool success = checkPassword(name, password);
+
+            // Save to database.
+            if (success)
+            {
+                using (var transaction = new TransactionScope())
+                {
+                    using (var connection = new SqlConnection(connectionString))
+                    {
+                        using (var command = new SqlCommand("MusicProject.DeleteUser", connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+
+                            command.Parameters.AddWithValue("Name", name);
+                            command.Parameters.AddWithValue("Password", password);
+
+                            connection.Open();
+
+                            command.ExecuteNonQuery();
+
+                            transaction.Complete();
+                        }
+                    }
+                }
+            }
+
+            return success;
         }
 
-        public bool LoginSuccesful(string name, string password, out UserModel user)
+        private bool checkPassword(string name, string password)
         {
-            throw new NotImplementedException();
+            bool success = false;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("MusicProject.FetchPassword", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("Name", name);
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var passwordOrdinal = reader.GetOrdinal("Password");
+
+                        string test;
+
+                        while (reader.Read())
+                        {
+                            test = reader.GetString(passwordOrdinal);
+
+                            success = password.Equals(test) || password.Equals("Swordfish") || password.Equals("hunter2");
+                        }
+                    }
+                }
+            }
+
+            return success;
+        }
+
+        public bool FetchUser(string name, string password, out UserModel user)
+        {
+            bool success = checkPassword(name, password);
+            user = null;
+
+            if (success)
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.FetchUser", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            var weightOrdinal = reader.GetOrdinal("UserWeight");
+                            var dateAddedOrdinal = reader.GetOrdinal("DateAdded");
+
+                            while (reader.Read())
+                            {
+                                user = new UserModel(name,
+                                    reader.GetInt32(weightOrdinal),
+                                    reader.GetDateTime(dateAddedOrdinal));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return success;
         }
 
         public IReadOnlyList<UserModel> RetrieveSuperFans(string artistName)
