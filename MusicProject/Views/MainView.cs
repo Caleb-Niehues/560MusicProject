@@ -60,13 +60,12 @@ namespace MusicProject.Views
         private void uxSearch_HitEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && !search(uxLookUpText.Text)) //update is called by search
-                    MessageBox.Show("No name found on data base - needs to be an exact match");
+                MessageBox.Show("No name found on data base - needs to be an exact match");
         }
 
         private void uxAlbumsFocus_CheckedChanged(object sender, EventArgs e)
         {
             uxFocusedList.DataSource = albums;
-            if (activeUser != null) uxLeaveReview.Enabled = true;
         }
 
         private void uxSongsFocus_CheckedChanged(object sender, EventArgs e)
@@ -102,10 +101,7 @@ namespace MusicProject.Views
             if (activeUser == null)
                 uxUserLabel.Text = "Not logged in";
             else
-            {
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
-                if (uxAlbumsFocus.Checked && uxFocusedList.SelectedItem != null) uxLeaveReview.Enabled = true;
-            }
         }
 
         private void uxLogIn_Click(object sender, EventArgs e)
