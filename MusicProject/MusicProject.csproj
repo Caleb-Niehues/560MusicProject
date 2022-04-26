@@ -137,7 +137,7 @@
     </Compile>
     <Content Include="Sql\Procedures\MusicProject.CreateProducer.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateSongAlbumExists.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

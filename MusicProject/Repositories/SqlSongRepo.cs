@@ -16,44 +16,41 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public SongModel CreateSong(string name, string album, Genre genre, TimeSpan length, int trackNumber)
+        public SongModel CreateSong(string name, AlbumModel album, Genre genre, TimeSpan length, int trackNumber)
         {
             // Verify parameters.
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
 
-            string checkAlbumResult = CheckAlbumExists(album);
-            if (checkAlbumResult != null)
+            using (var transaction = new TransactionScope())
             {
-                using (var transaction = new TransactionScope())
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var connection = new SqlConnection(connectionString))
+                    using (var command = new SqlCommand("MusicProject.CreateSong", connection))
                     {
-                        using (var command = new SqlCommand("MusicProject.CreateSongAlbumExists", connection))
-                        {
-                            command.CommandType = CommandType.StoredProcedure;
+                        command.CommandType = CommandType.StoredProcedure;
 
-                            command.Parameters.AddWithValue("SongName", name);
-                            command.Parameters.AddWithValue("AlbumID", album);
-                            command.Parameters.AddWithValue("GenreID", genre);
-                            command.Parameters.AddWithValue("Length", length);
-                            command.Parameters.AddWithValue("TrackNumber", trackNumber);
+                        command.Parameters.AddWithValue("SongName", name);
+                        command.Parameters.AddWithValue("AlbumName", album.Title);
+                        command.Parameters.AddWithValue("GenreName", Enum.GetName(typeof(Genre), genre));
+                        command.Parameters.AddWithValue("Length", length);
+                        command.Parameters.AddWithValue("TrackNumber", trackNumber);
 
-                            //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                            //p.Direction = ParameterDirection.Output;
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
 
-                            connection.Open();
+                        connection.Open();
 
-                            command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
 
-                            transaction.Complete();
+                        transaction.Complete();
 
-                            //var personId = (int)command.Parameters["PersonId"].Value;
+                        //var personId = (int)command.Parameters["PersonId"].Value;
 
-                            return new SongModel(name, album, checkAlbumResult, genre, length);
-                        }
+                        return new SongModel(name, album.Title, album.Artist.Name, genre, length);
                     }
                 }
+                
             }
 
             //Album doesn't exist.
@@ -64,7 +61,7 @@ namespace MusicProject.Repositories
         public string CheckAlbumExists(string albumName)
         {
             IReadOnlyList<SongModel> s = RetrieveSongs(albumName);
-            if (s != null)
+            if (s.Count > 0)
             {
                 return s[0].Artist;
             }
@@ -162,7 +159,6 @@ namespace MusicProject.Repositories
                             reader.GetString(artistNameOrdinal), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
                             reader.GetTimeSpan(songLengthOrdinal)));
             }
-
             return songs;
         }
     }
