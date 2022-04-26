@@ -4,5 +4,5 @@ AS
 
 SELECT U.UserWeight, U.DateAdded
 FROM MusicProject.[User] U
-WHERE U.UserName = @Name AND U.DateDeleted = NULL
+WHERE U.UserName = @Name AND U.DateDeleted IS NULL
 GO

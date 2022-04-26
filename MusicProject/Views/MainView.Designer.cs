@@ -249,6 +249,7 @@
             // 
             // uxLeaveReview
             // 
+            this.uxLeaveReview.Enabled = false;
             this.uxLeaveReview.Location = new System.Drawing.Point(172, 412);
             this.uxLeaveReview.Margin = new System.Windows.Forms.Padding(4);
             this.uxLeaveReview.Name = "uxLeaveReview";
