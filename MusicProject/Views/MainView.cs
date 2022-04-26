@@ -15,29 +15,34 @@ namespace MusicProject.Views
     public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
+        #region Basic Fields
         private LogInView login;
+        public AddProducerView producerView;
+
+        public CheckCredentials check;
         private Search search;
 
         private UserModel activeUser = null;
-        public List<PersonModel> members = new List<PersonModel>();
-        private ArtistModel artistModel;
+        //public List<PersonModel> members = new List<PersonModel>();
+        //private ArtistModel artistModel;
 
-        private ReviewModel _reviewModel = null;
-        public List<SongModel> songs = new List<SongModel>();
+        //private ReviewModel _reviewModel = null;
+        //public List<SongModel> songs = new List<SongModel>();
 
-        private IReadOnlyList<PersonModel> members = new List<PersonModel>();
-        public List<ProducerModel> producerModels = new List<ProducerModel>();
+        //private IReadOnlyList<PersonModel> members = new List<PersonModel>();
+        //public List<ProducerModel> producerModels = new List<ProducerModel>();
 
-        private IReadOnlyList<ArtistModel> artists = new List<ArtistModel>();
-        public List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        //private IReadOnlyList<ArtistModel> artists = new List<ArtistModel>();
+        //public List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
 
-        private IReadOnlyList<SongModel> songs = new List<SongModel>();
+        //private IReadOnlyList<SongModel> songs = new List<SongModel>();
 
-        private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
+        //private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
 
-        private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        //private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
 
-        private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
+        //private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
+        #endregion
 
         public MainView(MainController controller)
         {
@@ -55,11 +60,6 @@ namespace MusicProject.Views
         }
 
         public void RegisterSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels)
-        public uxLogInView login;
-        public DatabaseProxy proxy;
-        public CheckCredentials check;
-        public AddProducerView producerView;
-        public MainView()
         {
             uxAlbumListBox.DataSource = albums;
             uxArtistListBox.DataSource = artists;
