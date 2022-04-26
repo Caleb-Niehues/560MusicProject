@@ -19,12 +19,7 @@ namespace MusicProject.Views
         {
             InitializeComponent();
             search = controller.Search;
-            uxAlbumListBox.DataSource = albums;
-            uxArtistListBox.DataSource = artists;
-            uxSongList.DataSource = songs;
-            uxPersonList.DataSource = people;
-            uxProducerList.DataSource = producers;
-            uxRecordLabelList.DataSource = recordLabels;
+            uxFocusedList.DataSource = albums;
         }
 
         #region Basic Fields
@@ -52,6 +47,14 @@ namespace MusicProject.Views
             this.people = people;
             this.producers = producers;
             this.recordLabels = recordLabels;
+
+            uxAlbumListBox.DataSource = albums;
+            uxArtistListBox.DataSource = artists;
+            uxSongList.DataSource = songs;
+            uxPersonList.DataSource = people;
+            uxProducerList.DataSource = producers;
+            uxRecordLabelList.DataSource = recordLabels;
+            uxFocusedList.Refresh();
         }
 
         private void uxSearch_HitEnter(object sender, KeyEventArgs e)
@@ -60,7 +63,35 @@ namespace MusicProject.Views
                     MessageBox.Show("No name found on data base - needs to be an exact match");
         }
 
+        private void uxAlbumsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = albums;
+        }
 
+        private void uxSongsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = songs;
+        }
+
+        private void uxArtistsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = artists;
+        }
+
+        private void uxLabelsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = recordLabels;
+        }
+
+        private void uxProducersFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = producers;
+        }
+
+        private void uxPeopleFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = people;
+        }
         #endregion
 
         #region User Actions
