@@ -11,7 +11,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -106,7 +106,7 @@ namespace MusicProject.Controllers
         {
             bool success = false;
 
-            //_albums = SqlAlbum.FetchAlbum(name);
+            _albums = SqlAlbum.FetchAlbum(name);
             success = success || _albums.Count > 0;
 
             _artists = SqlArtist.FetchArtist(name);

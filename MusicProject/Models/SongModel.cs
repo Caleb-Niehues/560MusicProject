@@ -87,7 +87,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return Name;
+            return Name + " - " + AlbumName + " - " + Artist + " - " + Enum.GetName(typeof(Genre), this.Genre) + " - " + Length.ToString();
         }
     }
 }

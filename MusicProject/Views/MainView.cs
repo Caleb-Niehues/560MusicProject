@@ -15,6 +15,13 @@ namespace MusicProject.Views
     public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
+        public MainView(MainController controller)
+        {
+            InitializeComponent();
+            search = controller.Search;
+            uxFocusedList.DataSource = albums;
+        }
+
         #region Basic Fields
         private LogInView login;
         public AddProducerView producerView;
@@ -23,50 +30,31 @@ namespace MusicProject.Views
         private Search search;
 
         private UserModel activeUser = null;
-        //public List<PersonModel> members = new List<PersonModel>();
-        //private ArtistModel artistModel;
-
-        //private ReviewModel _reviewModel = null;
-        //public List<SongModel> songs = new List<SongModel>();
-
-        //private IReadOnlyList<PersonModel> members = new List<PersonModel>();
-        //public List<ProducerModel> producerModels = new List<ProducerModel>();
-
-        //private IReadOnlyList<ArtistModel> artists = new List<ArtistModel>();
-        //public List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
-
-        //private IReadOnlyList<SongModel> songs = new List<SongModel>();
-
-        //private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
-
-        //private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
-
-        //private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
+        private IReadOnlyList<PersonModel> people = new List<PersonModel>();
+        private IReadOnlyList<ArtistModel> artists = new List<ArtistModel>();
+        private IReadOnlyList<SongModel> songs = new List<SongModel>();
+        private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
+        private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
         #endregion
 
-        public MainView(MainController controller)
-        {
-            InitializeComponent();
-            search = controller.Search;
-        }
-
-        private void RegisterLogin(UserModel user)
-        {
-            activeUser = user;
-            if (activeUser == null)
-                uxUserLabel.Text = "Not logged in";
-            else
-                uxUserLabel.Text = "Logged in as: " + activeUser.Name;
-        }
-
+        #region Search and Focus
         public void RegisterSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels)
         {
+            this.albums = albums;
+            this.artists = artists;
+            this.songs = songs;
+            this.people = people;
+            this.producers = producers;
+            this.recordLabels = recordLabels;
+
             uxAlbumListBox.DataSource = albums;
             uxArtistListBox.DataSource = artists;
             uxSongList.DataSource = songs;
             uxPersonList.DataSource = people;
             uxProducerList.DataSource = producers;
             uxRecordLabelList.DataSource = recordLabels;
+            uxFocusedList.Refresh();
         }
 
         private void uxSearch_HitEnter(object sender, KeyEventArgs e)
@@ -75,10 +63,77 @@ namespace MusicProject.Views
                     MessageBox.Show("No name found on data base - needs to be an exact match");
         }
 
+        private void uxAlbumsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = albums;
+            if (activeUser != null) uxLeaveReview.Enabled = true;
+        }
+
+        private void uxSongsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = songs;
+        }
+
+        private void uxArtistsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = artists;
+        }
+
+        private void uxLabelsFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = recordLabels;
+        }
+
+        private void uxProducersFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = producers;
+        }
+
+        private void uxPeopleFocus_CheckedChanged(object sender, EventArgs e)
+        {
+            uxFocusedList.DataSource = people;
+        }
+        #endregion
+
+        #region User Actions
+        private void RegisterLogin(UserModel user)
+        {
+            activeUser = user;
+            if (activeUser == null)
+                uxUserLabel.Text = "Not logged in";
+            else
+            {
+                uxUserLabel.Text = "Logged in as: " + activeUser.Name;
+                if (uxAlbumsFocus.Checked && uxFocusedList.SelectedItem != null) uxLeaveReview.Enabled = true;
+            }
+        }
+
         private void uxLogIn_Click(object sender, EventArgs e)
         {
             login = new LogInView(RegisterLogin);
             login.Show();
+        }
+
+        private void uxLeaveReview_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Add to DB
+        private void uxAddAlbum_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uxAddArtist_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uxAddRecordLabel_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void uxAddProducer_Click(object sender, EventArgs e)
@@ -87,9 +142,10 @@ namespace MusicProject.Views
             producerView.Show();
         }
 
-        private void uxLeaveReview_Click(object sender, EventArgs e)
+        private void uxAddPerson_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
     }
 }
