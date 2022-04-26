@@ -55,6 +55,14 @@
             this.uxAddPerson = new System.Windows.Forms.Button();
             this.uxFocusedList = new System.Windows.Forms.ListBox();
             this.uxFocus = new System.Windows.Forms.Label();
+            this.uxFocusButtons = new System.Windows.Forms.GroupBox();
+            this.uxAlbumsFocus = new System.Windows.Forms.RadioButton();
+            this.uxSongsFocus = new System.Windows.Forms.RadioButton();
+            this.uxArtistsFocus = new System.Windows.Forms.RadioButton();
+            this.uxLabelsFocus = new System.Windows.Forms.RadioButton();
+            this.uxProducersFocus = new System.Windows.Forms.RadioButton();
+            this.uxPeopleFocus = new System.Windows.Forms.RadioButton();
+            this.uxFocusButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // uxLogIn
@@ -246,7 +254,7 @@
             this.uxLeaveReview.Name = "uxLeaveReview";
             this.uxLeaveReview.Size = new System.Drawing.Size(100, 28);
             this.uxLeaveReview.TabIndex = 18;
-            this.uxLeaveReview.Text = "Leave Review";
+            this.uxLeaveReview.Text = "Add Review";
             this.uxLeaveReview.UseVisualStyleBackColor = true;
             this.uxLeaveReview.Click += new System.EventHandler(this.uxLeaveReview_Click);
             // 
@@ -278,6 +286,7 @@
             this.uxAddAlbum.TabIndex = 21;
             this.uxAddAlbum.Text = "Add Album";
             this.uxAddAlbum.UseVisualStyleBackColor = true;
+            this.uxAddAlbum.Click += new System.EventHandler(this.uxAddAlbum_Click);
             // 
             // uxAddArtist
             // 
@@ -287,6 +296,7 @@
             this.uxAddArtist.TabIndex = 22;
             this.uxAddArtist.Text = "Add Artist";
             this.uxAddArtist.UseVisualStyleBackColor = true;
+            this.uxAddArtist.Click += new System.EventHandler(this.uxAddArtist_Click);
             // 
             // uxAddRecordLabel
             // 
@@ -296,6 +306,7 @@
             this.uxAddRecordLabel.TabIndex = 23;
             this.uxAddRecordLabel.Text = "Add Label";
             this.uxAddRecordLabel.UseVisualStyleBackColor = true;
+            this.uxAddRecordLabel.Click += new System.EventHandler(this.uxAddRecordLabel_Click);
             // 
             // uxAddPerson
             // 
@@ -305,6 +316,7 @@
             this.uxAddPerson.TabIndex = 24;
             this.uxAddPerson.Text = "Add Person";
             this.uxAddPerson.UseVisualStyleBackColor = true;
+            this.uxAddPerson.Click += new System.EventHandler(this.uxAddPerson_Click);
             // 
             // uxFocusedList
             // 
@@ -326,11 +338,88 @@
             this.uxFocus.TabIndex = 26;
             this.uxFocus.Text = "Focus";
             // 
+            // uxFocusButtons
+            // 
+            this.uxFocusButtons.Controls.Add(this.uxPeopleFocus);
+            this.uxFocusButtons.Controls.Add(this.uxProducersFocus);
+            this.uxFocusButtons.Controls.Add(this.uxLabelsFocus);
+            this.uxFocusButtons.Controls.Add(this.uxArtistsFocus);
+            this.uxFocusButtons.Controls.Add(this.uxSongsFocus);
+            this.uxFocusButtons.Controls.Add(this.uxAlbumsFocus);
+            this.uxFocusButtons.Location = new System.Drawing.Point(349, 12);
+            this.uxFocusButtons.Name = "uxFocusButtons";
+            this.uxFocusButtons.Size = new System.Drawing.Size(505, 32);
+            this.uxFocusButtons.TabIndex = 28;
+            this.uxFocusButtons.TabStop = false;
+            // 
+            // uxAlbumsFocus
+            // 
+            this.uxAlbumsFocus.AutoSize = true;
+            this.uxAlbumsFocus.Checked = true;
+            this.uxAlbumsFocus.Location = new System.Drawing.Point(25, 6);
+            this.uxAlbumsFocus.Name = "uxAlbumsFocus";
+            this.uxAlbumsFocus.Size = new System.Drawing.Size(75, 21);
+            this.uxAlbumsFocus.TabIndex = 0;
+            this.uxAlbumsFocus.TabStop = true;
+            this.uxAlbumsFocus.Text = "Albums";
+            this.uxAlbumsFocus.UseVisualStyleBackColor = true;
+            // 
+            // uxSongsFocus
+            // 
+            this.uxSongsFocus.AutoSize = true;
+            this.uxSongsFocus.Location = new System.Drawing.Point(106, 6);
+            this.uxSongsFocus.Name = "uxSongsFocus";
+            this.uxSongsFocus.Size = new System.Drawing.Size(69, 21);
+            this.uxSongsFocus.TabIndex = 1;
+            this.uxSongsFocus.Text = "Songs";
+            this.uxSongsFocus.UseVisualStyleBackColor = true;
+            // 
+            // uxArtistsFocus
+            // 
+            this.uxArtistsFocus.AutoSize = true;
+            this.uxArtistsFocus.Location = new System.Drawing.Point(181, 6);
+            this.uxArtistsFocus.Name = "uxArtistsFocus";
+            this.uxArtistsFocus.Size = new System.Drawing.Size(68, 21);
+            this.uxArtistsFocus.TabIndex = 2;
+            this.uxArtistsFocus.Text = "Artists";
+            this.uxArtistsFocus.UseVisualStyleBackColor = true;
+            // 
+            // uxLabelsFocus
+            // 
+            this.uxLabelsFocus.AutoSize = true;
+            this.uxLabelsFocus.Location = new System.Drawing.Point(255, 6);
+            this.uxLabelsFocus.Name = "uxLabelsFocus";
+            this.uxLabelsFocus.Size = new System.Drawing.Size(71, 21);
+            this.uxLabelsFocus.TabIndex = 3;
+            this.uxLabelsFocus.Text = "Labels";
+            this.uxLabelsFocus.UseVisualStyleBackColor = true;
+            // 
+            // uxProducersFocus
+            // 
+            this.uxProducersFocus.AutoSize = true;
+            this.uxProducersFocus.Location = new System.Drawing.Point(332, 6);
+            this.uxProducersFocus.Name = "uxProducersFocus";
+            this.uxProducersFocus.Size = new System.Drawing.Size(94, 21);
+            this.uxProducersFocus.TabIndex = 4;
+            this.uxProducersFocus.Text = "Producers";
+            this.uxProducersFocus.UseVisualStyleBackColor = true;
+            // 
+            // uxPeopleFocus
+            // 
+            this.uxPeopleFocus.AutoSize = true;
+            this.uxPeopleFocus.Location = new System.Drawing.Point(432, 6);
+            this.uxPeopleFocus.Name = "uxPeopleFocus";
+            this.uxPeopleFocus.Size = new System.Drawing.Size(73, 21);
+            this.uxPeopleFocus.TabIndex = 5;
+            this.uxPeopleFocus.Text = "People";
+            this.uxPeopleFocus.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.uxFocusButtons);
             this.Controls.Add(this.uxFocus);
             this.Controls.Add(this.uxFocusedList);
             this.Controls.Add(this.uxAddPerson);
@@ -361,6 +450,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "GoodVibes.exe";
+            this.uxFocusButtons.ResumeLayout(false);
+            this.uxFocusButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -395,5 +486,12 @@
         private System.Windows.Forms.Button uxAddPerson;
         private System.Windows.Forms.ListBox uxFocusedList;
         private System.Windows.Forms.Label uxFocus;
+        private System.Windows.Forms.GroupBox uxFocusButtons;
+        private System.Windows.Forms.RadioButton uxPeopleFocus;
+        private System.Windows.Forms.RadioButton uxProducersFocus;
+        private System.Windows.Forms.RadioButton uxLabelsFocus;
+        private System.Windows.Forms.RadioButton uxArtistsFocus;
+        private System.Windows.Forms.RadioButton uxSongsFocus;
+        private System.Windows.Forms.RadioButton uxAlbumsFocus;
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace MusicProject.Views
 {
-    partial class AlterDatabaseView
+    partial class AddAlbumView
     {
         /// <summary>
         /// Required designer variable.

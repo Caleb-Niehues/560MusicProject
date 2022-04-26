@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MusicProject.Views
 {
-    public partial class AlterDatabaseView : Form
+    public partial class AddAlbumView : Form
     {
-        public AlterDatabaseView()
+        public AddAlbumView()
         {
             InitializeComponent();
         }
