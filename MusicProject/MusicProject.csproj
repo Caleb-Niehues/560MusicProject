@@ -126,6 +126,12 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReviewView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReviewView.Designer.cs">
+      <DependentUpon>ReviewView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ReviewView.resx">
+      <DependentUpon>ReviewView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -181,6 +190,7 @@
     <Content Include="Sql\Procedures\MusicProject.DeleteReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.DeleteUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchPassword.sql" />
+    <Content Include="Sql\Procedures\MusicProject.FetchReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
     <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />

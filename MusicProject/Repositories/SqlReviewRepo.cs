@@ -28,8 +28,8 @@ namespace MusicProject.Repositories
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(comment));
 
-            if(rating < 0 || rating > 5)
-                throw new ArgumentException("The parameter must be between 0 and 100.", nameof(rating));
+            if (rating < 0 || rating > 5)
+                throw new ArgumentException("The parameter must be between 0 and 5.", nameof(rating));
 
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -79,8 +79,7 @@ namespace MusicProject.Repositories
             }
         }
 
-
-        public IReadOnlyList<ReviewModel> RetrieveReviews(string albumName)
+        public IReadOnlyList<ReviewModel> RetrieveReviews(string albumTitle)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -88,10 +87,30 @@ namespace MusicProject.Repositories
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.AddWithValue("AlbumTitle", albumTitle);
+
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
                         return TranslateReviews(reader);
+                }
+            }
+        }
+
+        public ReviewModel FetchReview(string userName)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("MusicProject.FetchReview", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("UserName", userName);
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                        return TranslateReviews(reader)[0];
                 }
             }
         }
@@ -116,7 +135,6 @@ namespace MusicProject.Repositories
                     DateTime.Now //reader.GetDateTime(dateAddedOrdinal)
                     ));
             }
-
             return reviews;
         }
 
