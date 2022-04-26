@@ -35,7 +35,7 @@
             this.uxUserLabel = new System.Windows.Forms.Label();
             this.uxLookUpText = new System.Windows.Forms.TextBox();
             this.uxGetArtistReviews = new System.Windows.Forms.Button();
-            this.uxAddToDB = new System.Windows.Forms.Button();
+            this.uxAddProducer = new System.Windows.Forms.Button();
             this.uxSongList = new System.Windows.Forms.ListBox();
             this.uxSongsLabel = new System.Windows.Forms.Label();
             this.uxProducerLabel = new System.Windows.Forms.Label();
@@ -112,14 +112,15 @@
             this.uxGetArtistReviews.Text = "Get artist reviews";
             this.uxGetArtistReviews.UseVisualStyleBackColor = true;
             // 
-            // uxAddToDB
+            // uxAddProducer
             // 
-            this.uxAddToDB.Location = new System.Drawing.Point(50, 254);
-            this.uxAddToDB.Name = "uxAddToDB";
-            this.uxAddToDB.Size = new System.Drawing.Size(75, 23);
-            this.uxAddToDB.TabIndex = 7;
-            this.uxAddToDB.Text = "Add to DB";
-            this.uxAddToDB.UseVisualStyleBackColor = true;
+            this.uxAddProducer.Location = new System.Drawing.Point(13, 248);
+            this.uxAddProducer.Name = "uxAddProducer";
+            this.uxAddProducer.Size = new System.Drawing.Size(165, 23);
+            this.uxAddProducer.TabIndex = 7;
+            this.uxAddProducer.Text = "Add Producer to DB";
+            this.uxAddProducer.UseVisualStyleBackColor = true;
+            this.uxAddProducer.Click += new System.EventHandler(this.uxAddProducer_Click);
             // 
             // uxSongList
             // 
@@ -221,7 +222,7 @@
             this.Controls.Add(this.uxProducerLabel);
             this.Controls.Add(this.uxSongsLabel);
             this.Controls.Add(this.uxSongList);
-            this.Controls.Add(this.uxAddToDB);
+            this.Controls.Add(this.uxAddProducer);
             this.Controls.Add(this.uxGetArtistReviews);
             this.Controls.Add(this.uxLookUpText);
             this.Controls.Add(this.uxUserLabel);
@@ -245,7 +246,7 @@
         private System.Windows.Forms.Label uxUserLabel;
         private System.Windows.Forms.TextBox uxLookUpText;
         private System.Windows.Forms.Button uxGetArtistReviews;
-        private System.Windows.Forms.Button uxAddToDB;
+        private System.Windows.Forms.Button uxAddProducer;
         private System.Windows.Forms.ListBox uxSongList;
         private System.Windows.Forms.Label uxSongsLabel;
         private System.Windows.Forms.Label uxProducerLabel;

@@ -19,14 +19,14 @@ namespace MusicProject.Views
         private ReviewModel reviewModel = null;
         private UserModel user = null;
 
-        private List<PersonModel> members = new List<PersonModel>();
+        public List<PersonModel> members = new List<PersonModel>();
         private ArtistModel artistModel;
 
-        private List<SongModel> songs = new List<SongModel>();
+        public List<SongModel> songs = new List<SongModel>();
 
-        private List<ProducerModel> producerModels = new List<ProducerModel>();
+        public List<ProducerModel> producerModels = new List<ProducerModel>();
 
-        private List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
+        public List<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
 
         private AlbumModel test;
 
@@ -86,6 +86,7 @@ namespace MusicProject.Views
         public uxLogInView login;
         public DatabaseProxy proxy;
         public CheckCredentials check;
+        public AddProducerView producerView;
         public MainView()
         {
             InitializeComponent();
@@ -105,6 +106,12 @@ namespace MusicProject.Views
         {
             login = new uxLogInView(proxy, check);
             login.Show();
+        }
+
+        private void uxAddProducer_Click(object sender, EventArgs e)
+        {
+            producerView = new AddProducerView();
+            producerView.Show();
         }
     }
 }

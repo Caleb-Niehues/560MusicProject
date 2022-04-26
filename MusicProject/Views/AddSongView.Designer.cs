@@ -28,106 +28,145 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.uxAddSongButton = new System.Windows.Forms.Button();
+            this.uxSongNameText = new System.Windows.Forms.Label();
+            this.uxSongNText = new System.Windows.Forms.TextBox();
+            this.uxAlbumText = new System.Windows.Forms.TextBox();
+            this.uxAlbumLabel = new System.Windows.Forms.Label();
+            this.uxGenreText = new System.Windows.Forms.TextBox();
+            this.uxGenreLabel = new System.Windows.Forms.Label();
+            this.uxTimeSpanLabel = new System.Windows.Forms.Label();
+            this.uxHours = new System.Windows.Forms.NumericUpDown();
+            this.uxMinute = new System.Windows.Forms.NumericUpDown();
+            this.uxSecond = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.uxHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxMinute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxSecond)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // uxAddSongButton
             // 
-            this.button1.Location = new System.Drawing.Point(165, 342);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.uxAddSongButton.Location = new System.Drawing.Point(167, 274);
+            this.uxAddSongButton.Name = "uxAddSongButton";
+            this.uxAddSongButton.Size = new System.Drawing.Size(75, 23);
+            this.uxAddSongButton.TabIndex = 0;
+            this.uxAddSongButton.Text = "Add Song";
+            this.uxAddSongButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // uxSongNameText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.uxSongNameText.AutoSize = true;
+            this.uxSongNameText.Location = new System.Drawing.Point(22, 77);
+            this.uxSongNameText.Name = "uxSongNameText";
+            this.uxSongNameText.Size = new System.Drawing.Size(66, 13);
+            this.uxSongNameText.TabIndex = 1;
+            this.uxSongNameText.Text = "Song Name:";
             // 
-            // textBox1
+            // uxSongNText
             // 
-            this.textBox1.Location = new System.Drawing.Point(94, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.uxSongNText.Location = new System.Drawing.Point(94, 77);
+            this.uxSongNText.Name = "uxSongNText";
+            this.uxSongNText.Size = new System.Drawing.Size(252, 20);
+            this.uxSongNText.TabIndex = 2;
             // 
-            // textBox2
+            // uxAlbumText
             // 
-            this.textBox2.Location = new System.Drawing.Point(94, 120);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.uxAlbumText.Location = new System.Drawing.Point(94, 120);
+            this.uxAlbumText.Name = "uxAlbumText";
+            this.uxAlbumText.Size = new System.Drawing.Size(252, 20);
+            this.uxAlbumText.TabIndex = 4;
             // 
-            // label2
+            // uxAlbumLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 128);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.uxAlbumLabel.AutoSize = true;
+            this.uxAlbumLabel.Location = new System.Drawing.Point(48, 120);
+            this.uxAlbumLabel.Name = "uxAlbumLabel";
+            this.uxAlbumLabel.Size = new System.Drawing.Size(39, 13);
+            this.uxAlbumLabel.TabIndex = 3;
+            this.uxAlbumLabel.Text = "Album:";
             // 
-            // textBox3
+            // uxGenreText
             // 
-            this.textBox3.Location = new System.Drawing.Point(94, 160);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
+            this.uxGenreText.Location = new System.Drawing.Point(94, 160);
+            this.uxGenreText.Name = "uxGenreText";
+            this.uxGenreText.Size = new System.Drawing.Size(252, 20);
+            this.uxGenreText.TabIndex = 6;
             // 
-            // label3
+            // uxGenreLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 168);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.uxGenreLabel.AutoSize = true;
+            this.uxGenreLabel.Location = new System.Drawing.Point(48, 160);
+            this.uxGenreLabel.Name = "uxGenreLabel";
+            this.uxGenreLabel.Size = new System.Drawing.Size(39, 13);
+            this.uxGenreLabel.TabIndex = 5;
+            this.uxGenreLabel.Text = "Genre:";
             // 
-            // textBox4
+            // uxTimeSpanLabel
             // 
-            this.textBox4.Location = new System.Drawing.Point(94, 207);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 8;
+            this.uxTimeSpanLabel.AutoSize = true;
+            this.uxTimeSpanLabel.Location = new System.Drawing.Point(3, 203);
+            this.uxTimeSpanLabel.Name = "uxTimeSpanLabel";
+            this.uxTimeSpanLabel.Size = new System.Drawing.Size(97, 13);
+            this.uxTimeSpanLabel.TabIndex = 7;
+            this.uxTimeSpanLabel.Text = "Time Span(H,M,S):";
             // 
-            // label4
+            // uxHours
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(52, 215);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "label4";
+            this.uxHours.Location = new System.Drawing.Point(106, 201);
+            this.uxHours.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.uxHours.Name = "uxHours";
+            this.uxHours.Size = new System.Drawing.Size(41, 20);
+            this.uxHours.TabIndex = 8;
             // 
-            // AddView
+            // uxMinute
+            // 
+            this.uxMinute.Location = new System.Drawing.Point(153, 201);
+            this.uxMinute.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.uxMinute.Name = "uxMinute";
+            this.uxMinute.Size = new System.Drawing.Size(41, 20);
+            this.uxMinute.TabIndex = 9;
+            // 
+            // uxSecond
+            // 
+            this.uxSecond.Location = new System.Drawing.Point(200, 201);
+            this.uxSecond.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.uxSecond.Name = "uxSecond";
+            this.uxSecond.Size = new System.Drawing.Size(41, 20);
+            this.uxSecond.TabIndex = 10;
+            // 
+            // AddSongView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 450);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Name = "AddView";
+            this.Controls.Add(this.uxSecond);
+            this.Controls.Add(this.uxMinute);
+            this.Controls.Add(this.uxHours);
+            this.Controls.Add(this.uxTimeSpanLabel);
+            this.Controls.Add(this.uxGenreText);
+            this.Controls.Add(this.uxGenreLabel);
+            this.Controls.Add(this.uxAlbumText);
+            this.Controls.Add(this.uxAlbumLabel);
+            this.Controls.Add(this.uxSongNText);
+            this.Controls.Add(this.uxSongNameText);
+            this.Controls.Add(this.uxAddSongButton);
+            this.Name = "AddSongView";
             this.Text = "AddView";
+            ((System.ComponentModel.ISupportInitialize)(this.uxHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxMinute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxSecond)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,14 +174,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button uxAddSongButton;
+        private System.Windows.Forms.Label uxSongNameText;
+        private System.Windows.Forms.TextBox uxSongNText;
+        private System.Windows.Forms.TextBox uxAlbumText;
+        private System.Windows.Forms.Label uxAlbumLabel;
+        private System.Windows.Forms.TextBox uxGenreText;
+        private System.Windows.Forms.Label uxGenreLabel;
+        private System.Windows.Forms.Label uxTimeSpanLabel;
+        private System.Windows.Forms.NumericUpDown uxHours;
+        private System.Windows.Forms.NumericUpDown uxMinute;
+        private System.Windows.Forms.NumericUpDown uxSecond;
     }
 }
