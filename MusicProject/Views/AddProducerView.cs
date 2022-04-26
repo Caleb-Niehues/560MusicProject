@@ -27,7 +27,7 @@ namespace MusicProject.Views
             if(uxNameBox.Text != null)
             {
                 string producerName = uxNameBox.Text;
-                MainView.producerModels.Add(new ProducerModel(producerName));
+                //MainView.producerModels.Add(new ProducerModel(producerName));
             }
             else
             {
