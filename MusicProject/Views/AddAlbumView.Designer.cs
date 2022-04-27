@@ -49,6 +49,7 @@ namespace MusicProject.Views
             this.label1 = new System.Windows.Forms.Label();
             this.uxNewSongButton = new System.Windows.Forms.Button();
             this.uxSongsLabel = new System.Windows.Forms.Label();
+            this.uxFinishButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxReleaseDate
@@ -117,9 +118,9 @@ namespace MusicProject.Views
             // 
             this.uxProducerList.FormattingEnabled = true;
             this.uxProducerList.ItemHeight = 16;
-            this.uxProducerList.Location = new System.Drawing.Point(15, 254);
+            this.uxProducerList.Location = new System.Drawing.Point(15, 286);
             this.uxProducerList.Name = "uxProducerList";
-            this.uxProducerList.Size = new System.Drawing.Size(211, 164);
+            this.uxProducerList.Size = new System.Drawing.Size(211, 132);
             this.uxProducerList.TabIndex = 7;
             // 
             // textBox1
@@ -147,7 +148,7 @@ namespace MusicProject.Views
             // uxProducerLabel
             // 
             this.uxProducerLabel.AutoSize = true;
-            this.uxProducerLabel.Location = new System.Drawing.Point(12, 190);
+            this.uxProducerLabel.Location = new System.Drawing.Point(13, 223);
             this.uxProducerLabel.Name = "uxProducerLabel";
             this.uxProducerLabel.Size = new System.Drawing.Size(77, 17);
             this.uxProducerLabel.TabIndex = 11;
@@ -155,14 +156,15 @@ namespace MusicProject.Views
             // 
             // uxFetchProducerText
             // 
-            this.uxFetchProducerText.Location = new System.Drawing.Point(15, 216);
+            this.uxFetchProducerText.Location = new System.Drawing.Point(16, 249);
             this.uxFetchProducerText.Name = "uxFetchProducerText";
             this.uxFetchProducerText.Size = new System.Drawing.Size(210, 22);
             this.uxFetchProducerText.TabIndex = 12;
+            this.uxFetchProducerText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.uxFetchProducerText_HitEnter);
             // 
             // uxNewProducerButton
             // 
-            this.uxNewProducerButton.Location = new System.Drawing.Point(95, 187);
+            this.uxNewProducerButton.Location = new System.Drawing.Point(96, 220);
             this.uxNewProducerButton.Name = "uxNewProducerButton";
             this.uxNewProducerButton.Size = new System.Drawing.Size(131, 23);
             this.uxNewProducerButton.TabIndex = 13;
@@ -172,24 +174,26 @@ namespace MusicProject.Views
             // 
             // uxNewRecordLabelButton
             // 
-            this.uxNewRecordLabelButton.Location = new System.Drawing.Point(354, 251);
+            this.uxNewRecordLabelButton.Location = new System.Drawing.Point(354, 249);
             this.uxNewRecordLabelButton.Name = "uxNewRecordLabelButton";
             this.uxNewRecordLabelButton.Size = new System.Drawing.Size(88, 23);
             this.uxNewRecordLabelButton.TabIndex = 16;
             this.uxNewRecordLabelButton.Text = "New Label";
             this.uxNewRecordLabelButton.UseVisualStyleBackColor = true;
+            this.uxNewRecordLabelButton.Click += new System.EventHandler(this.uxNewRecordLabelButton_Click);
             // 
             // uxFetchRecordLabelText
             // 
-            this.uxFetchRecordLabelText.Location = new System.Drawing.Point(448, 251);
+            this.uxFetchRecordLabelText.Location = new System.Drawing.Point(448, 249);
             this.uxFetchRecordLabelText.Name = "uxFetchRecordLabelText";
             this.uxFetchRecordLabelText.Size = new System.Drawing.Size(242, 22);
             this.uxFetchRecordLabelText.TabIndex = 15;
+            this.uxFetchRecordLabelText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.uxFetchRecordLabelText_HitEnter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(244, 254);
+            this.label1.Location = new System.Drawing.Point(244, 252);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 17);
             this.label1.TabIndex = 14;
@@ -203,6 +207,7 @@ namespace MusicProject.Views
             this.uxNewSongButton.TabIndex = 19;
             this.uxNewSongButton.Text = "New Song";
             this.uxNewSongButton.UseVisualStyleBackColor = true;
+            this.uxNewSongButton.Click += new System.EventHandler(this.uxNewSongButton_Click);
             // 
             // uxSongsLabel
             // 
@@ -213,11 +218,22 @@ namespace MusicProject.Views
             this.uxSongsLabel.TabIndex = 17;
             this.uxSongsLabel.Text = "Songs:";
             // 
+            // uxFinishButton
+            // 
+            this.uxFinishButton.Location = new System.Drawing.Point(559, 12);
+            this.uxFinishButton.Name = "uxFinishButton";
+            this.uxFinishButton.Size = new System.Drawing.Size(131, 30);
+            this.uxFinishButton.TabIndex = 20;
+            this.uxFinishButton.Text = "Finish Album";
+            this.uxFinishButton.UseVisualStyleBackColor = true;
+            this.uxFinishButton.Click += new System.EventHandler(this.uxFinishButton_Click);
+            // 
             // AddAlbumView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 435);
+            this.Controls.Add(this.uxFinishButton);
             this.Controls.Add(this.uxNewSongButton);
             this.Controls.Add(this.uxSongsLabel);
             this.Controls.Add(this.uxNewRecordLabelButton);
@@ -266,5 +282,6 @@ namespace MusicProject.Views
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button uxNewSongButton;
         private System.Windows.Forms.Label uxSongsLabel;
+        private System.Windows.Forms.Button uxFinishButton;
     }
 }
