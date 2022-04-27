@@ -24,6 +24,19 @@ namespace MusicProject.Views
             create = createArtist;
         }
 
-
+        private void uxAddArtistButton_Click(object sender, EventArgs e)
+        {
+            string name = uxArtistName.Text;
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                var artist = create(name);
+                MessageBox.Show("Artist successfully added as: " + artist.Name);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please add a name!");
+            }
+        }
     }
 }
