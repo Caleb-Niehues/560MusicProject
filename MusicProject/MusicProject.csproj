@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AlbumModel.cs" />
+    <Compile Include="Models\AlbumsWithRecordLabelModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
     <Compile Include="Models\BestPerformingAlbumModel.cs" />
     <Compile Include="Models\Certification.cs" />
@@ -170,6 +171,7 @@
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
+    <Content Include="Sql\Procedures\MusicProject.GetAlbumsWithRecordLabel.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

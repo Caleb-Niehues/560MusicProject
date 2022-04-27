@@ -102,5 +102,48 @@ namespace MusicProject.Repositories
 
             return recordLabels;
         }
+
+        public AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, DateTime startYear, DateTime endYear)
+        {
+            if (string.IsNullOrWhiteSpace(recordLabelName))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(recordLabelName));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.AlbumsWithRecordLabel", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("RecordLabelName", recordLabelName);
+                        command.Parameters.AddWithValue("StartYear", startYear);
+                        command.Parameters.AddWithValue("EndYear", endYear);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateGetAlbumsWithRecordLabel(reader);
+                    }
+                }
+            }
+        }
+        private AlbumsWithRecordLabelModel TranslateGetAlbumsWithRecordLabel(SqlDataReader reader)
+        {
+            var recordLabelNameOrdinal = reader.GetOrdinal("RecordLabelName");
+            var albumCountOrdinal = reader.GetOrdinal("AlbumCount");
+            var certificationCountOrdinal = reader.GetOrdinal("CertificationCount");
+
+            while (reader.Read())
+            {
+                return new AlbumsWithRecordLabelModel(reader.GetString(recordLabelNameOrdinal),
+                    reader.GetInt32(albumCountOrdinal), reader.GetInt32(certificationCountOrdinal));
+            }
+            return null;
+        }
     }
 }

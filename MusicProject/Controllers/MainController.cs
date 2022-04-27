@@ -54,7 +54,7 @@ namespace MusicProject.Controllers
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
 
-            IReadOnlyList<Genre> test = SqlAlbum.GetBestPerformingGenres(new System.DateTime(1990,05,03), new System.DateTime(2020,01,01), 5);
+            AlbumsWithRecordLabelModel test = SqlRecordLabel.GetAlbumsWithRecordLabel("Eu Limited", new System.DateTime(1900, 05,03), new System.DateTime(2022,01,01));
             test.ToString();
         }
 
