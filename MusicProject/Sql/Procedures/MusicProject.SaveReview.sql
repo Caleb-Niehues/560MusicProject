@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE MusicProject.CreateOrEditReview
+﻿CREATE OR ALTER PROCEDURE MusicProject.SaveReview
    @UserName NVARCHAR(32),
    @AlbumName NVARCHAR(32),
    @Comment NVARCHAR(128),
@@ -14,13 +14,7 @@ WITH CTE (ReviewID, UserID, AlbumID) AS (
 )
 
 MERGE MusicProject.Review R
-USING CTE ON CTE.ReviewID = R.ReviewID
-WHEN NOT MATCHED THEN 
-	INSERT (UserID, AlbumID, AlbumComment, AlbumRating, DateDeleted)
-	VALUES (CTE.UserId, CTE.AlbumID, @Comment, @Rating, 
-	--SYSDATETIMEOFFSET(),
-	NULL
-)
+USING CTE ON CTE.AlbumID = R.AlbumID AND CTE.UserID = R.UserID
 WHEN MATCHED THEN
 	UPDATE SET
 		R.AlbumComment = @Comment,

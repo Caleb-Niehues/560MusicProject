@@ -96,9 +96,10 @@ namespace MusicProject.Controllers
             return SqlReview.FetchReview(userName);
         }
 
-        public ReviewModel SaveReview(ReviewModel review)
+        public ReviewModel CreateOrSaveReview(ReviewModel review, bool newRev)
         {
-            return SqlReview.CreateOrEditReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
+            if(newRev) return SqlReview.CreateReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
+            else return SqlReview.SaveReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
         }
         #endregion
 

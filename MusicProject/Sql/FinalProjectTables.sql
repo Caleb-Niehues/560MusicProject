@@ -139,5 +139,6 @@ CREATE TABLE MusicProject.Review
 		REFERENCES MusicProject.Album(AlbumID),
    AlbumComment NVARCHAR(400),
    AlbumRating DECIMAL(2,1) NOT NULL,
-   DateDeleted INT
+   DateAdded DATE NOT NULL,
+   DateDeleted DATE
 );

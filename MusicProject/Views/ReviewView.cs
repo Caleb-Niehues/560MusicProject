@@ -9,7 +9,7 @@ namespace MusicProject.Views
     {
         private static GetReviews get;
         private static FetchReview fetch;
-        private static SaveReview save;
+        private static CreateOrSaveReview save;
 
         AlbumModel album;
         UserModel user;
@@ -23,7 +23,7 @@ namespace MusicProject.Views
             uxReviewsForLabel.Text = "Reviews for " + album.Title;
             uxReviewsList.DataSource = get(album);
         }
-        public static void InitializeDelegates(GetReviews getRev, FetchReview fetchRev, SaveReview saveRev)
+        public static void InitializeDelegates(GetReviews getRev, FetchReview fetchRev, CreateOrSaveReview saveRev)
         {
             get = getRev;
             fetch = fetchRev;
@@ -73,14 +73,16 @@ namespace MusicProject.Views
 
         private void uxSaveButton_Click(object sender, EventArgs e)
         {
+            bool newRev = false;
             if (activeReview == null && fetch(user.Name) == null)
             {
                 var temp = DateTime.Now;
                 if(Decimal.TryParse(uxRatingText.Text, out var temp2))
                 activeReview = new ReviewModel(user.Name, album.Title, uxComment.Text, temp2, temp);
+                newRev = true;
             }
             
-            save(activeReview);
+            save(activeReview, newRev);
             uxReviewsList.DataSource = get(album);
         }
 

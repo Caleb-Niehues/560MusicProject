@@ -16,7 +16,7 @@ namespace MusicProject.Repositories
             this.connectionString = connectionString;
         }
 
-        public ReviewModel CreateOrEditReview(string userName, string albumTitle, string comment, decimal rating)
+        public ReviewModel CreateReview(string userName, string albumTitle, string comment, decimal rating)
         {
             // Verify parameters. Need to call fetch album and user to check real
             if (string.IsNullOrWhiteSpace(userName))
@@ -36,7 +36,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateOrEditReview", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateReview", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -140,6 +140,47 @@ namespace MusicProject.Repositories
                     ));
             }
             return reviews;
+        }
+
+        public ReviewModel SaveReview(string userName, string albumTitle, string comment, decimal rating)
+        {
+            // Verify parameters. Need to call fetch album and user to check real
+            if (string.IsNullOrWhiteSpace(userName))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(userName));
+
+            if (string.IsNullOrWhiteSpace(albumTitle))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumTitle));
+
+            if (string.IsNullOrWhiteSpace(comment))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(comment));
+
+            if (rating < 0 || rating > 5)
+                throw new ArgumentException("The parameter must be between 0 and 5.", nameof(rating));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.SaveReview", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("UserName", userName);
+                        command.Parameters.AddWithValue("AlbumName", albumTitle);
+                        command.Parameters.AddWithValue("Comment", comment);
+                        command.Parameters.AddWithValue("Rating", rating);
+
+                        connection.Open();
+
+                        command.ExecuteNonQuery();
+
+                        transaction.Complete();
+
+                        return new ReviewModel(userName, albumTitle, comment, rating, DateTime.Now);
+                    }
+                }
+            }
         }
     }
 }
