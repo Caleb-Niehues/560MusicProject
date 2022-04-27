@@ -6,7 +6,7 @@
 AS
 
 WITH CTE (ReviewID, UserID, AlbumID) AS (
-	SELECT R.ReviewID, U.UserID, A.AlbumID
+	SELECT TOP(1) R.ReviewID, U.UserID, A.AlbumID
 	FROM MusicProject.Review R
 		INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID
 		INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
