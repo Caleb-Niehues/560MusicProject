@@ -169,6 +169,7 @@
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
+    <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -169,7 +169,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="artistName">Artist name to query.</param>
         /// <returns></returns>
-        public IReadOnlyList<BestPerformingAlbumModel> GetBestPerforming(string artistName)
+        public IReadOnlyList<BestPerformingAlbumModel> GetBestPerformingAlbum(string artistName)
         {
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -188,13 +188,13 @@ namespace MusicProject.Repositories
                         connection.Open();
 
                         using (var reader = command.ExecuteReader())
-                            return TranslateGetBestPerforming(reader);
+                            return TranslateGetBestPerformingAlbum(reader);
                     }
                 }
             }
         }
 
-        private IReadOnlyList<BestPerformingAlbumModel> TranslateGetBestPerforming(SqlDataReader reader)
+        private IReadOnlyList<BestPerformingAlbumModel> TranslateGetBestPerformingAlbum(SqlDataReader reader)
         {
             var albums = new List<BestPerformingAlbumModel>();
 
@@ -212,5 +212,38 @@ namespace MusicProject.Repositories
             }
             return albums;
         }
+
+        /// <summary>
+        /// Gets the given number of best performing genres of a given time frame 
+        /// based on the number of certifications the album earned.
+        /// </summary>
+        /// <returns></returns>
+        public IReadOnlyList<Genre> GetBestPerformingGenres(DateTime startYear, DateTime endYear, int number)
+        {
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.TopPerformingGenres", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("StartYear", startYear);
+                        command.Parameters.AddWithValue("EndYear", endYear);
+                        command.Parameters.AddWithValue("Filter", number);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateGetBestPerformingAlbum(reader);
+                    }
+                }
+            }
+        }
+
     }
 }
