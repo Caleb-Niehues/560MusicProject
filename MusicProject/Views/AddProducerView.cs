@@ -13,21 +13,25 @@ namespace MusicProject.Views
 {
     public partial class AddProducerView : Form
     {
-        
+        private static CreateProducer create;
 
         public AddProducerView()
         {
             InitializeComponent();
         }
 
+        public static void InitializeDelegates(CreateProducer createProd)
+        {
+            create = createProd;
+        }
+
         private void uxAddProducerButton_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrWhiteSpace(uxNameBox.Text))
+            string name = uxNameBox.Text;
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                string producerName = uxNameBox.Text;
-
-
-                MessageBox.Show("Producer successfully added as: ");
+                var producer = create(name);
+                MessageBox.Show("Producer successfully added as: " + producer.Name);
                 this.Close();
             }
             else

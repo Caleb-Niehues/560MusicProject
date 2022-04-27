@@ -16,5 +16,10 @@ namespace MusicProject.Views
         {
             InitializeComponent();
         }
+
+        public static void InitializeDelegates()
+        {
+
+        }
     }
 }

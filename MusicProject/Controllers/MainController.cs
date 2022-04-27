@@ -135,9 +135,19 @@ namespace MusicProject.Controllers
         #endregion
 
         #region Add and Fetch
-        public ProducerModel FetchProducer(string producerName)
+        public ArtistModel CreateArtist(string name)
         {
-            return SqlProducer.FetchProducer(producerName);
+            return SqlArtist.CreateArtist(name, new List<PersonModel>());
+        }
+        
+        public ProducerModel FetchProducer(string name)
+        {
+            return SqlProducer.FetchProducer(name);
+        }
+
+        public ProducerModel CreateProducer(string name)
+        {
+            return SqlProducer.CreateProducer(name);
         }
         #endregion
     }

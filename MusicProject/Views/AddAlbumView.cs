@@ -10,6 +10,11 @@ namespace MusicProject.Views
             InitializeComponent();
         }
 
+        public static void InitializeDelegates()
+        {
+        
+        }
+
         private void uxNewProducerButton_Click(object sender, EventArgs e)
         {
 

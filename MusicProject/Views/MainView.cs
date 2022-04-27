@@ -18,9 +18,11 @@ namespace MusicProject.Views
 
         #region Basic Fields
         private LogInView login;
-        public ReviewView review;
-        public AddAlbumView albumView;
-        public AddProducerView producerView;
+        private ReviewView review;
+        private AddAlbumView albumView;
+        private AddArtistView artistView;
+        private AddProducerView producerView;
+        private AddRecordLabelView recordLabelView;
 
         public CheckCredentials check;
         private Search search;
@@ -134,7 +136,8 @@ namespace MusicProject.Views
 
         private void uxAddArtist_Click(object sender, EventArgs e)
         {
-
+            artistView = new AddArtistView();
+            artistView.Show();
         }
 
         private void uxAddRecordLabel_Click(object sender, EventArgs e)

@@ -10,11 +10,20 @@ using System.Windows.Forms;
 
 namespace MusicProject.Views
 {
-    public partial class AddPersonView : Form
+    public partial class AddArtistView : Form
     {
-        public AddPersonView()
+        private static CreateArtist create;
+
+        public AddArtistView()
         {
             InitializeComponent();
         }
+
+        public static void InitializeDelegates(CreateArtist createArtist)
+        {
+            create = createArtist;
+        }
+
+
     }
 }
