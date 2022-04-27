@@ -16,5 +16,12 @@ namespace MusicProject.Views
         {
             InitializeComponent();
         }
+
+
+
+        private void uxNewProducerButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

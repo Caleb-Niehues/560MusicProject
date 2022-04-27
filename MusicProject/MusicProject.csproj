@@ -143,6 +143,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\AddAlbumView.resx">
+      <DependentUpon>AddAlbumView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\AddProducerView.resx">
       <DependentUpon>AddProducerView.cs</DependentUpon>
     </EmbeddedResource>
