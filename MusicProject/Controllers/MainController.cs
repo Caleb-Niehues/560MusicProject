@@ -54,7 +54,7 @@ namespace MusicProject.Controllers
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
 
-            IReadOnlyList<BestPerformingAlbumModel> test = SqlAlbum.GetBestPerformingAlbum("The Beatles");
+            IReadOnlyList<Genre> test = SqlAlbum.GetBestPerformingGenres(new System.DateTime(1990,05,03), new System.DateTime(2020,01,01), 5);
             test.ToString();
         }
 

@@ -7,14 +7,12 @@ DECLARE @TrackCount INT = (
 	SELECT COUNT(S.SongID) AS TrackCount
 	FROM MusicProject.Album A 
 		INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
-	--WHERE A.AlbumTitle = 'The Diary of Alicia Keys'
 );
 WITH CTE(GenreID, GenrePercentage) AS (
 	SELECT DISTINCT S.GenreID, ROUND(CAST(COUNT(S.SongID) AS FLOAT)/@TrackCount, 3) AS GenrePercentage
 	From MusicProject.Album A 
 		INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
 		INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
-	--WHERE A.AlbumTitle = 'The Diary of Alicia Keys'
 	GROUP BY S.GenreID
 )
 SELECT TOP(@Filter) WITH TIES CAST(SUM(Als.CertificationCount) AS FLOAT) AS GenreCertificationScore, G.GenreID, G.GenreName
@@ -36,7 +34,6 @@ FROM (
 		INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
 	WHERE A.ReleaseDate BETWEEN @StartYear AND @EndYear
 	GROUP BY A.AlbumID, A.AlbumTitle
-	--ORDER BY SUM(IIF(C.CertificationName != 'None',1, 0)) DESC
 ) AS Als
 INNER JOIN MusicProject.Song S ON S.AlbumID = Als.AlbumID
 INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
