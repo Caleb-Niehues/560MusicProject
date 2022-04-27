@@ -23,6 +23,7 @@ namespace MusicProject.Views
             uxReviewsForLabel.Text = "Reviews for " + album.Title;
             uxReviewsList.DataSource = get(album);
         }
+
         public static void InitializeDelegates(GetReviews getRev, FetchReview fetchRev, CreateOrSaveReview saveRev)
         {
             get = getRev;
@@ -52,7 +53,7 @@ namespace MusicProject.Views
 
         private void uxGetReviewButton_Click(object sender, EventArgs e)
         {
-            activeReview = fetch(user.Name);
+            activeReview = fetch(user.Name, album.Title);
             uxIndividualTextLabel.Text = "Review by " + user.Name;
 
             if (activeReview != null)
@@ -73,17 +74,18 @@ namespace MusicProject.Views
 
         private void uxSaveButton_Click(object sender, EventArgs e)
         {
-            bool newRev = false;
-            if (activeReview == null && fetch(user.Name) == null)
+            bool newRev = activeReview == null && fetch(user.Name, album.Title) == null;
+            if (!Decimal.TryParse(uxRatingText.Text, out var rating))
             {
-                var temp = DateTime.Now;
-                if(Decimal.TryParse(uxRatingText.Text, out var temp2))
-                activeReview = new ReviewModel(user.Name, album.Title, uxComment.Text, temp2, temp);
-                newRev = true;
+                MessageBox.Show("Rating must be a valid decimal");
+                uxRatingText.Clear();
             }
-            
-            save(activeReview, newRev);
-            uxReviewsList.DataSource = get(album);
+            else
+            {
+                DateTime dateTime = newRev ? DateTime.Now : activeReview.DateAdded;
+                activeReview = save(new ReviewModel(user.Name, album.Title, uxComment.Text, rating, DateTime.Now), newRev);
+                uxReviewsList.DataSource = get(album);
+            }
         }
 
         private void uxCloseButton_Click(object sender, EventArgs e)

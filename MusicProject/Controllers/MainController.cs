@@ -91,9 +91,9 @@ namespace MusicProject.Controllers
             return _reviews;
         }
 
-        public ReviewModel FetchReview(string userName)
+        public ReviewModel FetchReview(string userName, string albumTitle)
         {
-            return SqlReview.FetchReview(userName);
+            return SqlReview.FetchReview(userName, albumTitle);
         }
 
         public ReviewModel CreateOrSaveReview(ReviewModel review, bool newRev)

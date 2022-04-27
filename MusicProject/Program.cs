@@ -13,7 +13,7 @@ namespace MusicProject
     public delegate bool Search(string name);
     public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
     public delegate IReadOnlyList<ReviewModel> GetReviews(AlbumModel album);
-    public delegate ReviewModel FetchReview(string userName);
+    public delegate ReviewModel FetchReview(string userName, string albumTitle);
     public delegate ReviewModel CreateOrSaveReview(ReviewModel review, bool newRev);
 
     static class Program

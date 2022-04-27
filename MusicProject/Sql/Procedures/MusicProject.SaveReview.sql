@@ -14,7 +14,7 @@ WITH CTE (ReviewID, UserID, AlbumID) AS (
 )
 
 MERGE MusicProject.Review R
-USING CTE ON CTE.AlbumID = R.AlbumID AND CTE.UserID = R.UserID
+USING CTE ON CTE.ReviewID = R.ReviewID AND CTE.AlbumID = R.AlbumID AND CTE.UserID = R.UserID
 WHEN MATCHED THEN
 	UPDATE SET
 		R.AlbumComment = @Comment,

@@ -97,7 +97,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public ReviewModel FetchReview(string userName)
+        public ReviewModel FetchReview(string userName, string albumName)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -106,13 +106,14 @@ namespace MusicProject.Repositories
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("UserName", userName);
+                    command.Parameters.AddWithValue("AlbumTitle", albumName);
 
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
                     {
                         var temp = TranslateReviews(reader);
-                        if (temp.Count == 1) return temp[0];
+                        if (temp.Count > 0) return temp[0];
                         return null;
                     }
                 }
