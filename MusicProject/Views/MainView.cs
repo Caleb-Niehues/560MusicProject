@@ -24,6 +24,7 @@ namespace MusicProject.Views
 
         #region Basic Fields
         private LogInView login;
+        public ReviewView review;
         public AddProducerView producerView;
 
         public CheckCredentials check;
@@ -66,6 +67,8 @@ namespace MusicProject.Views
         private void uxAlbumsFocus_CheckedChanged(object sender, EventArgs e)
         {
             uxFocusedList.DataSource = albums;
+            if (activeUser != null) uxLeaveReview.Enabled = true;
+            else uxLeaveReview.Enabled = false;
         }
 
         private void uxSongsFocus_CheckedChanged(object sender, EventArgs e)
@@ -99,9 +102,15 @@ namespace MusicProject.Views
         {
             activeUser = user;
             if (activeUser == null)
+            {
                 uxUserLabel.Text = "Not logged in";
+                uxLeaveReview.Enabled = false;
+            }
             else
+            {
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
+                if(uxAlbumsFocus.Checked && uxFocusedList.Items.Count > 0) uxLeaveReview.Enabled = true;
+            }
         }
 
         private void uxLogIn_Click(object sender, EventArgs e)
@@ -112,7 +121,12 @@ namespace MusicProject.Views
 
         private void uxLeaveReview_Click(object sender, EventArgs e)
         {
-
+            var temp = uxFocusedList.SelectedItem;
+            if (temp is AlbumModel)
+            {
+                review = new ReviewView((AlbumModel)temp, activeUser);
+                review.Show();
+            }
         }
         #endregion
 

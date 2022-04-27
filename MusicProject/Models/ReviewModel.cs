@@ -80,7 +80,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return Comment;
+            return Rating.ToString() + " - " + UserName + " - " + DateAdded.ToString();
         }
     }
 }

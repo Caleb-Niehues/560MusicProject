@@ -83,7 +83,7 @@
             this.uxGenreTimeline.Name = "uxGenreTimeline";
             this.uxGenreTimeline.Size = new System.Drawing.Size(261, 28);
             this.uxGenreTimeline.TabIndex = 1;
-            this.uxGenreTimeline.Text = "Show genre timeline";
+            this.uxGenreTimeline.Text = "Best performing genres";
             this.uxGenreTimeline.UseVisualStyleBackColor = true;
             // 
             // uxArtistTimeline
@@ -103,7 +103,7 @@
             this.uxRecordLabelRoster.Name = "uxRecordLabelRoster";
             this.uxRecordLabelRoster.Size = new System.Drawing.Size(261, 28);
             this.uxRecordLabelRoster.TabIndex = 3;
-            this.uxRecordLabelRoster.Text = "Get active roster";
+            this.uxRecordLabelRoster.Text = "Get Artist";
             this.uxRecordLabelRoster.UseVisualStyleBackColor = true;
             // 
             // uxUserLabel
@@ -255,7 +255,7 @@
             this.uxLeaveReview.Name = "uxLeaveReview";
             this.uxLeaveReview.Size = new System.Drawing.Size(100, 28);
             this.uxLeaveReview.TabIndex = 18;
-            this.uxLeaveReview.Text = "Add Review";
+            this.uxLeaveReview.Text = "Reviews";
             this.uxLeaveReview.UseVisualStyleBackColor = true;
             this.uxLeaveReview.Click += new System.EventHandler(this.uxLeaveReview_Click);
             // 

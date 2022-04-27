@@ -26,7 +26,7 @@ namespace MusicProject.Controllers
         private UserModel _activeUser = null;
         public UserModel ActiveUser => _activeUser;
 
-        private ReviewModel _reviewModel = null;
+        private IReadOnlyList<ReviewModel> _reviews = new List<ReviewModel>();
 
         private IReadOnlyList<PersonModel> _people = new List<PersonModel>();
 
@@ -53,9 +53,6 @@ namespace MusicProject.Controllers
             SqlProducer = new SqlProducerRepo(connectionString);
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
-
-            IReadOnlyList<Genre> test = SqlAlbum.GetBestPerformingGenres(new System.DateTime(1990,05,03), new System.DateTime(2020,01,01), 5);
-            test.ToString();
         }
 
         public void InitializeDelegates(UpdateSearch update)
@@ -87,12 +84,31 @@ namespace MusicProject.Controllers
         }
         #endregion
 
+        #region Reviews
+        public IReadOnlyList<ReviewModel> GetReviews(AlbumModel album)
+        {
+            _reviews = SqlReview.RetrieveReviews(album.Title);
+            return _reviews;
+        }
+
+        public ReviewModel FetchReview(string userName, string albumTitle)
+        {
+            return SqlReview.FetchReview(userName, albumTitle);
+        }
+
+        public ReviewModel CreateOrSaveReview(ReviewModel review, bool newRev)
+        {
+            if(newRev) return SqlReview.CreateReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
+            else return SqlReview.SaveReview(review.UserName, review.AlbumTitle, review.Comment, review.Rating);
+        }
+        #endregion
+
         #region Search Bar
         public bool Search(string name)
         {
             bool success = false;
 
-            //_albums = SqlAlbum.FetchAlbum(name);
+            _albums = SqlAlbum.FetchAlbum(name);
             success = success || _albums.Count > 0;
 
             _artists = SqlArtist.FetchArtist(name);

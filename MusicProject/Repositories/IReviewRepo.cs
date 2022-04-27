@@ -16,20 +16,22 @@ namespace MusicProject.Repositories
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="album"></param>
+        /// <param name="userName"></param>
+        /// <param name="albumTitle"></param>
         /// <param name="comment"></param>
         /// <param name="rating"></param>
-        /// <param name="dateAdded"></param>
         /// <returns></returns>
-        ReviewModel CreateReview(UserModel user, AlbumModel album, string comment, decimal rating);
+        ReviewModel CreateReview(string userName, string albumTitle, string comment, decimal rating);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="review"></param>
+        /// <param name="userName"></param>
+        /// <param name="albumTitle"></param>
+        /// <param name="comment"></param>
+        /// <param name="rating"></param>
         /// <returns></returns>
-        ReviewModel SaveReview(ReviewModel review);
+        ReviewModel SaveReview(string userName, string albumTitle, string comment, decimal rating);
 
         /// <summary>
         /// 
