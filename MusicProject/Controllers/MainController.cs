@@ -11,7 +11,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -120,7 +120,7 @@ namespace MusicProject.Controllers
             //_people = SqlPerson.FetchPerson(name);
             success = success || _people.Count > 0;
 
-            _producers = SqlProducer.FetchProducer(name);
+            _producers = SqlProducer.RetrieveProducersByName(name);
             success = success || _producers.Count > 0;
 
             _recordLabels = SqlRecordLabel.FetchRecordLabel(name);
@@ -132,6 +132,13 @@ namespace MusicProject.Controllers
         }
 
 
+        #endregion
+
+        #region Add and Fetch
+        public ProducerModel FetchProducer(string producerName)
+        {
+            return SqlProducer.FetchProducer(producerName);
+        }
         #endregion
     }
 }

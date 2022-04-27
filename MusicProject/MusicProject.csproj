@@ -181,6 +181,8 @@
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByName.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
   </ItemGroup>

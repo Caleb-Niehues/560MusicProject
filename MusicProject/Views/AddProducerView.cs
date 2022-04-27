@@ -13,9 +13,7 @@ namespace MusicProject.Views
 {
     public partial class AddProducerView : Form
     {
-        public MainView MainView { get; set; }
-
-        public ProducerModel producer;
+        
 
         public AddProducerView()
         {
@@ -24,14 +22,17 @@ namespace MusicProject.Views
 
         private void uxAddProducerButton_Click(object sender, EventArgs e)
         {
-            if(uxNameBox.Text != null)
+            if(!string.IsNullOrWhiteSpace(uxNameBox.Text))
             {
                 string producerName = uxNameBox.Text;
-                //MainView.producerModels.Add(new ProducerModel(producerName));
+
+
+                MessageBox.Show("Producer successfully added as: ");
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Please add a Name!");
+                MessageBox.Show("Please add a name!");
             }
         }
     }

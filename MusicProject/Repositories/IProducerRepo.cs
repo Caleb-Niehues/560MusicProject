@@ -9,8 +9,23 @@ namespace MusicProject.Repositories
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
         /// <returns></returns>
-        IReadOnlyList<ProducerModel> FetchProducer(string name);
+        ProducerModel FetchProducer(string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="albumTitle"></param>
+        /// <returns></returns>
+        IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="albumTitle"></param>
+        /// <returns></returns>
+        IReadOnlyList<ProducerModel> RetrieveProducersByName(string name);
 
         /// <summary>
         /// 
