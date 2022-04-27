@@ -20,7 +20,8 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="artistName">Artist name to query.</param>
         /// <returns></returns>
-        IReadOnlyList<BestPerformingAlbumModel> GetBestPerforming(string artistName);
+        /// </summary>
+        IReadOnlyList<BestPerformingAlbumModel> GetBestPerformingAlbum(string artistName);
 
         /// <summary>
         /// 

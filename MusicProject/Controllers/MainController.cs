@@ -54,7 +54,8 @@ namespace MusicProject.Controllers
             SqlRecordLabel = new SqlRecordLabelRepo(connectionString);
             SqlAlbum = new SqlAlbumRepo(connectionString);
 
-            IReadOnlyList<BestPerformingAlbumModel> test = SqlAlbum.GetBestPerforming("The Beatles");
+
+            IReadOnlyList<BestPerformingAlbumModel> test = SqlAlbum.GetBestPerformingAlbum("The Beatles");
             test.ToString();
         }
 
@@ -92,7 +93,7 @@ namespace MusicProject.Controllers
         {
             bool success = false;
 
-            //_albums = SqlAlbum.FetchAlbum(name);
+            _albums = SqlAlbum.FetchAlbum(name);
             success = success || _albums.Count > 0;
 
             _artists = SqlArtist.FetchArtist(name);
