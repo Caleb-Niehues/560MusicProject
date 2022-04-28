@@ -12,6 +12,7 @@ namespace MusicProject
     public delegate ReviewModel CreateOrSaveReview(ReviewModel review, bool newRev);
     public delegate ArtistModel CreateArtist(string name);
     public delegate ProducerModel CreateProducer(string name);
+    public delegate RecordLabelModel CreateLabel(string name, DateTime founded, DateTime? ended, string location);
     public delegate bool DeleteUser(string userName, string password);
     public delegate bool Search(string name);
     public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
@@ -36,7 +37,7 @@ namespace MusicProject
             AddAlbumView.InitializeDelegates();
             AddArtistView.InitializeDelegates(controller.CreateArtist);
             AddProducerView.InitializeDelegates(controller.CreateProducer);
-            AddRecordLabelView.InitializeDelegates();
+            AddRecordLabelView.InitializeDelegates(controller.CreateLabel);
             AddSongView.InitializeDelegates();
             controller.InitializeDelegates(view.RegisterSearch);
 

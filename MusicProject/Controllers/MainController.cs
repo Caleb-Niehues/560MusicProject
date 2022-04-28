@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MusicProject.Repositories;
 using System.Configuration;
+using System;
 
 namespace MusicProject.Controllers
 {
@@ -148,6 +149,11 @@ namespace MusicProject.Controllers
         public ProducerModel CreateProducer(string name)
         {
             return SqlProducer.CreateProducer(name);
+        }
+
+        public RecordLabelModel CreateLabel(string name, DateTime founded, DateTime? ended, string location)
+        {
+            return SqlRecordLabel.CreateRecordLabel(name, founded, ended, location);
         }
         #endregion
     }

@@ -206,6 +206,7 @@
             this.uxPersonList.Name = "uxPersonList";
             this.uxPersonList.Size = new System.Drawing.Size(159, 116);
             this.uxPersonList.TabIndex = 13;
+            this.uxPersonList.Visible = false;
             // 
             // uxArtistListBox
             // 
@@ -236,6 +237,7 @@
             this.uxPersonLabel.Size = new System.Drawing.Size(53, 17);
             this.uxPersonLabel.TabIndex = 16;
             this.uxPersonLabel.Text = "Person";
+            this.uxPersonLabel.Visible = false;
             // 
             // uxArtistsLabel
             // 

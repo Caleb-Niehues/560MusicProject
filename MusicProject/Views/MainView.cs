@@ -142,7 +142,8 @@ namespace MusicProject.Views
 
         private void uxAddRecordLabel_Click(object sender, EventArgs e)
         {
-
+            recordLabelView = new AddRecordLabelView();
+            recordLabelView.Show();
         }
 
         private void uxAddProducer_Click(object sender, EventArgs e)
