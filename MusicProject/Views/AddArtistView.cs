@@ -7,31 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MusicProject.Models;
 
 namespace MusicProject.Views
 {
-    public partial class AddProducerView : Form
+    public partial class AddArtistView : Form
     {
-        private static CreateProducer create;
+        private static CreateArtist create;
 
-        public AddProducerView()
+        public AddArtistView()
         {
             InitializeComponent();
         }
 
-        public static void InitializeDelegates(CreateProducer createProd)
+        public static void InitializeDelegates(CreateArtist createArtist)
         {
-            create = createProd;
+            create = createArtist;
         }
 
-        private void uxAddProducerButton_Click(object sender, EventArgs e)
+        private void uxAddArtistButton_Click(object sender, EventArgs e)
         {
-            string name = uxNameBox.Text;
+            string name = uxArtistName.Text;
             if (!string.IsNullOrWhiteSpace(name))
             {
-                var producer = create(name);
-                MessageBox.Show("Producer successfully added as: " + producer.Name);
+                var artist = create(name);
+                MessageBox.Show("Artist successfully added as: " + artist.Name);
                 this.Close();
             }
             else

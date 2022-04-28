@@ -10,16 +10,6 @@ namespace MusicProject.Models
     {
         #region Basic Fields
         /// <summary>
-        /// backing field for ID
-        /// </summary>
-        private int _ID;
-
-        /// <summary>
-        /// ID number of the album
-        /// </summary>
-        public int ID => _ID;
-
-        /// <summary>
         /// 
         /// </summary>
         private string _title;
@@ -125,7 +115,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return Title;
+            return Title + " - " + Artist + " - " + ReleaseDate.Year.ToString() + " - " + Enum.GetName(typeof(Certification), this.Certification) + " - " + Length.ToString();
         }
     }
 }

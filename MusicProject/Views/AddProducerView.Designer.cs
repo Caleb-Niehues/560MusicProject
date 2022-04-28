@@ -36,24 +36,27 @@
             // uxQuestion
             // 
             this.uxQuestion.AutoSize = true;
-            this.uxQuestion.Location = new System.Drawing.Point(94, 82);
+            this.uxQuestion.Location = new System.Drawing.Point(125, 101);
+            this.uxQuestion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxQuestion.Name = "uxQuestion";
-            this.uxQuestion.Size = new System.Drawing.Size(151, 13);
+            this.uxQuestion.Size = new System.Drawing.Size(200, 17);
             this.uxQuestion.TabIndex = 0;
             this.uxQuestion.Text = "What is the Producer\'s Name?";
             // 
             // uxNameBox
             // 
-            this.uxNameBox.Location = new System.Drawing.Point(65, 113);
+            this.uxNameBox.Location = new System.Drawing.Point(87, 139);
+            this.uxNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.uxNameBox.Name = "uxNameBox";
-            this.uxNameBox.Size = new System.Drawing.Size(209, 20);
+            this.uxNameBox.Size = new System.Drawing.Size(277, 22);
             this.uxNameBox.TabIndex = 1;
             // 
             // uxAddProducerButton
             // 
-            this.uxAddProducerButton.Location = new System.Drawing.Point(107, 151);
+            this.uxAddProducerButton.Location = new System.Drawing.Point(143, 186);
+            this.uxAddProducerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.uxAddProducerButton.Name = "uxAddProducerButton";
-            this.uxAddProducerButton.Size = new System.Drawing.Size(118, 23);
+            this.uxAddProducerButton.Size = new System.Drawing.Size(157, 28);
             this.uxAddProducerButton.TabIndex = 2;
             this.uxAddProducerButton.Text = "Add Producer";
             this.uxAddProducerButton.UseVisualStyleBackColor = true;
@@ -61,12 +64,13 @@
             // 
             // AddProducerView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 232);
+            this.ClientSize = new System.Drawing.Size(449, 286);
             this.Controls.Add(this.uxAddProducerButton);
             this.Controls.Add(this.uxNameBox);
             this.Controls.Add(this.uxQuestion);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AddProducerView";
             this.Text = "AddProducerView";
             this.ResumeLayout(false);
