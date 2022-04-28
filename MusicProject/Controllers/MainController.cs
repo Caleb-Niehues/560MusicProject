@@ -158,6 +158,12 @@ namespace MusicProject.Controllers
         #endregion
 
         #region AlbumView
+        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs,
+            TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
+        {
+            return SqlAlbum.CreateAlbum(title, releaseDate, artist, songs, length, producers, recordLabel, certification);
+        }
+
         public IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle)
         {
             return SqlProducer.RetrieveProducersByAlbum(albumTitle);

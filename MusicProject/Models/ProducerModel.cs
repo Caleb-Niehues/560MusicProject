@@ -9,16 +9,6 @@
         /// <summary>
         /// 
         /// </summary>
-        private int _ID;
-
-        /// <summary>
-        /// ID number for a producer
-        /// </summary>
-        public int ID => _ID;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private string _name;
 
         /// <summary>
@@ -49,6 +39,17 @@
         public override string ToString()
         {
             return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            if (obj is ProducerModel)
+            {
+                var temp = (ProducerModel)obj;
+                equals = _name.Equals(temp.Name);
+            }
+            return equals;
         }
     }
 }
