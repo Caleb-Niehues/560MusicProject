@@ -437,13 +437,11 @@
             // uxAlbumsFocus
             // 
             this.uxAlbumsFocus.AutoSize = true;
-            this.uxAlbumsFocus.Checked = true;
             this.uxAlbumsFocus.Location = new System.Drawing.Point(50, 12);
             this.uxAlbumsFocus.Margin = new System.Windows.Forms.Padding(6);
             this.uxAlbumsFocus.Name = "uxAlbumsFocus";
             this.uxAlbumsFocus.Size = new System.Drawing.Size(147, 36);
             this.uxAlbumsFocus.TabIndex = 0;
-            this.uxAlbumsFocus.TabStop = true;
             this.uxAlbumsFocus.Text = "Albums";
             this.uxAlbumsFocus.UseVisualStyleBackColor = true;
             this.uxAlbumsFocus.CheckedChanged += new System.EventHandler(this.uxAlbumsFocus_CheckedChanged);

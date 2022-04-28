@@ -53,7 +53,7 @@ namespace MusicProject.Repositories
 
         public string CheckAlbumExists(string albumName)
         {
-            IReadOnlyList<SongModel> s = RetrieveSongs(albumName);
+            IReadOnlyList<SongModel> s = RetrieveSongsByName(albumName);
             if (s.Count > 0)
             {
                 return s[0].Artist;
@@ -107,22 +107,51 @@ namespace MusicProject.Repositories
             return songs;
         }
 
-        public IReadOnlyList<SongModel> RetrieveSongs(string albumName)
+        public IReadOnlyList<SongModel> RetrieveSongsByName(string name)
         {
             // Verify parameters.
-            if (string.IsNullOrWhiteSpace(albumName))
-                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumName));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
 
             // Save to database.
             using (var transaction = new TransactionScope())
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.RetrieveSongs", connection))
+                    using (var command = new SqlCommand("MusicProject.RetrieveSongsByName", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("Name", albumName);
+                        command.Parameters.AddWithValue("Name", name);
+
+                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
+                        //p.Direction = ParameterDirection.Output;
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                            return TranslateRetrieveSongs(reader);
+                    }
+                }
+            }
+        }
+
+        public IReadOnlyList<SongModel> RetrieveSongsByAlbum(string albumTitle)
+        {
+            // Verify parameters.
+            if (string.IsNullOrWhiteSpace(albumTitle))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumTitle));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.RetrieveSongsByAlbum", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("AlbumTitle", albumTitle);
 
                         //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
                         //p.Direction = ParameterDirection.Output;

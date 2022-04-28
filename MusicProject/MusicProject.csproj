@@ -194,6 +194,7 @@
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByName.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSongsByAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
     <Content Include="Sql\Procedures\MusicProject.GetAlbumsWithRecordLabel.sql" />
@@ -227,7 +228,7 @@
     <Content Include="Sql\Procedures\MusicProject.FetchRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
     <Content Include="Sql\Procedures\MusicProject.GetArtistsInWindow.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveSongs.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveSongsByName.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sql\Data\" />

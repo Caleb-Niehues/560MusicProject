@@ -13,7 +13,7 @@ namespace MusicProject.Repositories
         /// </summary>
         /// <param name="albumName"></param>
         /// <returns></returns>
-        IReadOnlyList<SongModel> RetrieveSongs(string albumName);
+        IReadOnlyList<SongModel> RetrieveSongsByName(string albumName);
 
         /// <summary>
         /// 

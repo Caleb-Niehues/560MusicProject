@@ -173,6 +173,7 @@ namespace MusicProject.Views
         }
         #endregion
 
+        #region Aggregating Queries
         private void uxTopGenres_Click(object sender, EventArgs e)
         {
             genres = topGenres(uxStartDate.Value, uxEndDate.Value, (int)uxTopGenreInput.Value);
@@ -223,5 +224,6 @@ namespace MusicProject.Views
                 uxFocusedList.DataSource = labels;
             }
         }
+        #endregion
     }
 }
