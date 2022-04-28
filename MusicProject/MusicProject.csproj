@@ -55,6 +55,7 @@
     <Compile Include="Models\AlbumsWithRecordLabelModel.cs" />
     <Compile Include="Models\ArtistModel.cs" />
     <Compile Include="Models\BestPerformingAlbumModel.cs" />
+    <Compile Include="Models\BestPerformingGenreModel.cs" />
     <Compile Include="Models\Certification.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\Genre.cs" />

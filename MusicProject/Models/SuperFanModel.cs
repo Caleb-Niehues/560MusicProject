@@ -42,5 +42,10 @@ namespace MusicProject.Models
             _commentCount = commentCount;
 
         }
+
+        public override string ToString()
+        {
+            return $"{User} - {Score} score - {CommentCount} comments";
+        }
     }
 }
