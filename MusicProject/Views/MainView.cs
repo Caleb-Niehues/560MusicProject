@@ -24,7 +24,7 @@ namespace MusicProject.Views
         private AddProducerView producerView;
         private AddRecordLabelView recordLabelView;
 
-        public CheckCredentials check;
+        public FetchAndCheckUser check;
         private Search search;
 
         private UserModel activeUser = null;
