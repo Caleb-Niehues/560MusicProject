@@ -13,11 +13,18 @@ namespace MusicProject.Views
         {
             InitializeComponent();
             search = controller.Search;
+            topGenres = controller.GetGenres;
+            topAlbums = controller.GetAlbums;
+            superFans = controller.GetSuperFans;
+            recordLabelAlbums = controller.GetAlbumsWithRecordLabel;
             uxFocusedList.DataSource = albums;
         }
 
         #region Basic Fields
         private LogInView login;
+        public ReviewView review;
+        public AddAlbumView albumView;
+        public AddProducerView producerView;
         private ReviewView review;
         private AddAlbumView albumView;
         private AddArtistView artistView;
@@ -26,6 +33,10 @@ namespace MusicProject.Views
 
         public CheckCredentials check;
         private Search search;
+        private GetTopPerformingGenres topGenres;
+        private GetTopPerformingAlbums topAlbums;
+        private GetSuperFans superFans;
+        private GetAlbumsWithRecordLabel recordLabelAlbums;
 
         private UserModel activeUser = null;
         private IReadOnlyList<PersonModel> people = new List<PersonModel>();
@@ -34,10 +45,17 @@ namespace MusicProject.Views
         private IReadOnlyList<ProducerModel> producers = new List<ProducerModel>();
         private IReadOnlyList<RecordLabelModel> recordLabels = new List<RecordLabelModel>();
         private IReadOnlyList<AlbumModel> albums = new List<AlbumModel>();
+        private IReadOnlyList<BestPerformingGenreModel> genres = new List<BestPerformingGenreModel>();
+        private IReadOnlyList<BestPerformingAlbumModel> aggQueryAlbums = new List<BestPerformingAlbumModel>();
+        private IReadOnlyList<SuperFanModel> aggQuerySuperFans = new List<SuperFanModel>();
+        private AlbumsWithRecordLabelModel aggQueryRecordLabelAlbums;
+
         #endregion
 
         #region Search and Focus
-        public void RegisterSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels)
+        public void RegisterSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists,
+            IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, 
+            IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels)
         {
             this.albums = albums;
             this.artists = artists;
@@ -106,7 +124,7 @@ namespace MusicProject.Views
             else
             {
                 uxUserLabel.Text = "Logged in as: " + activeUser.Name;
-                if(uxAlbumsFocus.Checked && uxFocusedList.Items.Count > 0) uxLeaveReview.Enabled = true;
+                if (uxAlbumsFocus.Checked && uxFocusedList.Items.Count > 0) uxLeaveReview.Enabled = true;
             }
         }
 
@@ -157,5 +175,56 @@ namespace MusicProject.Views
 
         }
         #endregion
+
+        private void uxTopGenres_Click(object sender, EventArgs e)
+        {
+            genres = topGenres(uxStartDate.Value, uxEndDate.Value, (int)uxTopGenreInput.Value);
+            if (genres.Count < 1)
+            {
+                MessageBox.Show("No genres fit these parameters.");
+                uxFocusedList.DataSource = new List<string>();
+            }
+            uxFocusedList.DataSource = genres;
+        }
+
+        private void uxArtistAlbums_Click(object sender, EventArgs e)
+        {
+            aggQueryAlbums = topAlbums(uxAggQueryName.Text);
+            if (aggQueryAlbums.Count < 1)
+            {
+                MessageBox.Show(uxAggQueryName.Text +
+                " has no albums that have earned at least a " +
+                "Platinum certification and an average user rating of at least a 3.0");
+                uxFocusedList.DataSource = new List<string>();
+            }
+            else uxFocusedList.DataSource = aggQueryAlbums;
+        }
+
+        private void uxSuperFans_Click(object sender, EventArgs e)
+        {
+            aggQuerySuperFans = superFans(uxAggQueryName.Text);
+            if (aggQuerySuperFans.Count < 1)
+            {
+                MessageBox.Show($"No super fans for {uxAggQueryName.Text}");
+                uxFocusedList.DataSource = new List<string>();
+            }
+            else uxFocusedList.DataSource = aggQuerySuperFans;
+        }
+
+        private void uxRecordLabelAlbums_Click(object sender, EventArgs e)
+        {
+            var labels = new List<AlbumsWithRecordLabelModel>();
+            aggQueryRecordLabelAlbums = recordLabelAlbums(uxAggQueryName.Text, uxStartDate.Value, uxEndDate.Value);
+            if (aggQueryRecordLabelAlbums == null)
+            {
+                MessageBox.Show($"{uxAggQueryName.Text} has no albums in this time frame.");
+                uxFocusedList.DataSource = new List<string>();
+            }
+            else
+            {
+                labels.Add(aggQueryRecordLabelAlbums);
+                uxFocusedList.DataSource = labels;
+            }
+        }
     }
 }

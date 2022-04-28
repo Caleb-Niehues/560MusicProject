@@ -17,6 +17,11 @@ namespace MusicProject
     public delegate bool Search(string name);
     public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
     public delegate IReadOnlyList<ReviewModel> GetReviews(AlbumModel album);
+    public delegate ReviewModel FetchReview(string userName, string albumTitle); 
+    public delegate IReadOnlyList<BestPerformingGenreModel> GetTopPerformingGenres(DateTime start, DateTime end, int top);
+    public delegate IReadOnlyList<BestPerformingAlbumModel> GetTopPerformingAlbums(string artistName);
+    public delegate IReadOnlyList<SuperFanModel> GetSuperFans(string artistName);
+    public delegate AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, DateTime start, DateTime end);
     public delegate ReviewModel FetchReview(string userName, string albumTitle);
 
     static class Program

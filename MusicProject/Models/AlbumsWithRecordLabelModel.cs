@@ -23,5 +23,10 @@ namespace MusicProject.Models
             _albumCount = albumCount;
             _certificationCount = certificationCount;
         }
+
+        public override string ToString()
+        {
+            return $"{AlbumCount} albums - {CertificationCount} certifications";
+        }
     }
 }

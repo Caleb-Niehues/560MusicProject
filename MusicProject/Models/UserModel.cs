@@ -63,5 +63,10 @@ namespace MusicProject.Models
             this._weight = weight;
             this._dateAdded = dateAdded;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

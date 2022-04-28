@@ -27,5 +27,10 @@ namespace MusicProject.Models
             _averageRating = averageRating;
             _certification = certification;
         }
+
+        public override string ToString()
+        {
+            return $"{Title} - {Math.Round(AverageRating, 2)} average user rating - {Certification}";
+        }
     }
 }

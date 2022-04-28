@@ -206,8 +206,8 @@ namespace MusicProject.Repositories
 
             while (reader.Read())
             {
-                albums.Add(new BestPerformingAlbumModel(reader.GetString(artistNameOrdinal), reader.GetString(albumTitleOrdinal),
-                    reader.GetDecimal(averageRatingOrdinal),
+                albums.Add(new BestPerformingAlbumModel(reader.GetString(albumTitleOrdinal),
+                    reader.GetString(artistNameOrdinal), reader.GetDecimal(averageRatingOrdinal),
                     (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationNameOrdinal))));
             }
             return albums;
@@ -218,7 +218,7 @@ namespace MusicProject.Repositories
         /// based on the number of certifications the album earned.
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<Genre> GetBestPerformingGenres(DateTime startYear, DateTime endYear, int number)
+        public IReadOnlyList<BestPerformingGenreModel> GetBestPerformingGenres(DateTime startYear, DateTime endYear, int number)
         {
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -244,15 +244,18 @@ namespace MusicProject.Repositories
                 }
             }
         }
-        private IReadOnlyList<Genre> TranslateGetBestPerformingGenre(SqlDataReader reader)
+        private IReadOnlyList<BestPerformingGenreModel> TranslateGetBestPerformingGenre(SqlDataReader reader)
         {
-            var genres = new List<Genre>();
+            var genres = new List<BestPerformingGenreModel>();
 
             var genreNameOrdinal = reader.GetOrdinal("GenreName");
+            var genreRankOrdinal = reader.GetOrdinal("Ranking");
 
             while (reader.Read())
             {
-                genres.Add((Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)));
+                //int rank = Convert.ToInt32(reader.GetString(genreRankOrdinal));
+                genres.Add(new BestPerformingGenreModel((int)reader.GetInt64(genreRankOrdinal), 
+                    (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal))));
             }
             return genres;
         }

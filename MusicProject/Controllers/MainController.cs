@@ -27,6 +27,8 @@ namespace MusicProject.Controllers
         private UserModel _activeUser = null;
         public UserModel ActiveUser => _activeUser;
 
+        private GetTopPerformingGenres Genres;
+
         private IReadOnlyList<ReviewModel> _reviews = new List<ReviewModel>();
 
         private IReadOnlyList<PersonModel> _people = new List<PersonModel>();
@@ -41,7 +43,6 @@ namespace MusicProject.Controllers
         private IReadOnlyList<RecordLabelModel> _recordLabels = new List<RecordLabelModel>();
 
         private IReadOnlyList<AlbumModel> _albums = new List<AlbumModel>();
-
         #endregion
 
         public MainController()
@@ -134,6 +135,28 @@ namespace MusicProject.Controllers
 
 
         #endregion
+
+
+        #region Aggregating Queries
+        public IReadOnlyList<BestPerformingGenreModel> GetGenres(System.DateTime start, System.DateTime end, int top)
+        {
+            return SqlAlbum.GetBestPerformingGenres(start, end, top);
+        }
+
+        public IReadOnlyList<BestPerformingAlbumModel> GetAlbums(string artistName)
+        {
+            return SqlAlbum.GetBestPerformingAlbum(artistName);
+        }
+
+        public IReadOnlyList<SuperFanModel> GetSuperFans(string artistName)
+        {
+            return SqlUser.RetrieveSuperFans(artistName);
+        }
+
+        public AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, 
+            System.DateTime start, System.DateTime end)
+        {
+            return SqlRecordLabel.GetAlbumsWithRecordLabel(recordLabelName, start, end);
 
         #region Add and Fetch
         public ArtistModel CreateArtist(string name)
