@@ -25,10 +25,7 @@ namespace MusicProject.Views
         public ReviewView review;
         public AddAlbumView albumView;
         public AddProducerView producerView;
-        private ReviewView review;
-        private AddAlbumView albumView;
         private AddArtistView artistView;
-        private AddProducerView producerView;
         private AddRecordLabelView recordLabelView;
 
         public CheckCredentials check;

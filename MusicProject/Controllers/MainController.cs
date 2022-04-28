@@ -12,7 +12,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -153,12 +153,15 @@ namespace MusicProject.Controllers
             return SqlUser.RetrieveSuperFans(artistName);
         }
 
-        public AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, 
+        public AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName,
             System.DateTime start, System.DateTime end)
         {
             return SqlRecordLabel.GetAlbumsWithRecordLabel(recordLabelName, start, end);
+        }
+        #endregion
 
         #region Add and Fetch
+
         public ArtistModel CreateArtist(string name)
         {
             return SqlArtist.CreateArtist(name, new List<PersonModel>());

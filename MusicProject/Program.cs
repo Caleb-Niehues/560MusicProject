@@ -22,7 +22,6 @@ namespace MusicProject
     public delegate IReadOnlyList<BestPerformingAlbumModel> GetTopPerformingAlbums(string artistName);
     public delegate IReadOnlyList<SuperFanModel> GetSuperFans(string artistName);
     public delegate AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, DateTime start, DateTime end);
-    public delegate ReviewModel FetchReview(string userName, string albumTitle);
 
     static class Program
     {
