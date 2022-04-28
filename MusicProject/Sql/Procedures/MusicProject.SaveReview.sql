@@ -1,7 +1,7 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.SaveReview
    @UserName NVARCHAR(32),
-   @AlbumName NVARCHAR(32),
-   @Comment NVARCHAR(128),
+   @AlbumName NVARCHAR(128),
+   @Comment NVARCHAR(400),
    @Rating DECIMAL
 AS
 

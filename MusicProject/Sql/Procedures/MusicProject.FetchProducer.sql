@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.FetchProducer
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(128)
 AS
 
 SELECT P.ProducerName

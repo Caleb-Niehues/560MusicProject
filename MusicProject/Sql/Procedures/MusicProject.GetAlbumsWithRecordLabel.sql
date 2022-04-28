@@ -1,7 +1,7 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.GetAlbumsWithRecordLabel
    @StartYear DATE,
    @EndYear DATE,
-   @RecordLabelName NVARCHAR(32)
+   @RecordLabelName NVARCHAR(128)
 AS
 
 SELECT R.RecordLabelName, 

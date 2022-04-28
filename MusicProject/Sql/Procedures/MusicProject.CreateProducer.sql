@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.CreateProducer
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(128)
 AS
 MERGE MusicProject.Producer P
 USING (VALUES (@Name)) NEW(ProducerName)

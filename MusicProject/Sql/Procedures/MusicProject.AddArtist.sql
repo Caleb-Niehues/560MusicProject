@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE MusicProject.AddArtist
-   @ArtistName NVARCHAR(32)
+   @ArtistName NVARCHAR(128)
 AS
 
 INSERT MusicProject.Artist(ArtistName)

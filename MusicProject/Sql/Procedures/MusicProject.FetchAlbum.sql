@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.FetchAlbum
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(128)
 AS
 
 SELECT A.AlbumTitle, A.ReleaseDate, Ar.ArtistName, S.SongName,

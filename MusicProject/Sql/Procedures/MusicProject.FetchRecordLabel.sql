@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.FetchRecordLabel
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(128)
 AS
 
 SELECT R.RecordLabelName, R.DateFounded AS DateFounded,

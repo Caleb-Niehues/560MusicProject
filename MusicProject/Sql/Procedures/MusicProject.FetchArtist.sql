@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.FetchArtist
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(128)
 AS
 
 SELECT Ar.ArtistName
