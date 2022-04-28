@@ -218,6 +218,7 @@
             this.uxPersonList.Name = "uxPersonList";
             this.uxPersonList.Size = new System.Drawing.Size(314, 221);
             this.uxPersonList.TabIndex = 13;
+            this.uxPersonList.Visible = false;
             // 
             // uxArtistListBox
             // 
@@ -248,6 +249,7 @@
             this.uxPersonLabel.Size = new System.Drawing.Size(105, 32);
             this.uxPersonLabel.TabIndex = 16;
             this.uxPersonLabel.Text = "Person";
+            this.uxPersonLabel.Visible = false;
             // 
             // uxArtistsLabel
             // 
@@ -333,6 +335,7 @@
             this.uxAddPerson.TabIndex = 24;
             this.uxAddPerson.Text = "Add Person";
             this.uxAddPerson.UseVisualStyleBackColor = true;
+            this.uxAddPerson.Visible = false;
             this.uxAddPerson.Click += new System.EventHandler(this.uxAddPerson_Click);
             // 
             // uxFocusedList

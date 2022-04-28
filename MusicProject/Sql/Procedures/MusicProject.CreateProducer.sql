@@ -8,5 +8,4 @@ WHEN NOT MATCHED THEN
 	INSERT (ProducerName)
 	VALUES (@Name);
 
-
 GO

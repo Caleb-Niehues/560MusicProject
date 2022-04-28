@@ -83,7 +83,7 @@ namespace MusicProject.Views
             else
             {
                 DateTime dateTime = newRev ? DateTime.Now : activeReview.DateAdded;
-                activeReview = save(new ReviewModel(user.Name, album.Title, uxComment.Text, rating, DateTime.Now), newRev);
+                activeReview = save(new ReviewModel(user.Name, album.Title, uxComment.Text, rating, dateTime), newRev);
                 uxReviewsList.DataSource = get(album);
             }
         }

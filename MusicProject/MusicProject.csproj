@@ -86,17 +86,23 @@
     <Compile Include="Repositories\SqlReviewRepo.cs" />
     <Compile Include="Repositories\SqlSongRepo.cs" />
     <Compile Include="Repositories\SqlUserRepo.cs" />
+    <Compile Include="Views\AddPersonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddPersonView.Designer.cs">
+      <DependentUpon>AddPersonView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddProducerView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\AddProducerView.Designer.cs">
       <DependentUpon>AddProducerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddPersonView.cs">
+    <Compile Include="Views\AddArtistView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AddPersonView.Designer.cs">
-      <DependentUpon>AddPersonView.cs</DependentUpon>
+    <Compile Include="Views\AddArtistView.Designer.cs">
+      <DependentUpon>AddArtistView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\AddRecordLabelView.cs">
       <SubType>Form</SubType>
@@ -145,11 +151,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\AddProducerView.resx">
-      <DependentUpon>AddProducerView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AddAlbumView.resx">
+      <DependentUpon>AddAlbumView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddPersonView.resx">
       <DependentUpon>AddPersonView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddProducerView.resx">
+      <DependentUpon>AddProducerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddArtistView.resx">
+      <DependentUpon>AddArtistView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddRecordLabelView.resx">
       <DependentUpon>AddRecordLabelView.cs</DependentUpon>
@@ -180,6 +192,8 @@
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByAlbum.sql" />
+    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByName.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
     <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
     <Content Include="Sql\Procedures\MusicProject.GetAlbumsWithRecordLabel.sql" />
@@ -201,7 +215,7 @@
     <Content Include="Sql\Procedures\MusicProject.FetchReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
-    <Content Include="Sql\Procedures\MusicProject.AddArtist.sql" />
+    <Content Include="Sql\Procedures\MusicProject.CreateArtist.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveReviewsByAlbum.sql" />
     <Content Include="Sql\Procedures\MusicProject.RetrieveSuperFans.sql" />
     <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />

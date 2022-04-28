@@ -40,7 +40,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public IReadOnlyList<ProducerModel> FetchProducer(string name)
+        public ProducerModel FetchProducer(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
@@ -59,13 +59,71 @@ namespace MusicProject.Repositories
                         connection.Open();
 
                         using (var reader = command.ExecuteReader())
-                            return TranslateFetchProducer(reader);
+                        {
+                            var temp = TranslateProducer(reader);
+                            if (temp.Count == 1) return temp[0];
+                            return null;
+                        }
                     }
                 }
             }
         }
 
-        private IReadOnlyList<ProducerModel> TranslateFetchProducer(SqlDataReader reader)
+        public IReadOnlyList<ProducerModel> RetrieveProducersByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.RetrieveProducersByName", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("Name", name);
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            return TranslateProducer(reader);
+                        }
+                    }
+                }
+            }
+        }
+
+        public IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle)
+        {
+            if (string.IsNullOrWhiteSpace(albumTitle))
+                throw new ArgumentException("The parameter cannot be null or empty.", nameof(albumTitle));
+
+            // Save to database.
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.RetrieveProducers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("AlbumTitle", albumTitle);
+
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            return TranslateProducer(reader);
+                        }
+                    }
+                }
+            }
+        }
+
+        private IReadOnlyList<ProducerModel> TranslateProducer(SqlDataReader reader)
         {
             var producers = new List<ProducerModel>();
 

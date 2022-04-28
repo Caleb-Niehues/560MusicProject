@@ -12,13 +12,9 @@ namespace MusicProject.Views
 {
     public partial class AddPersonView : Form
     {
-        public MainView MainView { get; set; }
-
         public AddPersonView()
         {
             InitializeComponent();
         }
-
-
     }
 }

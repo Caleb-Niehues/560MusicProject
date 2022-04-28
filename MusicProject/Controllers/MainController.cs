@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MusicProject.Repositories;
 using System.Configuration;
+using System;
 
 namespace MusicProject.Controllers
 {
@@ -11,7 +12,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -121,7 +122,7 @@ namespace MusicProject.Controllers
             //_people = SqlPerson.FetchPerson(name);
             success = success || _people.Count > 0;
 
-            _producers = SqlProducer.FetchProducer(name);
+            _producers = SqlProducer.RetrieveProducersByName(name);
             success = success || _producers.Count > 0;
 
             _recordLabels = SqlRecordLabel.FetchRecordLabel(name);
@@ -134,6 +135,7 @@ namespace MusicProject.Controllers
 
 
         #endregion
+
 
         #region Aggregating Queries
         public IReadOnlyList<BestPerformingGenreModel> GetGenres(System.DateTime start, System.DateTime end, int top)
@@ -155,6 +157,26 @@ namespace MusicProject.Controllers
             System.DateTime start, System.DateTime end)
         {
             return SqlRecordLabel.GetAlbumsWithRecordLabel(recordLabelName, start, end);
+
+        #region Add and Fetch
+        public ArtistModel CreateArtist(string name)
+        {
+            return SqlArtist.CreateArtist(name, new List<PersonModel>());
+        }
+        
+        public ProducerModel FetchProducer(string name)
+        {
+            return SqlProducer.FetchProducer(name);
+        }
+
+        public ProducerModel CreateProducer(string name)
+        {
+            return SqlProducer.CreateProducer(name);
+        }
+
+        public RecordLabelModel CreateLabel(string name, DateTime founded, DateTime? ended, string location)
+        {
+            return SqlRecordLabel.CreateRecordLabel(name, founded, ended, location);
         }
         #endregion
     }
