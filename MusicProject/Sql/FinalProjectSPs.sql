@@ -317,7 +317,9 @@ WHERE A.AlbumTitle = @Name;
 
 GO
 
---retrieves the super fans
+--Returns a list of Users for a given artist's super fans. 
+--Calculated by multiplying the user's weight and number of 
+--comments they left for that artist's albums.
 CREATE OR ALTER PROCEDURE MusicProject.RetrieveSuperFans
    @ArtistName NVARCHAR(128)
 AS
