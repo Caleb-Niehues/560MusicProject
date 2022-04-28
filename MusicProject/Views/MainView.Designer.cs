@@ -319,6 +319,7 @@
             this.uxAddPerson.TabIndex = 24;
             this.uxAddPerson.Text = "Add Person";
             this.uxAddPerson.UseVisualStyleBackColor = true;
+            this.uxAddPerson.Visible = false;
             this.uxAddPerson.Click += new System.EventHandler(this.uxAddPerson_Click);
             // 
             // uxFocusedList
