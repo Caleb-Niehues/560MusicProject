@@ -165,7 +165,8 @@ namespace MusicProject.Controllers
 
         public IReadOnlyList<RecordLabelModel> RetrieveLabelsByAlbum(string albumTitle)
         {
-            return SqlRecordLabel.RetrieveRecordLabelsByAlbum(albumTitle);
+            //return SqlRecordLabel.RetrieveRecordLabelsByAlbum(albumTitle);
+            return null;
         }
 
         public IReadOnlyList<SongModel> RetrieveSongsByAlbum(string albumTitle)

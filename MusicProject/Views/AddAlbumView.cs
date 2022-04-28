@@ -10,6 +10,8 @@ namespace MusicProject.Views
         private static RetrieveProducersByAlbum getProd;
         private static RetrieveLabelsByAlbum getLabels;
         private static RetrieveSongsByAlbum getSongs;
+        private static FetchLabel fetchLabel;
+        private static FetchProducer fetchProducer;
 
         private AlbumModel album;
         private List<ProducerModel> producers = new List<ProducerModel>();
@@ -25,12 +27,14 @@ namespace MusicProject.Views
             uxSongList.DataSource = songs;
         }
 
-        public static void InitializeDelegates(RetrieveProducersByAlbum retProducers,
-                                                RetrieveLabelsByAlbum retRecordLabels, RetrieveSongsByAlbum retSongs)
+        public static void InitializeDelegates(RetrieveProducersByAlbum retProducers, RetrieveLabelsByAlbum retRecordLabels,
+            RetrieveSongsByAlbum retSongs, FetchLabel fetchRecordLabel, FetchProducer fetchProducerDel)
         {
             getProd = retProducers;
             getLabels = retRecordLabels;
             getSongs = retSongs;
+            fetchLabel = fetchRecordLabel;
+            fetchProducer = fetchProducerDel;
         }
 
         private void AddAlbumView_Load(object sender, EventArgs e)
@@ -58,8 +62,16 @@ namespace MusicProject.Views
 
         private void uxFetchRecordLabelText_HitEnter(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)// && !search(uxLookUpText.Text)) //update is called by search
-                MessageBox.Show("No name found on data base - needs to be an exact match");
+            if (e.KeyCode == Keys.Enter)
+            {
+                var label = fetchLabel(uxFetchRecordLabelText.Text);
+                if (label == null) MessageBox.Show("No name found on data base - needs to be an exact match");
+                else
+                {
+                    labels.Add(label);
+                    uxRecordLabelList.Refresh();
+                }
+            }
         }
 
         private void uxFetchProducerText_HitEnter(object sender, KeyEventArgs e)

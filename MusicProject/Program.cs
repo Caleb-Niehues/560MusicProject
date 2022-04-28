@@ -27,8 +27,8 @@ namespace MusicProject
 
     public delegate UserModel FetchAndCheckUser(string name, string password);
     public delegate ReviewModel FetchReview(string userName, string albumTitle);
-    public delegate RecordLabelModel FetchLabel(string name, string albumTitle);
-    public delegate ProducerModel FetchProducer(string name, string albumTitle);
+    public delegate RecordLabelModel FetchLabel(string name);//, string albumTitle);
+    public delegate ProducerModel FetchProducer(string name);//, string albumTitle);
 
     static class Program
     {
@@ -45,7 +45,8 @@ namespace MusicProject
             var view = new MainView(controller);
             LogInView.InitializeDelegates(controller.FetchAndCheckUser, controller.CreateUser, controller.DeleteUser);
             ReviewView.InitializeDelegates(controller.RetrieveReviewsByAlbum, controller.FetchReview, controller.CreateOrSaveReview);
-            //AddAlbumView.InitializeDelegates();
+            AddAlbumView.InitializeDelegates(controller.RetrieveProducersByAlbum, controller.RetrieveLabelsByAlbum,
+                controller.RetrieveSongsByAlbum, controller.FetchLabel, controller.FetchProducer);
             AddArtistView.InitializeDelegates(controller.CreateArtist);
             AddProducerView.InitializeDelegates(controller.CreateProducer);
             AddRecordLabelView.InitializeDelegates(controller.CreateLabel);
