@@ -14,10 +14,17 @@ namespace MusicProject.Views
     public partial class AddProducerView : Form
     {
         private static CreateProducer create;
+        private updateProducers update = null;
 
         public AddProducerView()
         {
             InitializeComponent();
+        }
+
+        public AddProducerView(updateProducers updateProd)
+        {
+            InitializeComponent();
+            update = updateProd;
         }
 
         public static void InitializeDelegates(CreateProducer createProd)
@@ -32,6 +39,7 @@ namespace MusicProject.Views
             {
                 var producer = create(name);
                 MessageBox.Show("Producer successfully added as: " + producer.Name);
+                if (update != null) update(producer);
                 this.Close();
             }
             else

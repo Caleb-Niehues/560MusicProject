@@ -28,7 +28,7 @@ namespace MusicProject.Views
         private AddArtistView artistView;
         private AddRecordLabelView recordLabelView;
 
-        public CheckCredentials check;
+        public FetchAndCheckUser check;
         private Search search;
         private GetTopPerformingGenres topGenres;
         private GetTopPerformingAlbums topAlbums;
@@ -145,7 +145,7 @@ namespace MusicProject.Views
         #region Add to DB
         private void uxAddAlbum_Click(object sender, EventArgs e)
         {
-            albumView = new AddAlbumView();
+            albumView = new AddAlbumView(null);
             albumView.Show();
         }
 
