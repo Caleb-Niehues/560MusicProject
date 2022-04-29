@@ -49,7 +49,7 @@ namespace MusicProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            var controller = new MainController();
+            var controller = new Controller();
             var view = new MainView(controller);
             LogInView.InitializeDelegates(controller.FetchAndCheckUser, controller.CreateUser, controller.DeleteUser);
             ReviewView.InitializeDelegates((RetrieveReviewsByAlbum)controller.RetrieveReviewsByAlbum, controller.FetchReview, controller.CreateOrSaveReview);

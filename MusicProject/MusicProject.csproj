@@ -57,7 +57,7 @@
     <Compile Include="Models\BestPerformingAlbumModel.cs" />
     <Compile Include="Models\BestPerformingGenreModel.cs" />
     <Compile Include="Models\Certification.cs" />
-    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\ProducerModel.cs" />
@@ -187,7 +187,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Sql\MusicProjectFullSchema.sql" />
+    <Content Include="MusicProjectFullSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

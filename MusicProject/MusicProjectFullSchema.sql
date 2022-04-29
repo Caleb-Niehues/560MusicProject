@@ -217,7 +217,7 @@ GO
 --creates a review
 CREATE OR ALTER PROCEDURE MusicProject.CreateReview
 	@UserName NVARCHAR(32),
-	@AlbumName NVARCHAR(128),
+	@AlbumTitle NVARCHAR(128),
 	@Comment NVARCHAR(400),
 	@Rating DECIMAL
 AS
@@ -231,7 +231,7 @@ INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateDele
 	(
 		SELECT A.AlbumId
 		FROM MusicProject.Album A
-		WHERE A.AlbumTitle = @AlbumName
+		WHERE A.AlbumTitle = @AlbumTitle
 	),
 	@Comment, @Rating, 
 	--SYSDATETIMEOFFSET(),
@@ -242,7 +242,7 @@ GO
 --creates a song
 CREATE OR ALTER PROCEDURE MusicProject.CreateSong
    @SongName NVARCHAR(64),
-   @AlbumName NVARCHAR(128),
+   @AlbumTitle NVARCHAR(128),
    @GenreName NVARCHAR(64),
    @Length TIME, 
    @TrackNumber INT
@@ -253,14 +253,14 @@ SELECT S.SongName, A.AlbumID, G.GenreID, S.[Length], S.TrackNumber
 FROM
 	(
 		VALUES
-			(@SongName, @AlbumName,	@GenreName, @Length, @TrackNumber))
+			(@SongName, @AlbumTitle, @GenreName, @Length, @TrackNumber))
 			S(SongName, AlbumName, GenreName, [Length], TrackNumber)
 INNER JOIN MusicProject.Album A ON A.AlbumTitle = S.AlbumName
 INNER JOIN MusicProject.Genre G ON G.GenreName = S.GenreName; 
 
 GO
 
---creates a user
+--If user doesn't exist, a new user is created, otherwise updates the user's Weight and DateDeleted columns
 CREATE OR ALTER PROCEDURE MusicProject.CreateUser
    @Name NVARCHAR(32),
    @Password NVARCHAR(32),
@@ -278,7 +278,7 @@ WHEN MATCHED THEN UPDATE SET
 	U.UserWeight = @Weight;
 GO
 
---deletes a user
+--Flags user a being deleted by entering a non-null value for its DateDeleted column
 CREATE OR ALTER PROCEDURE MusicProject.DeleteUser
    @Name NVARCHAR(32),
    @Password NVARCHAR(32)
@@ -327,13 +327,13 @@ WHERE Ar.ArtistName = @Name;
 
 GO
 
---feteches the password from the database
+--fetches the password from the database
 CREATE OR ALTER PROCEDURE MusicProject.FetchPassword
 	@Name NVARCHAR(32)
 AS
 
 SELECT U.[Password]
-FROM MusicProject.[User] Ufetchreview
+FROM MusicProject.[User] U
 WHERE U.UserName = @Name
 GO
 
@@ -366,7 +366,7 @@ CREATE OR ALTER PROCEDURE MusicProject.FetchReview
    @AlbumTitle NVARCHAR(32)
 AS
 
-SELECT TOP(1) U.UserName, A.AlbumTitle, R.AlbumComment, R.AlbumRating--, R.DateAdded
+SELECT TOP(1) U.UserName, A.AlbumTitle, R.AlbumComment, R.AlbumRating, R.DateAdded
 FROM MusicProject.Review R
 	INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
 	INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID
@@ -509,7 +509,7 @@ GO
 --saves the review
 CREATE OR ALTER PROCEDURE MusicProject.SaveReview
    @UserName NVARCHAR(32),
-   @AlbumName NVARCHAR(128),
+   @AlbumTitle NVARCHAR(128),
    @Comment NVARCHAR(400),
    @Rating DECIMAL
 AS
@@ -519,7 +519,7 @@ WITH CTE (ReviewID, UserID, AlbumID) AS (
 	FROM MusicProject.Review R
 		INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID
 		INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
-	WHERE U.UserName = @UserName AND A.AlbumTitle = @AlbumName
+	WHERE U.UserName = @UserName AND A.AlbumTitle = @AlbumTitle
 )
 
 MERGE MusicProject.Review R

@@ -41,7 +41,7 @@ namespace MusicProject.Repositories
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("UserName", userName);
-                        command.Parameters.AddWithValue("AlbumName", albumTitle);
+                        command.Parameters.AddWithValue("AlbumTitle", albumTitle);
                         command.Parameters.AddWithValue("Comment", comment);
                         command.Parameters.AddWithValue("Rating", rating);
 
@@ -97,7 +97,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public ReviewModel FetchReview(string userName, string albumName)
+        public ReviewModel FetchReview(string userName, string albumTitle)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -106,7 +106,7 @@ namespace MusicProject.Repositories
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("UserName", userName);
-                    command.Parameters.AddWithValue("AlbumTitle", albumName);
+                    command.Parameters.AddWithValue("AlbumTitle", albumTitle);
 
                     connection.Open();
 
@@ -128,7 +128,7 @@ namespace MusicProject.Repositories
             var AlbumTitleOrdinal = reader.GetOrdinal("AlbumTitle");
             var commentOrdinal = reader.GetOrdinal("AlbumComment");
             var ratingOrdinal = reader.GetOrdinal("AlbumRating");
-            //var dateAddedOrdinal = reader.GetOrdinal("DateAdded");
+            var dateAddedOrdinal = reader.GetOrdinal("DateAdded");
 
             while (reader.Read())
             {
@@ -137,7 +137,7 @@ namespace MusicProject.Repositories
                     reader.GetString(AlbumTitleOrdinal),
                     reader.GetString(commentOrdinal),
                     reader.GetDecimal(ratingOrdinal),
-                    DateTime.Now //reader.GetDateTime(dateAddedOrdinal)
+                    reader.GetDateTime(dateAddedOrdinal)
                     ));
             }
             return reviews;
@@ -168,9 +168,10 @@ namespace MusicProject.Repositories
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("UserName", userName);
-                        command.Parameters.AddWithValue("AlbumName", albumTitle);
+                        command.Parameters.AddWithValue("AlbumTitle", albumTitle);
                         command.Parameters.AddWithValue("Comment", comment);
                         command.Parameters.AddWithValue("Rating", rating);
+                        //command.Parameters.AddWithValue("")
 
                         connection.Open();
 
