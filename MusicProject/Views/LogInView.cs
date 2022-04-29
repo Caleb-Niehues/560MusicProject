@@ -5,7 +5,7 @@ namespace MusicProject.Views
 {
     public partial class LogInView : Form
     {
-        private static CheckCredentials check;
+        private static FetchAndCheckUser check;
         private static CreateUser create;
         private static DeleteUser delete;
         private UpdateUser updateMain;
@@ -16,7 +16,7 @@ namespace MusicProject.Views
             updateMain = user;
         }
 
-        public static void InitializeDelegates(CheckCredentials checkDel, CreateUser createDel, DeleteUser deleteDel)
+        public static void InitializeDelegates(FetchAndCheckUser checkDel, CreateUser createDel, DeleteUser deleteDel)
         {
             check = checkDel;
             create = createDel;

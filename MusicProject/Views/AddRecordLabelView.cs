@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MusicProject.Views
@@ -13,10 +6,17 @@ namespace MusicProject.Views
     public partial class AddRecordLabelView : Form
     {
         private static CreateLabel create;
+        private updateLabel update = null;
 
         public AddRecordLabelView()
         {
             InitializeComponent();
+        }
+
+        public AddRecordLabelView(updateLabel updateLabel)
+        {
+            InitializeComponent();
+            update = updateLabel;
         }
 
         public static void InitializeDelegates(CreateLabel createLabel)
@@ -46,7 +46,8 @@ namespace MusicProject.Views
                     ended = uxEndedDate.Value;
 
                 var label = create(uxNameText.Text, uxFoundedDate.Value, ended, uxLocationText.Text);
-                MessageBox.Show("Artist successfully added as: " + label.ToString());
+                if (update != null) update(label);
+                MessageBox.Show("Record label successfully added as: " + label.ToString());
                 this.Close();
             }
         }

@@ -40,9 +40,6 @@ namespace MusicProject.Repositories
                         command.Parameters.AddWithValue("RecordLabelName", recordLabel.Name);
                         command.Parameters.AddWithValue("CertificationName", Enum.GetName(typeof(Certification), certification));
 
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
-
                         connection.Open();
 
                         command.ExecuteNonQuery();
@@ -66,10 +63,6 @@ namespace MusicProject.Repositories
                         {
                             producerRepo.CreateProducer(producer.Name);
                         }
-
-
-
-                        //var personId = (int)command.Parameters["PersonId"].Value;
                         
                         return new AlbumModel(title, releaseDate, artist, songs, albumLength, producers, recordLabel, certification);
                     }
