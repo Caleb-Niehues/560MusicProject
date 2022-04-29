@@ -187,53 +187,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Sql\FinalProjectSPs.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateProducer.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateSong.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByAlbum.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveProducersByName.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveSongsByAlbum.sql" />
-    <Content Include="Sql\Procedures\MusicProject.TopPerformingAlbums.sql" />
-    <Content Include="Sql\Procedures\MusicProject.TopPerformingGenres.sql" />
-    <Content Include="Sql\Procedures\MusicProject.GetAlbumsWithRecordLabel.sql" />
+    <Content Include="Sql\MusicProjectFullSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
-    <Content Include="Sql\FinalProjectInserts.sql" />
-    <Content Include="Sql\FinalProjectReviewInserts.sql" />
-    <Content Include="Sql\FinalProjectSongInserts.sql" />
-    <Content Include="Sql\FinalProjectTables.sql" />
-    <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
-    <Content Include="Sql\Procedures\MusicProject.DeleteReview.sql" />
-    <Content Include="Sql\Procedures\MusicProject.DeleteUser.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchPassword.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchReview.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchUser.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveArtists.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateArtist.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveReviewsByAlbum.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveSuperFans.sql" />
-    <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
-    <Content Include="Sql\Procedures\MusicProject.AddSong.sql" />
-    <Content Include="Sql\Procedures\MusicProject.CreateAlbum.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchAlbum.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchArtist.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchProducer.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchRecordLabel.sql" />
-    <Content Include="Sql\Procedures\MusicProject.FetchSong.sql" />
-    <Content Include="Sql\Procedures\MusicProject.GetArtistsInWindow.sql" />
-    <Content Include="Sql\Procedures\MusicProject.RetrieveSongsByName.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sql\Data\" />
-    <Folder Include="Sql\Schemas\" />
-    <Folder Include="Sql\Tables\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,9 +2,9 @@
 
 To get an instance of our database and Visual Studio user interface running for yourself, follow these instructions.
 	1. Clone or download this instance into your machine, and open it up in Visual Studio.
-	2. Navigate to MusicProject -> Sql -> NAME FOR ALL COMBINED SQL FILES.
-	3. Open THISNAME up in your local instance of Microsoft SQL Server Management Studio.
-	4. In line 1 of THISNAME, change the line to "USE [your_database_name]". Make sure everytime you run
+	2. Navigate to MusicProject -> Sql -> MusicProjectFullSchema.sql.
+	3. Open MusicProjectFullSchema.sql. up in your local instance of Microsoft SQL Server Management Studio.
+	4. In line 1 of MusicProjectFullSchema.sql., change the line to "USE [your_database_name]". Make sure everytime you run
 	   any .sql files pertaining to this project, you are using [your_database_name].
 	5. Click the Execute button. This will create the MusicProject schema with all of the required tables.
 	   Additionally, this will run all inserts to insert all present data that is in our current version. This will
