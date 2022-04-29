@@ -65,11 +65,6 @@ namespace MusicProject.Views
             }
         }
 
-        private void uxNewProducerButton_Click(object sender, EventArgs e)
-        {
-            new AddProducerView().Show();
-        }
-
         private void updateProducers(ProducerModel producer)
         {
             producers.Add(producer);
@@ -77,19 +72,20 @@ namespace MusicProject.Views
             uxProducerList.DataSource = producers;
         }
 
-        private void uxNewRecordLabelButton_Click(object sender, EventArgs e)
+        private void uxNewProducerButton_Click(object sender, EventArgs e)
         {
-            new AddRecordLabelView().Show();
+            new AddProducerView(updateProducers).Show();
         }
 
         private void updateLabel(RecordLabelModel recordLabel)
         {
             label = recordLabel;
+            uxLabelLabel.Text = "Record label: " + label.Name;
         }
 
-        private void uxNewSongButton_Click(object sender, EventArgs e)
+        private void uxNewRecordLabelButton_Click(object sender, EventArgs e)
         {
-            new AddSongView().Show();
+            new AddRecordLabelView(updateLabel).Show();
         }
 
         private void updateSongs(SongModel song)
@@ -97,6 +93,11 @@ namespace MusicProject.Views
             songs.Add(song);
             uxSongList.DataSource = null;
             uxSongList.DataSource = songs;
+        }
+
+        private void uxNewSongButton_Click(object sender, EventArgs e)
+        {
+            new AddSongView(updateSongs, artist.Name, title).Show();
         }
 
         private void uxArtistBox_HitEnter(object sender, KeyEventArgs e)
@@ -113,6 +114,7 @@ namespace MusicProject.Views
                 {
                     artist = tempArtist[0];
                     uxFinishButton.Enabled = isFinished();
+                    uxNewSongButton.Enabled = !string.IsNullOrWhiteSpace(title);
                     MessageBox.Show("Artist updated to " + artist.Name);
                 }
             }
@@ -178,6 +180,12 @@ namespace MusicProject.Views
         private bool isFinished()
         {
             return !string.IsNullOrWhiteSpace(title) && artist != null && songs.Count > 0 && length > TimeSpan.Zero && producers.Count > 0 && label != null;
+        }
+
+        private void uxTitleBox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(uxTitleBox.Text))
+                uxNewSongButton.Enabled = artist != null;
         }
     }
 }

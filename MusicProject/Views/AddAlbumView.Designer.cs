@@ -119,6 +119,7 @@ namespace MusicProject.Views
             this.uxTitleBox.Name = "uxTitleBox";
             this.uxTitleBox.Size = new System.Drawing.Size(220, 22);
             this.uxTitleBox.TabIndex = 8;
+            this.uxTitleBox.Leave += new System.EventHandler(this.uxTitleBox_Leave);
             // 
             // uxArtistBox
             // 
@@ -192,6 +193,7 @@ namespace MusicProject.Views
             // 
             // uxNewSongButton
             // 
+            this.uxNewSongButton.Enabled = false;
             this.uxNewSongButton.Location = new System.Drawing.Point(585, 12);
             this.uxNewSongButton.Name = "uxNewSongButton";
             this.uxNewSongButton.Size = new System.Drawing.Size(131, 28);
@@ -211,6 +213,7 @@ namespace MusicProject.Views
             // 
             // uxFinishButton
             // 
+            this.uxFinishButton.Enabled = false;
             this.uxFinishButton.Location = new System.Drawing.Point(451, 388);
             this.uxFinishButton.Name = "uxFinishButton";
             this.uxFinishButton.Size = new System.Drawing.Size(131, 30);

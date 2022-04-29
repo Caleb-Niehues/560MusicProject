@@ -53,7 +53,6 @@ namespace MusicProject
             AddArtistView.InitializeDelegates(controller.CreateArtist);
             AddProducerView.InitializeDelegates(controller.CreateProducer);
             AddRecordLabelView.InitializeDelegates(controller.CreateLabel);
-            AddSongView.InitializeDelegates();
             controller.InitializeDelegates(view.RegisterSearch);
 
             Application.Run(view);//confirmed issue of needing to run - does this mean the powershell stuff is required?
