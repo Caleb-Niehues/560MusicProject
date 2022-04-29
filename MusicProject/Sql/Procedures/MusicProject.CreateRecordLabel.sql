@@ -1,8 +1,8 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.CreateRecordLabel
-   @Name NVARCHAR(32),
+   @Name NVARCHAR(128),
    @DateFounded DATE,
    @DateClosed DATE,
-   @Location NVARCHAR(32)
+   @Location NVARCHAR(64)
 AS
 INSERT MusicProject.RecordLabel(RecordLabelName, DateFounded, DateClosed, RecordLabelLocation)
 SELECT R.RecordLabelName, R.DateFounded, R.DateClosed, R.RecordLabelLocation

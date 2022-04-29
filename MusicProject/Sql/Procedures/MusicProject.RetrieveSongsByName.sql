@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.RetrieveSongsByName
-   @Name NVARCHAR(32)
+   @Name NVARCHAR(64)
 AS
 
 SELECT A.AlbumTitle, S.SongName, Ar.ArtistName, G.GenreName, S.[Length]

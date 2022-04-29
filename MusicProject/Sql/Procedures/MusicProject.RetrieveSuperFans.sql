@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.RetrieveSuperFans
-   @ArtistName NVARCHAR(64)
+   @ArtistName NVARCHAR(128)
 AS
 
 SELECT U.UserID,

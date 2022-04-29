@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.RetrieveReviewsByAlbum
-	@AlbumTitle NVARCHAR(32)
+	@AlbumTitle NVARCHAR(128)
 AS
 
 SELECT U.UserName, A.AlbumTitle, R.AlbumComment, R.AlbumRating--, R.DateAdded

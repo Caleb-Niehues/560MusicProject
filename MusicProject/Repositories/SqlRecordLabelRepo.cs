@@ -103,6 +103,15 @@ namespace MusicProject.Repositories
             return recordLabels;
         }
 
+        /// <summary>
+        /// Gets the album within a certain record label
+        /// 
+        /// </summary>
+        /// <param name="recordLabelName"></param>
+        /// <param name="startYear"></param>
+        /// <param name="endYear"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public AlbumsWithRecordLabelModel GetAlbumsWithRecordLabel(string recordLabelName, DateTime startYear, DateTime endYear)
         {
             if (string.IsNullOrWhiteSpace(recordLabelName))

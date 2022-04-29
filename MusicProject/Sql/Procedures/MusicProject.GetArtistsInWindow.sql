@@ -1,5 +1,5 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.GetArtistsInWindow
-   @LabelName NVARCHAR(32),
+   @LabelName NVARCHAR(128),
    @StartYear DATE,
    @EndYear DATE
 AS

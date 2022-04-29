@@ -1,6 +1,6 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.CreateAlbum 
- @AlbumTitle NVARCHAR(32), @ReleaseDate DATE, @ArtistName NVARCHAR(32),
-	@RecordLabelName NVARCHAR(32), @CertificationName NVARCHAR(32)
+ @AlbumTitle NVARCHAR(128), @ReleaseDate DATE, @ArtistName NVARCHAR(128),
+	@RecordLabelName NVARCHAR(128), @CertificationName NVARCHAR(64)
 AS
 DECLARE @ArtistID INT =
 (

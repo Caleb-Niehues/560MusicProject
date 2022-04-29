@@ -1,7 +1,7 @@
 ﻿CREATE OR ALTER PROCEDURE MusicProject.CreateSong
-   @SongName NVARCHAR(32),
-   @AlbumName NVARCHAR(32),
-   @GenreName NVARCHAR(32),
+   @SongName NVARCHAR(64),
+   @AlbumName NVARCHAR(128),
+   @GenreName NVARCHAR(64),
    @Length TIME, 
    @TrackNumber INT
 AS
