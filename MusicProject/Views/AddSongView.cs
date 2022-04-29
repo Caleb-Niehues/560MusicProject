@@ -17,6 +17,8 @@ namespace MusicProject.Views
             this.update = update;
             this.albumTitle = albumTitle;
             this.artistName = artistName;
+            uxAlbumLabel.Text = albumTitle;
+            uxArtistLabel.Text = artistName;
             uxGenreDropDown.DataSource = Enum.GetValues(typeof(Genre));
         }
 

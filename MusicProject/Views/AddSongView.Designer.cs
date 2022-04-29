@@ -37,7 +37,7 @@
             this.uxSecond = new System.Windows.Forms.NumericUpDown();
             this.uxGenreDropDown = new System.Windows.Forms.ComboBox();
             this.uxAlbumLabel = new System.Windows.Forms.Label();
-            this.uxArtistName = new System.Windows.Forms.Label();
+            this.uxArtistLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.uxMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxSecond)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +45,7 @@
             // uxAddSongButton
             // 
             this.uxAddSongButton.Location = new System.Drawing.Point(350, 16);
-            this.uxAddSongButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxAddSongButton.Margin = new System.Windows.Forms.Padding(4);
             this.uxAddSongButton.Name = "uxAddSongButton";
             this.uxAddSongButton.Size = new System.Drawing.Size(100, 28);
             this.uxAddSongButton.TabIndex = 0;
@@ -66,7 +66,7 @@
             // uxNameBox
             // 
             this.uxNameBox.Location = new System.Drawing.Point(85, 82);
-            this.uxNameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxNameBox.Margin = new System.Windows.Forms.Padding(4);
             this.uxNameBox.Name = "uxNameBox";
             this.uxNameBox.Size = new System.Drawing.Size(365, 22);
             this.uxNameBox.TabIndex = 2;
@@ -94,7 +94,7 @@
             // uxMinute
             // 
             this.uxMinute.Location = new System.Drawing.Point(332, 127);
-            this.uxMinute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxMinute.Margin = new System.Windows.Forms.Padding(4);
             this.uxMinute.Maximum = new decimal(new int[] {
             59,
             0,
@@ -107,7 +107,7 @@
             // uxSecond
             // 
             this.uxSecond.Location = new System.Drawing.Point(395, 126);
-            this.uxSecond.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxSecond.Margin = new System.Windows.Forms.Padding(4);
             this.uxSecond.Maximum = new decimal(new int[] {
             59,
             0,
@@ -134,21 +134,21 @@
             this.uxAlbumLabel.TabIndex = 12;
             this.uxAlbumLabel.Text = "Album title: ";
             // 
-            // uxArtistName
+            // uxArtistLabel
             // 
-            this.uxArtistName.AutoSize = true;
-            this.uxArtistName.Location = new System.Drawing.Point(28, 47);
-            this.uxArtistName.Name = "uxArtistName";
-            this.uxArtistName.Size = new System.Drawing.Size(89, 17);
-            this.uxArtistName.TabIndex = 13;
-            this.uxArtistName.Text = "Artist Name: ";
+            this.uxArtistLabel.AutoSize = true;
+            this.uxArtistLabel.Location = new System.Drawing.Point(28, 47);
+            this.uxArtistLabel.Name = "uxArtistLabel";
+            this.uxArtistLabel.Size = new System.Drawing.Size(87, 17);
+            this.uxArtistLabel.TabIndex = 13;
+            this.uxArtistLabel.Text = "Artist name: ";
             // 
             // AddSongView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 173);
-            this.Controls.Add(this.uxArtistName);
+            this.Controls.Add(this.uxArtistLabel);
             this.Controls.Add(this.uxAlbumLabel);
             this.Controls.Add(this.uxGenreDropDown);
             this.Controls.Add(this.uxSecond);
@@ -158,7 +158,7 @@
             this.Controls.Add(this.uxNameBox);
             this.Controls.Add(this.uxNameLabel);
             this.Controls.Add(this.uxAddSongButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddSongView";
             this.Text = "AddView";
             ((System.ComponentModel.ISupportInitialize)(this.uxMinute)).EndInit();
@@ -179,6 +179,6 @@
         private System.Windows.Forms.NumericUpDown uxSecond;
         private System.Windows.Forms.ComboBox uxGenreDropDown;
         private System.Windows.Forms.Label uxAlbumLabel;
-        private System.Windows.Forms.Label uxArtistName;
+        private System.Windows.Forms.Label uxArtistLabel;
     }
 }

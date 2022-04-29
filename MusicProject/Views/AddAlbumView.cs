@@ -57,12 +57,12 @@ namespace MusicProject.Views
             fetchProducer = fetchProducerDel;
         }
 
-        private void AddAlbumView_Load(object sender, EventArgs e)
+        private void uxTitleBox_Leave(object sender, EventArgs e)
         {
-            if (album != null)
-            {
-                //producers = getProd();
-            }
+            if (album == null) title = uxTitleBox.Text;
+            if (!string.IsNullOrWhiteSpace(title))
+                uxNewSongButton.Enabled = artist != null;
+            uxFinishButton.Enabled = isFinished();
         }
 
         private void updateProducers(ProducerModel producer)
@@ -70,6 +70,7 @@ namespace MusicProject.Views
             producers.Add(producer);
             uxProducerList.DataSource = null;
             uxProducerList.DataSource = producers;
+            uxFinishButton.Enabled = isFinished();
         }
 
         private void uxNewProducerButton_Click(object sender, EventArgs e)
@@ -81,6 +82,7 @@ namespace MusicProject.Views
         {
             label = recordLabel;
             uxLabelLabel.Text = "Record label: " + label.Name;
+            uxFinishButton.Enabled = isFinished();
         }
 
         private void uxNewRecordLabelButton_Click(object sender, EventArgs e)
@@ -91,13 +93,15 @@ namespace MusicProject.Views
         private void updateSongs(SongModel song)
         {
             songs.Add(song);
+            length += song.Length;
             uxSongList.DataSource = null;
             uxSongList.DataSource = songs;
+            uxFinishButton.Enabled = isFinished();
         }
 
         private void uxNewSongButton_Click(object sender, EventArgs e)
         {
-            new AddSongView(updateSongs, artist.Name, title).Show();
+            new AddSongView(updateSongs, title, artist.Name).Show();
         }
 
         private void uxArtistBox_HitEnter(object sender, KeyEventArgs e)
@@ -160,32 +164,19 @@ namespace MusicProject.Views
                     uxFetchProducerText.Clear();
                     uxFinishButton.Enabled = isFinished();
                     MessageBox.Show("producer added as " + tempProducer.Name);
-
                 }
             }
         }
 
         private void uxFinishButton_Click(object sender, EventArgs e)
         {
-            title = uxTitleBox.Text;
-
-            length = new TimeSpan();
-            foreach (SongModel song in songs)
-                length += song.Length;
-
             create(title, uxReleaseDate.Value, artist, songs, length, producers, label, (Certification)uxCertificationCombo.SelectedIndex);
             this.Close();
         }
 
         private bool isFinished()
         {
-            return !string.IsNullOrWhiteSpace(title) && artist != null && songs.Count > 0 && length > TimeSpan.Zero && producers.Count > 0 && label != null;
-        }
-
-        private void uxTitleBox_Leave(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(uxTitleBox.Text))
-                uxNewSongButton.Enabled = artist != null;
+            return !(string.IsNullOrWhiteSpace(title)) && artist != null && songs.Count > 0 && length > TimeSpan.Zero && producers.Count > 0 && label != null;
         }
     }
 }

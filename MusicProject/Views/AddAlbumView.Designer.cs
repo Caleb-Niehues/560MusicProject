@@ -248,7 +248,7 @@ namespace MusicProject.Views
             this.Controls.Add(this.uxReleaseDate);
             this.Name = "AddAlbumView";
             this.Text = "AddAlbum";
-            this.Load += new System.EventHandler(this.AddAlbumView_Load);
+            //this.Load += new System.EventHandler(this.AddAlbumView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
