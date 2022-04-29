@@ -188,6 +188,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Sql\FinalProjectSPs.sql" />
+    <Content Include="Sql\MusicProjectFullSchema.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateProducer.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateRecordLabel.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateReview.sql" />
@@ -204,10 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
-    <Content Include="Sql\FinalProjectInserts.sql" />
-    <Content Include="Sql\FinalProjectReviewInserts.sql" />
-    <Content Include="Sql\FinalProjectSongInserts.sql" />
-    <Content Include="Sql\FinalProjectTables.sql" />
     <Content Include="Sql\Procedures\MusicProject.SaveReview.sql" />
     <Content Include="Sql\Procedures\MusicProject.CreateUser.sql" />
     <Content Include="Sql\Procedures\MusicProject.DeleteReview.sql" />
