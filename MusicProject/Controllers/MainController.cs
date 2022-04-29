@@ -164,6 +164,11 @@ namespace MusicProject.Controllers
             return SqlAlbum.CreateAlbum(title, releaseDate, artist, songs, length, producers, recordLabel, certification);
         }
 
+        public IReadOnlyList<ArtistModel> RetrieveArtistsByName(string name)
+        {
+            return SqlArtist.FetchArtist(name);
+        }
+
         public IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle)
         {
             return SqlProducer.RetrieveProducersByAlbum(albumTitle);

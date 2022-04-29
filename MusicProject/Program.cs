@@ -21,7 +21,8 @@ namespace MusicProject
     public delegate RecordLabelModel CreateLabel(string name, DateTime founded, DateTime? ended, string location);
     
     public delegate bool DeleteUser(string userName, string password);
-    
+
+    public delegate IReadOnlyList<ArtistModel> RetrieveArtistsByName(string name);
     public delegate IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle);
     public delegate IReadOnlyList<RecordLabelModel> RetrieveLabelsByAlbum(string albumTitle);
     public delegate IReadOnlyList<ReviewModel> RetrieveReviewsByAlbum(AlbumModel album);
@@ -47,7 +48,7 @@ namespace MusicProject
             var view = new MainView(controller);
             LogInView.InitializeDelegates(controller.FetchAndCheckUser, controller.CreateUser, controller.DeleteUser);
             ReviewView.InitializeDelegates(controller.RetrieveReviewsByAlbum, controller.FetchReview, controller.CreateOrSaveReview);
-            AddAlbumView.InitializeDelegates(controller.CreateAlbum, controller.RetrieveProducersByAlbum, controller.RetrieveLabelsByAlbum,
+            AddAlbumView.InitializeDelegates(controller.CreateAlbum, controller.RetrieveArtistsByName, controller.RetrieveProducersByAlbum, controller.RetrieveLabelsByAlbum,
                 controller.RetrieveSongsByAlbum, controller.FetchLabel, controller.FetchProducer);
             AddArtistView.InitializeDelegates(controller.CreateArtist);
             AddProducerView.InitializeDelegates(controller.CreateProducer);

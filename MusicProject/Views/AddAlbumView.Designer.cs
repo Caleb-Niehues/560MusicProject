@@ -36,8 +36,8 @@ namespace MusicProject.Views
             this.uxReleaseDateLabel = new System.Windows.Forms.Label();
             this.uxSongList = new System.Windows.Forms.ListBox();
             this.uxProducerList = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.uxTitleBox = new System.Windows.Forms.TextBox();
+            this.uxArtistBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.uxCertificationCombo = new System.Windows.Forms.ComboBox();
             this.uxProducerLabel = new System.Windows.Forms.Label();
@@ -113,19 +113,20 @@ namespace MusicProject.Views
             this.uxProducerList.Size = new System.Drawing.Size(267, 132);
             this.uxProducerList.TabIndex = 7;
             // 
-            // textBox1
+            // uxTitleBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 17);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 22);
-            this.textBox1.TabIndex = 8;
+            this.uxTitleBox.Location = new System.Drawing.Point(61, 17);
+            this.uxTitleBox.Name = "uxTitleBox";
+            this.uxTitleBox.Size = new System.Drawing.Size(220, 22);
+            this.uxTitleBox.TabIndex = 8;
             // 
-            // textBox2
+            // uxArtistBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(61, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(220, 22);
-            this.textBox2.TabIndex = 9;
+            this.uxArtistBox.Location = new System.Drawing.Point(61, 49);
+            this.uxArtistBox.Name = "uxArtistBox";
+            this.uxArtistBox.Size = new System.Drawing.Size(220, 22);
+            this.uxArtistBox.TabIndex = 9;
+            this.uxArtistBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.uxArtistBox_HitEnter);
             // 
             // uxCertificationCombo
             // 
@@ -233,8 +234,8 @@ namespace MusicProject.Views
             this.Controls.Add(this.uxFetchProducerText);
             this.Controls.Add(this.uxProducerLabel);
             this.Controls.Add(this.uxCertificationCombo);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.uxArtistBox);
+            this.Controls.Add(this.uxTitleBox);
             this.Controls.Add(this.uxProducerList);
             this.Controls.Add(this.uxSongList);
             this.Controls.Add(this.uxReleaseDateLabel);
@@ -259,8 +260,8 @@ namespace MusicProject.Views
         private System.Windows.Forms.Label uxReleaseDateLabel;
         private System.Windows.Forms.ListBox uxSongList;
         private System.Windows.Forms.ListBox uxProducerList;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox uxTitleBox;
+        private System.Windows.Forms.TextBox uxArtistBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox uxCertificationCombo;
         private System.Windows.Forms.Label uxProducerLabel;
