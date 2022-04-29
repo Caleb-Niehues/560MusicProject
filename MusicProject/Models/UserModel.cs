@@ -66,7 +66,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name} - {Weight} - {DateAdded}";
         }
     }
 }

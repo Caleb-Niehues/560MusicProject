@@ -22,7 +22,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return $"{Rank} {Genre}";
+            return $"{Rank}. {Genre}";
         }
     }
 }
