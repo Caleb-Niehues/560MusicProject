@@ -11,7 +11,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionAshley"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionJordan"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;

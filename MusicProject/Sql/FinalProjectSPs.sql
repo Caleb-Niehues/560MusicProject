@@ -1,4 +1,5 @@
-﻿--creates/adds an artist
+﻿--procedures
+--creates/adds an artist
 CREATE OR ALTER PROCEDURE MusicProject.AddArtist
    @ArtistName NVARCHAR(128)
 AS
