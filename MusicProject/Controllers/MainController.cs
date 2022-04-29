@@ -12,7 +12,7 @@ namespace MusicProject.Controllers
     public class MainController
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionJordan"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -208,7 +208,7 @@ namespace MusicProject.Controllers
 
         public IReadOnlyList<SongModel> RetrieveSongsByAlbum(string albumTitle)
         {
-            return SqlSong.RetrieveSongs(albumTitle);
+            return SqlSong.RetrieveSongsByAlbum(albumTitle);
         }
 
         public RecordLabelModel FetchLabel(string name)//, string location)

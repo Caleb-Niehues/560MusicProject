@@ -32,10 +32,7 @@ namespace MusicProject
     public delegate ReviewModel FetchReview(string userName, string albumTitle);
     public delegate RecordLabelModel FetchLabel(string name);//, string albumTitle);
     public delegate ProducerModel FetchProducer(string name);//, string albumTitle);
-    public delegate bool Search(string name);
-    public delegate void UpdateSearch(IReadOnlyList<AlbumModel> albums, IReadOnlyList<ArtistModel> artists, IReadOnlyList<SongModel> songs, IReadOnlyList<PersonModel> people, IReadOnlyList<ProducerModel> producers, IReadOnlyList<RecordLabelModel> recordLabels);
-    public delegate IReadOnlyList<ReviewModel> GetReviews(AlbumModel album);
-    public delegate ReviewModel FetchReview(string userName, string albumTitle); 
+
     public delegate IReadOnlyList<BestPerformingGenreModel> GetTopPerformingGenres(DateTime start, DateTime end, int top);
     public delegate IReadOnlyList<BestPerformingAlbumModel> GetTopPerformingAlbums(string artistName);
     public delegate IReadOnlyList<SuperFanModel> GetSuperFans(string artistName);
@@ -55,7 +52,7 @@ namespace MusicProject
             var controller = new MainController();
             var view = new MainView(controller);
             LogInView.InitializeDelegates(controller.FetchAndCheckUser, controller.CreateUser, controller.DeleteUser);
-            ReviewView.InitializeDelegates(controller.RetrieveReviewsByAlbum, controller.FetchReview, controller.CreateOrSaveReview);
+            ReviewView.InitializeDelegates((RetrieveReviewsByAlbum)controller.RetrieveReviewsByAlbum, controller.FetchReview, controller.CreateOrSaveReview);
             AddAlbumView.InitializeDelegates(controller.CreateAlbum, controller.RetrieveArtistsByName, controller.RetrieveProducersByAlbum, controller.RetrieveLabelsByAlbum,
                 controller.RetrieveSongsByAlbum, controller.FetchLabel, controller.FetchProducer);
             AddArtistView.InitializeDelegates(controller.CreateArtist);
