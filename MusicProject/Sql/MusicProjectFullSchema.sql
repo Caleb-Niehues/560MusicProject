@@ -333,7 +333,7 @@ CREATE OR ALTER PROCEDURE MusicProject.FetchPassword
 AS
 
 SELECT U.[Password]
-FROM MusicProject.[User] Ufetchreview
+FROM MusicProject.[User] U
 WHERE U.UserName = @Name
 GO
 
@@ -576,7 +576,8 @@ WITH CTE(GenreID, GenrePercentage) AS (
 		INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
 	GROUP BY S.GenreID
 )
-SELECT TOP(@Filter) WITH TIES CAST(SUM(Als.CertificationCount) AS FLOAT) AS GenreCertificationScore, G.GenreID, G.GenreName
+SELECT TOP(@Filter) WITH TIES CAST(SUM(Als.CertificationCount) AS FLOAT) AS GenreCertificationScore, G.GenreID, G.GenreName,
+	RANK() OVER (ORDER BY CAST(SUM(Als.CertificationCount) AS FLOAT) DESC) AS Ranking
 FROM (
 	SELECT A.AlbumID, A.AlbumTitle, 
 		SUM(
@@ -600,7 +601,6 @@ INNER JOIN MusicProject.Song S ON S.AlbumID = Als.AlbumID
 INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 GROUP BY G.GenreID, G.GenreName, Als.CertificationCount
 ORDER BY CAST(SUM(Als.CertificationCount) AS FLOAT) DESC;
-
 GO
 
 
