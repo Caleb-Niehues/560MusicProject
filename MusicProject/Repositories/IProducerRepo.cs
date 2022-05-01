@@ -33,5 +33,12 @@ namespace MusicProject.Repositories
         /// <param name="name"></param>
         /// <returns></returns>
         ProducerModel CreateProducer(string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="producerName"></param>
+        /// <param name="albumTitle"></param>
+        void UpdateProducersOnAlbum(string producerName, string albumTitle);
     }
 }

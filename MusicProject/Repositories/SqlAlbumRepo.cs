@@ -52,16 +52,16 @@ namespace MusicProject.Repositories
 
                         SqlSongRepo songRepo = new SqlSongRepo(connectionString);
                         TimeSpan albumLength = new TimeSpan();
-                        foreach (var song in songs)
+                        for (int i = 0; i < songs.Count; i++)
                         {
-                            songRepo.CreateSong(song.Name, currAlbum, song.Genre, song.Length, song.TrackNumber);
-                            albumLength += song.Length;
+                            songRepo.CreateSong(songs[i].Name, currAlbum, songs[i].Genre, songs[i].Length, i+1);
+                            albumLength += songs[i].Length;
                         }
 
                         SqlProducerRepo producerRepo = new SqlProducerRepo(connectionString);
                         foreach (var producer in producers)
                         {
-                            producerRepo.CreateProducer(producer.Name);
+                            producerRepo.UpdateProducersOnAlbum(producer.Name, title);
                         }
                         
                         return new AlbumModel(title, releaseDate, artist, songs, albumLength, producers, recordLabel, certification);
@@ -82,9 +82,6 @@ namespace MusicProject.Repositories
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("Name", name);
-
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
 
                         connection.Open();
 
