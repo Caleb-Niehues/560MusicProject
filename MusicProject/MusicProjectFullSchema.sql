@@ -603,6 +603,22 @@ GROUP BY G.GenreID, G.GenreName, Als.CertificationCount
 ORDER BY CAST(SUM(Als.CertificationCount) AS FLOAT) DESC;
 GO
 
+CREATE OR ALTER PROCEDURE MusicProject.UpdateProducerAlbum
+   @ProducerName NVARCHAR(128),
+   @AlbumTitle NVARCHAR(128)
+AS
+
+MERGE MusicProject.ProducerAlbum PA
+USING (
+	SELECT P.ProducerID, A.AlbumID
+	FROM MusicProject.Producer P
+		INNER JOIN MusicProject.Album A ON A.AlbumTitle = @AlbumTitle
+	WHERE P.ProducerName = @ProducerName
+	) AS NEW ON New.ProducerID = PA.ProducerID
+WHEN NOT MATCHED THEN
+	INSERT (ProducerID, AlbumID)
+	VALUES (NEW.ProducerID, NEW.AlbumID);
+GO
 
 /*************************
 **************************
