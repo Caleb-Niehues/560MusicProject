@@ -161,6 +161,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddSongView";
             this.Text = "AddView";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddSongView_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.uxMinute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxSecond)).EndInit();
             this.ResumeLayout(false);
