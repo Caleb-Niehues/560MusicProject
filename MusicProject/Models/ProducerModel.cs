@@ -51,5 +51,10 @@
             }
             return equals;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private string _comment;//needs to be nullable - though the empty string could suffice
+        private string _comment;
 
         /// <summary>
         /// comments made on the review by the user
@@ -80,8 +80,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            //return Rating.ToString() + " - " + UserName + " - " + DateAdded.ToString();
-            return Rating.ToString() + " - " + UserName;
+            return $"{Rating} - {UserName}";// - {DateAdded}";
         }
     }
 }

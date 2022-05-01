@@ -31,7 +31,7 @@ namespace MusicProject.Repositories
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("SongName", name);
-                        command.Parameters.AddWithValue("AlbumName", album.Title);
+                        command.Parameters.AddWithValue("AlbumTitle", album.Title);
                         command.Parameters.AddWithValue("GenreName", Enum.GetName(typeof(Genre), genre));
                         command.Parameters.AddWithValue("Length", length);
                         command.Parameters.AddWithValue("TrackNumber", trackNumber);
@@ -42,8 +42,6 @@ namespace MusicProject.Repositories
 
                         transaction.Complete();
 
-                        //var personId = (int)command.Parameters["PersonId"].Value;
-
                         return new SongModel(name, album.Title, album.Artist.Name, genre, length);
                     }
                 }
@@ -51,9 +49,9 @@ namespace MusicProject.Repositories
             }
         }
 
-        public string CheckAlbumExists(string albumName)
+        public string CheckAlbumExists(string albumTitle)
         {
-            IReadOnlyList<SongModel> s = RetrieveSongsByName(albumName);
+            IReadOnlyList<SongModel> s = RetrieveSongsByName(albumTitle);
             if (s.Count > 0)
             {
                 return s[0].Artist;

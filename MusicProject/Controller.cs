@@ -4,12 +4,12 @@ using MusicProject.Repositories;
 using System.Configuration;
 using System;
 
-namespace MusicProject.Controllers
+namespace MusicProject
 {
     /// <summary>
     /// A class to control the main operations of the program - very vague and likely needs broken up
     /// </summary>
-    public class MainController
+    public class Controller
     {
         #region Load Order
         private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
@@ -45,7 +45,7 @@ namespace MusicProject.Controllers
         private IReadOnlyList<AlbumModel> _albums = new List<AlbumModel>();
         #endregion
 
-        public MainController()
+        public Controller()
         {
             SqlUser = new SqlUserRepo(connectionString);
             SqlReview = new SqlReviewRepo(connectionString);
@@ -135,7 +135,6 @@ namespace MusicProject.Controllers
 
 
         #endregion
-
 
         #region Aggregating Queries
         public IReadOnlyList<BestPerformingGenreModel> GetGenres(System.DateTime start, System.DateTime end, int top)

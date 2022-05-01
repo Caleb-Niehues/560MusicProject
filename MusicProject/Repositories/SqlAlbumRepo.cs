@@ -119,6 +119,7 @@ namespace MusicProject.Repositories
             DateTime releaseDate = DateTime.Now;
             ArtistModel artist = null;
             Certification certification = Certification.None;
+            RecordLabelModel label;
 
             while (reader.Read())
             {
@@ -136,20 +137,23 @@ namespace MusicProject.Repositories
 
                 if (!producers.ContainsKey(producer)) producers.Add(producer, new ProducerModel(producer));
 
-                /*if (!recordLabels.ContainsKey(recordLabel)) 
-                {
-                    recordLabels.Add(recordLabel, new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal),
-                        reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
-                }*/
                 
                 if (!albums.ContainsKey(title))
                 {
-                    albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
-                        producers.Values.ToList<ProducerModel>(), 
-                        new RecordLabelModel(recordLabel, reader.GetDateTime(labelDateFoundedOrdinal), 
-                        reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)),
-                        certification));
+                    if (!reader.IsDBNull(labelDateClosedOrdinal))
+                    {
+                        label = new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
+                            reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal));
+                    }
+                    else
+                    {
+                        Nullable<DateTime> d = null;
+                        label = new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
+                            d, reader.GetString(labelLocationOrdinal));
+                    }
 
+                    albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
+                        producers.Values.ToList<ProducerModel>(), label,certification));
                 }
             }
             return albums.Values.ToList<AlbumModel>();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MusicProject.Controllers;
 using MusicProject.Models;
 using System.Windows.Forms;
 
@@ -9,7 +8,7 @@ namespace MusicProject.Views
     public delegate void UpdateUser(UserModel user);
     public partial class MainView : Form
     {
-        public MainView(MainController controller)
+        public MainView(Controller controller)
         {
             InitializeComponent();
             search = controller.Search;

@@ -28,6 +28,8 @@ namespace MusicProject.Views
         private List<ProducerModel> producers = new List<ProducerModel>();
         private List<SongModel> songs = new List<SongModel>();
 
+        private AddSongView addSong = null;
+
         public AddAlbumView(AlbumModel album)
         {
             InitializeComponent();
@@ -101,7 +103,11 @@ namespace MusicProject.Views
 
         private void uxNewSongButton_Click(object sender, EventArgs e)
         {
-            new AddSongView(updateSongs, title, artist.Name).Show();
+            if (addSong == null || !addSong.IsOpen)
+            {
+                addSong = new AddSongView(updateSongs, title, artist.Name);
+                addSong.Show();
+            }
         }
 
         private void uxArtistBox_HitEnter(object sender, KeyEventArgs e)

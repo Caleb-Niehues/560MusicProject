@@ -72,12 +72,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private RecordLabelModel _recordLabels;
+        private RecordLabelModel _recordLabel;
 
         /// <summary>
         /// 
         /// </summary>
-        public RecordLabelModel RecordLabels => _recordLabels;
+        public RecordLabelModel RecordLabel => _recordLabel;
 
         /// <summary>
         /// 
@@ -101,7 +101,7 @@ namespace MusicProject.Models
         /// <param name="producers"></param>
         /// <param name="recordLabels"></param>
         /// <param name="certification"></param>
-        public AlbumModel(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabels, Certification certification)
+        public AlbumModel(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs, TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
         {
             this._title = title;
             this._releaseDate = releaseDate;
@@ -109,13 +109,13 @@ namespace MusicProject.Models
             this._songs = songs;
             this._length = length;
             this._producers = producers;
-            this._recordLabels = recordLabels;
+            this._recordLabel = recordLabel;
             this._certification = certification;
         }
 
         public override string ToString()
         {
-            return Title + " - " + Artist + " - " + ReleaseDate.Year.ToString() + " - " + Enum.GetName(typeof(Certification), this.Certification) + " - " + Length.ToString();
+            return $"{Title} - {Artist.Name} - {ReleaseDate.Year} - {RecordLabel.Name} - {Enum.GetName(typeof(Certification), this.Certification)} - {Length}";
         }
     }
 }

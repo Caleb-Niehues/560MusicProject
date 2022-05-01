@@ -11,16 +11,6 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private int _ID;
-
-        /// <summary>
-        /// ID number of a record label
-        /// </summary>
-        public int ID => _ID;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private string _name;
 
         /// <summary>
@@ -76,7 +66,9 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return Name;
+            if(DateClosed == null)
+                return $"{Name} - {Location} - {DateFounded.Year} - still active";
+            return $"{Name} - {Location} - {DateFounded.Year} - {DateClosed.Value.Year}";
         }
     }
 }
