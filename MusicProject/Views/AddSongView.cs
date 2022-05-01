@@ -8,12 +8,14 @@ namespace MusicProject.Views
     {
         private updateSongs update;
 
+        public static bool isOpen = false;
         private string albumTitle;
         private string artistName;
 
         public AddSongView(updateSongs update, string albumTitle, string artistName)
         {
             InitializeComponent();
+            isOpen = true;
             this.update = update;
             this.albumTitle = albumTitle;
             this.artistName = artistName;
@@ -34,5 +36,7 @@ namespace MusicProject.Views
             }
             else MessageBox.Show("All fields must be filled out");
         }
+
+
     }
 }

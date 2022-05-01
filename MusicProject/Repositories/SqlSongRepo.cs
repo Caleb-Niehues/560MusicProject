@@ -42,8 +42,6 @@ namespace MusicProject.Repositories
 
                         transaction.Complete();
 
-                        //var personId = (int)command.Parameters["PersonId"].Value;
-
                         return new SongModel(name, album.Title, album.Artist.Name, genre, length);
                     }
                 }

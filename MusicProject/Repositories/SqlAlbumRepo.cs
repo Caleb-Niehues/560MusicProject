@@ -142,7 +142,7 @@ namespace MusicProject.Repositories
                         reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal)));
                 }*/
                 
-                if (!albums.ContainsKey(title))
+                if (!albums.ContainsKey(title))// && albums[title].Title != null)
                 {
                     albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length, 
                         producers.Values.ToList<ProducerModel>(), 

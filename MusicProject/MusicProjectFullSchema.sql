@@ -1,4 +1,4 @@
-USE [your_database_name]; -- Your database here.
+USE [CalebNiehues]; -- Your database here.
 
 /********************
 *********************
@@ -137,7 +137,7 @@ CREATE TABLE MusicProject.Review
 		REFERENCES MusicProject.Album(AlbumID),
    AlbumComment NVARCHAR(400),
    AlbumRating DECIMAL(2,1) NOT NULL,
-   DateAdded INT NOT NULL,
+   DateAdded DATE NOT NULL,
    DateDeleted INT
 );
 GO
@@ -221,7 +221,7 @@ CREATE OR ALTER PROCEDURE MusicProject.CreateReview
 	@Comment NVARCHAR(400),
 	@Rating DECIMAL
 AS
-INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateDeleted)
+INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateAdded, DateDeleted)
 	VALUES (
 	(
 		SELECT U.UserID
@@ -234,7 +234,7 @@ INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateDele
 		WHERE A.AlbumTitle = @AlbumTitle
 	),
 	@Comment, @Rating, 
-	--SYSDATETIMEOFFSET(),
+	SYSDATETIMEOFFSET(),
 	NULL
 );
 GO
@@ -446,7 +446,7 @@ CREATE OR ALTER PROCEDURE MusicProject.RetrieveReviewsByAlbum
 	@AlbumTitle NVARCHAR(128)
 AS
 
-SELECT U.UserName, A.AlbumTitle, R.AlbumComment, R.AlbumRating--, R.DateAdded
+SELECT U.UserName, A.AlbumTitle, R.AlbumComment, R.AlbumRating, R.DateAdded
 FROM MusicProject.Review R
 	INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
 	INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID

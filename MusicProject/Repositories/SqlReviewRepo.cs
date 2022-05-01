@@ -171,7 +171,6 @@ namespace MusicProject.Repositories
                         command.Parameters.AddWithValue("AlbumTitle", albumTitle);
                         command.Parameters.AddWithValue("Comment", comment);
                         command.Parameters.AddWithValue("Rating", rating);
-                        //command.Parameters.AddWithValue("")
 
                         connection.Open();
 
