@@ -41,7 +41,7 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private Genre _genre; //might end up being enum
+        private Genre _genre;
 
         /// <summary>
         /// genre from where the song comes from
@@ -87,7 +87,8 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return Name + " - " + AlbumName + " - " + Artist + " - " + Enum.GetName(typeof(Genre), this.Genre) + " - " + Length.ToString();
+            return $"{Name} - {AlbumName} - " +
+                $"{Artist} - {Enum.GetName(typeof(Genre), this.Genre)} - {Length}";
         }
     }
 }

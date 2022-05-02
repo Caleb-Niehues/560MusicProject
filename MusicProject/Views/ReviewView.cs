@@ -7,7 +7,7 @@ namespace MusicProject.Views
 {
     public partial class ReviewView : Form
     {
-        private static GetReviews get;
+        private static RetrieveReviewsByAlbum get;
         private static FetchReview fetch;
         private static CreateOrSaveReview save;
 
@@ -24,7 +24,7 @@ namespace MusicProject.Views
             uxReviewsList.DataSource = get(album);
         }
 
-        public static void InitializeDelegates(GetReviews getRev, FetchReview fetchRev, CreateOrSaveReview saveRev)
+        public static void InitializeDelegates(RetrieveReviewsByAlbum getRev, FetchReview fetchRev, CreateOrSaveReview saveRev)
         {
             get = getRev;
             fetch = fetchRev;

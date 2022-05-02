@@ -45,7 +45,7 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return $"{User} - {Score} score - {CommentCount} comments";
+            return $"{User.Name} - {Score} score - {CommentCount} comments";
         }
     }
 }

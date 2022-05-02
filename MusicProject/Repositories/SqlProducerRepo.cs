@@ -134,5 +134,28 @@ namespace MusicProject.Repositories
             }
             return producers;
         }
+
+        public void UpdateProducersOnAlbum(string producerName, string albumTitle)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    using (var command = new SqlCommand("MusicProject.UpdateProducerAlbum", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("ProducerName", producerName);
+                        command.Parameters.AddWithValue("AlbumTitle", albumTitle);
+
+                        connection.Open();
+
+                        command.ExecuteNonQuery();
+
+                        transaction.Complete();
+                    }
+                }
+            }
+        }
     }
 }

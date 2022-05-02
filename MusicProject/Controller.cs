@@ -4,15 +4,15 @@ using MusicProject.Repositories;
 using System.Configuration;
 using System;
 
-namespace MusicProject.Controllers
+namespace MusicProject
 {
     /// <summary>
     /// A class to control the main operations of the program - very vague and likely needs broken up
     /// </summary>
-    public class MainController
+    public class Controller
     {
         #region Load Order
-        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionJordan"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["configConnectionCaleb"].ConnectionString;
         private SqlUserRepo SqlUser;
         private SqlReviewRepo SqlReview;
         private SqlPersonRepo SqlPerson;
@@ -45,7 +45,7 @@ namespace MusicProject.Controllers
         private IReadOnlyList<AlbumModel> _albums = new List<AlbumModel>();
         #endregion
 
-        public MainController()
+        public Controller()
         {
             SqlUser = new SqlUserRepo(connectionString);
             SqlReview = new SqlReviewRepo(connectionString);
@@ -63,7 +63,7 @@ namespace MusicProject.Controllers
         }
 
         #region Login        
-        public UserModel CredentialCheck(string userName, string password)
+        public UserModel FetchAndCheckUser(string userName, string password)
         {
             bool temp = SqlUser.FetchUser(userName, password, out _activeUser);
             return _activeUser;
@@ -87,7 +87,7 @@ namespace MusicProject.Controllers
         #endregion
 
         #region Reviews
-        public IReadOnlyList<ReviewModel> GetReviews(AlbumModel album)
+        public IReadOnlyList<ReviewModel> RetrieveReviewsByAlbum(AlbumModel album)
         {
             _reviews = SqlReview.RetrieveReviews(album.Title);
             return _reviews;
@@ -136,7 +136,6 @@ namespace MusicProject.Controllers
 
         #endregion
 
-
         #region Aggregating Queries
         public IReadOnlyList<BestPerformingGenreModel> GetGenres(System.DateTime start, System.DateTime end, int top)
         {
@@ -180,6 +179,42 @@ namespace MusicProject.Controllers
         public RecordLabelModel CreateLabel(string name, DateTime founded, DateTime? ended, string location)
         {
             return SqlRecordLabel.CreateRecordLabel(name, founded, ended, location);
+        }
+        #endregion
+
+        #region AlbumView
+        public AlbumModel CreateAlbum(string title, DateTime releaseDate, ArtistModel artist, List<SongModel> songs,
+            TimeSpan length, List<ProducerModel> producers, RecordLabelModel recordLabel, Certification certification)
+        {
+            return SqlAlbum.CreateAlbum(title, releaseDate, artist, songs, length, producers, recordLabel, certification);
+        }
+
+        public IReadOnlyList<ArtistModel> RetrieveArtistsByName(string name)
+        {
+            return SqlArtist.FetchArtist(name);
+        }
+
+        public IReadOnlyList<ProducerModel> RetrieveProducersByAlbum(string albumTitle)
+        {
+            return SqlProducer.RetrieveProducersByAlbum(albumTitle);
+        }
+
+        public IReadOnlyList<RecordLabelModel> RetrieveLabelsByAlbum(string albumTitle)
+        {
+            //return SqlRecordLabel.RetrieveRecordLabelsByAlbum(albumTitle);
+            return null;
+        }
+
+        public IReadOnlyList<SongModel> RetrieveSongsByAlbum(string albumTitle)
+        {
+            return SqlSong.RetrieveSongsByAlbum(albumTitle);
+        }
+
+        public RecordLabelModel FetchLabel(string name)//, string location)
+        {
+            var temp = SqlRecordLabel.FetchRecordLabel(name);//, location);
+            if (temp.Count > 0) return temp[0];
+            return null;
         }
         #endregion
     }
