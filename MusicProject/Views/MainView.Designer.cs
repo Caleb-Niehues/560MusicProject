@@ -75,7 +75,7 @@
             // uxLogIn
             // 
             this.uxLogIn.Location = new System.Drawing.Point(13, 467);
-            this.uxLogIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxLogIn.Margin = new System.Windows.Forms.Padding(4);
             this.uxLogIn.Name = "uxLogIn";
             this.uxLogIn.Size = new System.Drawing.Size(100, 28);
             this.uxLogIn.TabIndex = 0;
@@ -86,7 +86,7 @@
             // uxTopGenres
             // 
             this.uxTopGenres.Location = new System.Drawing.Point(11, 159);
-            this.uxTopGenres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxTopGenres.Margin = new System.Windows.Forms.Padding(4);
             this.uxTopGenres.Name = "uxTopGenres";
             this.uxTopGenres.Size = new System.Drawing.Size(236, 28);
             this.uxTopGenres.TabIndex = 1;
@@ -97,7 +97,7 @@
             // uxArtistAlbums
             // 
             this.uxArtistAlbums.Location = new System.Drawing.Point(11, 195);
-            this.uxArtistAlbums.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxArtistAlbums.Margin = new System.Windows.Forms.Padding(4);
             this.uxArtistAlbums.Name = "uxArtistAlbums";
             this.uxArtistAlbums.Size = new System.Drawing.Size(261, 28);
             this.uxArtistAlbums.TabIndex = 2;
@@ -108,7 +108,7 @@
             // uxSuperFans
             // 
             this.uxSuperFans.Location = new System.Drawing.Point(11, 229);
-            this.uxSuperFans.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxSuperFans.Margin = new System.Windows.Forms.Padding(4);
             this.uxSuperFans.Name = "uxSuperFans";
             this.uxSuperFans.Size = new System.Drawing.Size(261, 28);
             this.uxSuperFans.TabIndex = 3;
@@ -130,7 +130,7 @@
             // uxLookUpText
             // 
             this.uxLookUpText.Location = new System.Drawing.Point(11, 23);
-            this.uxLookUpText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxLookUpText.Margin = new System.Windows.Forms.Padding(4);
             this.uxLookUpText.Name = "uxLookUpText";
             this.uxLookUpText.Size = new System.Drawing.Size(261, 22);
             this.uxLookUpText.TabIndex = 5;
@@ -140,7 +140,7 @@
             // uxRecordLabelAlbums
             // 
             this.uxRecordLabelAlbums.Location = new System.Drawing.Point(13, 265);
-            this.uxRecordLabelAlbums.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxRecordLabelAlbums.Margin = new System.Windows.Forms.Padding(4);
             this.uxRecordLabelAlbums.Name = "uxRecordLabelAlbums";
             this.uxRecordLabelAlbums.Size = new System.Drawing.Size(259, 28);
             this.uxRecordLabelAlbums.TabIndex = 6;
@@ -163,7 +163,7 @@
             this.uxSongList.FormattingEnabled = true;
             this.uxSongList.ItemHeight = 16;
             this.uxSongList.Location = new System.Drawing.Point(500, 381);
-            this.uxSongList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxSongList.Margin = new System.Windows.Forms.Padding(4);
             this.uxSongList.Name = "uxSongList";
             this.uxSongList.Size = new System.Drawing.Size(159, 116);
             this.uxSongList.TabIndex = 8;
@@ -193,7 +193,7 @@
             this.uxProducerList.FormattingEnabled = true;
             this.uxProducerList.ItemHeight = 16;
             this.uxProducerList.Location = new System.Drawing.Point(878, 227);
-            this.uxProducerList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxProducerList.Margin = new System.Windows.Forms.Padding(4);
             this.uxProducerList.Name = "uxProducerList";
             this.uxProducerList.Size = new System.Drawing.Size(159, 116);
             this.uxProducerList.TabIndex = 11;
@@ -203,7 +203,7 @@
             this.uxRecordLabelList.FormattingEnabled = true;
             this.uxRecordLabelList.ItemHeight = 16;
             this.uxRecordLabelList.Location = new System.Drawing.Point(878, 51);
-            this.uxRecordLabelList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxRecordLabelList.Margin = new System.Windows.Forms.Padding(4);
             this.uxRecordLabelList.Name = "uxRecordLabelList";
             this.uxRecordLabelList.Size = new System.Drawing.Size(159, 116);
             this.uxRecordLabelList.TabIndex = 12;
@@ -213,7 +213,7 @@
             this.uxPersonList.FormattingEnabled = true;
             this.uxPersonList.ItemHeight = 16;
             this.uxPersonList.Location = new System.Drawing.Point(878, 381);
-            this.uxPersonList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxPersonList.Margin = new System.Windows.Forms.Padding(4);
             this.uxPersonList.Name = "uxPersonList";
             this.uxPersonList.Size = new System.Drawing.Size(159, 116);
             this.uxPersonList.TabIndex = 13;
@@ -224,7 +224,7 @@
             this.uxArtistListBox.FormattingEnabled = true;
             this.uxArtistListBox.ItemHeight = 16;
             this.uxArtistListBox.Location = new System.Drawing.Point(695, 381);
-            this.uxArtistListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxArtistListBox.Margin = new System.Windows.Forms.Padding(4);
             this.uxArtistListBox.Name = "uxArtistListBox";
             this.uxArtistListBox.Size = new System.Drawing.Size(159, 116);
             this.uxArtistListBox.TabIndex = 14;
@@ -264,7 +264,7 @@
             // 
             this.uxLeaveReview.Enabled = false;
             this.uxLeaveReview.Location = new System.Drawing.Point(172, 467);
-            this.uxLeaveReview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxLeaveReview.Margin = new System.Windows.Forms.Padding(4);
             this.uxLeaveReview.Name = "uxLeaveReview";
             this.uxLeaveReview.Size = new System.Drawing.Size(100, 28);
             this.uxLeaveReview.TabIndex = 18;
@@ -287,7 +287,7 @@
             this.uxAlbumListBox.FormattingEnabled = true;
             this.uxAlbumListBox.ItemHeight = 16;
             this.uxAlbumListBox.Location = new System.Drawing.Point(299, 381);
-            this.uxAlbumListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxAlbumListBox.Margin = new System.Windows.Forms.Padding(4);
             this.uxAlbumListBox.Name = "uxAlbumListBox";
             this.uxAlbumListBox.Size = new System.Drawing.Size(159, 116);
             this.uxAlbumListBox.TabIndex = 19;
@@ -298,7 +298,7 @@
             this.uxAddAlbum.Name = "uxAddAlbum";
             this.uxAddAlbum.Size = new System.Drawing.Size(125, 23);
             this.uxAddAlbum.TabIndex = 21;
-            this.uxAddAlbum.Text = "Add Album";
+            this.uxAddAlbum.Text = "Add/Edit Album";
             this.uxAddAlbum.UseVisualStyleBackColor = true;
             this.uxAddAlbum.Click += new System.EventHandler(this.uxAddAlbum_Click);
             // 
@@ -338,7 +338,7 @@
             this.uxFocusedList.FormattingEnabled = true;
             this.uxFocusedList.ItemHeight = 16;
             this.uxFocusedList.Location = new System.Drawing.Point(299, 51);
-            this.uxFocusedList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxFocusedList.Margin = new System.Windows.Forms.Padding(4);
             this.uxFocusedList.Name = "uxFocusedList";
             this.uxFocusedList.Size = new System.Drawing.Size(555, 292);
             this.uxFocusedList.TabIndex = 25;
@@ -436,7 +436,7 @@
             // uxAggQueryName
             // 
             this.uxAggQueryName.Location = new System.Drawing.Point(13, 316);
-            this.uxAggQueryName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.uxAggQueryName.Margin = new System.Windows.Forms.Padding(4);
             this.uxAggQueryName.Name = "uxAggQueryName";
             this.uxAggQueryName.Size = new System.Drawing.Size(261, 22);
             this.uxAggQueryName.TabIndex = 29;
@@ -446,7 +446,7 @@
             // 
             this.uxStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.uxStartDate.Location = new System.Drawing.Point(13, 377);
-            this.uxStartDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxStartDate.Margin = new System.Windows.Forms.Padding(2);
             this.uxStartDate.Name = "uxStartDate";
             this.uxStartDate.Size = new System.Drawing.Size(102, 22);
             this.uxStartDate.TabIndex = 30;
@@ -477,7 +477,7 @@
             // 
             this.uxEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.uxEndDate.Location = new System.Drawing.Point(146, 376);
-            this.uxEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxEndDate.Margin = new System.Windows.Forms.Padding(2);
             this.uxEndDate.Name = "uxEndDate";
             this.uxEndDate.Size = new System.Drawing.Size(102, 22);
             this.uxEndDate.TabIndex = 33;
@@ -485,7 +485,7 @@
             // uxTopGenreInput
             // 
             this.uxTopGenreInput.Location = new System.Drawing.Point(252, 164);
-            this.uxTopGenreInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxTopGenreInput.Margin = new System.Windows.Forms.Padding(2);
             this.uxTopGenreInput.Maximum = new decimal(new int[] {
             500,
             0,
@@ -539,7 +539,7 @@
             this.Controls.Add(this.uxArtistAlbums);
             this.Controls.Add(this.uxTopGenres);
             this.Controls.Add(this.uxLogIn);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "GoodVibes.exe";
             this.uxFocusButtons.ResumeLayout(false);

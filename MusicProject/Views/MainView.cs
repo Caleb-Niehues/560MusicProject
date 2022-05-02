@@ -144,7 +144,12 @@ namespace MusicProject.Views
         #region Add to DB
         private void uxAddAlbum_Click(object sender, EventArgs e)
         {
-            albumView = new AddAlbumView(null);
+            if (uxAlbumsFocus.Checked && albums.Count > 0)
+            {
+                albumView = new AddAlbumView(albums[uxFocusedList.SelectedIndex]);
+            }
+            else
+                albumView = new AddAlbumView(null);
             albumView.Show();
         }
 
@@ -175,6 +180,9 @@ namespace MusicProject.Views
         #region Aggregating Queries
         private void uxTopGenres_Click(object sender, EventArgs e)
         {
+            foreach (RadioButton button in uxFocusButtons.Controls)
+                button.Checked = false;
+
             genres = topGenres(uxStartDate.Value, uxEndDate.Value, (int)uxTopGenreInput.Value);
             if (genres.Count < 1)
             {
@@ -186,6 +194,9 @@ namespace MusicProject.Views
 
         private void uxArtistAlbums_Click(object sender, EventArgs e)
         {
+            foreach (RadioButton button in uxFocusButtons.Controls)
+                button.Checked = false;
+
             aggQueryAlbums = topAlbums(uxAggQueryName.Text);
             if (aggQueryAlbums.Count < 1)
             {
@@ -199,6 +210,9 @@ namespace MusicProject.Views
 
         private void uxSuperFans_Click(object sender, EventArgs e)
         {
+            foreach (RadioButton button in uxFocusButtons.Controls)
+                button.Checked = false;
+
             aggQuerySuperFans = superFans(uxAggQueryName.Text);
             if (aggQuerySuperFans.Count < 1)
             {
@@ -210,6 +224,9 @@ namespace MusicProject.Views
 
         private void uxRecordLabelAlbums_Click(object sender, EventArgs e)
         {
+            foreach (RadioButton button in uxFocusButtons.Controls)
+                button.Checked = false;
+
             var labels = new List<AlbumsWithRecordLabelModel>();
             aggQueryRecordLabelAlbums = recordLabelAlbums(uxAggQueryName.Text, uxStartDate.Value, uxEndDate.Value);
             if (aggQueryRecordLabelAlbums == null)

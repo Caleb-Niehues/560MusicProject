@@ -34,15 +34,29 @@ namespace MusicProject.Views
         {
             InitializeComponent();
             this.album = album;
+            uxCertificationCombo.DataSource = Enum.GetValues(typeof(Certification));
+
             if (album != null)
             {
                 title = album.Title;
-                uxTitleBox.ReadOnly = true;
                 artist = album.Artist;
+                songs = album.Songs;
+                producers = album.Producers;
+                label = album.RecordLabel;
+
+                uxTitleBox.Text = title;
+                uxTitleBox.ReadOnly = true;
+
+                uxArtistBox.Text = artist.Name;
                 uxArtistBox.ReadOnly = true;
-                uxReleaseDate.Enabled = false;
+
+                uxReleaseDate.Value = album.ReleaseDate;
+
+                uxCertificationCombo.SelectedIndex = (int)album.Certification;
+
+                uxLabelLabel.Text = $"Record label: {label.Name}";
             }
-            uxCertificationCombo.DataSource = Enum.GetValues(typeof(Certification));
+
             uxProducerList.DataSource = producers;
             uxSongList.DataSource = songs;
         }
