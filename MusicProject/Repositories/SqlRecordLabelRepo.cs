@@ -122,16 +122,13 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.AlbumsWithRecordLabel", connection))
+                    using (var command = new SqlCommand("MusicProject.GetAlbumsWithRecordLabel", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("RecordLabelName", recordLabelName);
                         command.Parameters.AddWithValue("StartYear", startYear);
                         command.Parameters.AddWithValue("EndYear", endYear);
-
-                        //var p = command.Parameters.Add("PersonId", SqlDbType.Int);
-                        //p.Direction = ParameterDirection.Output;
 
                         connection.Open();
 
