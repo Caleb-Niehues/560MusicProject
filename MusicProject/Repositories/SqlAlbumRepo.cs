@@ -147,7 +147,7 @@ namespace MusicProject.Repositories
                         tempDate, reader.GetString(labelLocationOrdinal));
             }
             
-            if (!albums.ContainsKey(title))
+            if (!string.IsNullOrWhiteSpace(title) && !albums.ContainsKey(title))
             {
                 albums.Add(title, new AlbumModel(title, releaseDate, artist, songs, length,
                     producers.Values.ToList<ProducerModel>(), label, certification));
