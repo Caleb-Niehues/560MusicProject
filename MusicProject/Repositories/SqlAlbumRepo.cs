@@ -126,6 +126,7 @@ namespace MusicProject.Repositories
                 certification = (Certification)Enum.Parse(typeof(Certification), reader.GetString(certificationOrdinal));
                 string producer = reader.GetString(producerNameOrdinal);
                 string recordLabel = reader.GetString(recordLabelNameOrdinal);
+                Nullable<DateTime> tempDate;
 
                 songs.Add(new SongModel(reader.GetString(songNameOrdinal), title,
                     artist.ToString(), (Genre)Enum.Parse(typeof(Genre), reader.GetString(genreNameOrdinal)),
@@ -136,15 +137,14 @@ namespace MusicProject.Repositories
 
                 if (!reader.IsDBNull(labelDateClosedOrdinal))
                 {
-                    label = new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
-                        reader.GetDateTime(labelDateClosedOrdinal), reader.GetString(labelLocationOrdinal));
+                    tempDate = reader.GetDateTime(labelDateClosedOrdinal);
                 }
                 else
                 {
-                    Nullable<DateTime> d = null;
-                    label = new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
-                        d, reader.GetString(labelLocationOrdinal));
+                    tempDate = null;
                 }
+                label = new RecordLabelModel(reader.GetString(recordLabelNameOrdinal), reader.GetDateTime(labelDateFoundedOrdinal),
+                        tempDate, reader.GetString(labelLocationOrdinal));
             }
             
             if (!albums.ContainsKey(title))
