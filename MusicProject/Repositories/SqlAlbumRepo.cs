@@ -70,7 +70,7 @@ namespace MusicProject.Repositories
             }
         }
 
-        public IReadOnlyList<AlbumModel> FetchAlbum(string name)
+        public IReadOnlyList<AlbumModel> FetchAlbum(string title)
         {
             // Save to database.
             using (var transaction = new TransactionScope())
@@ -81,7 +81,7 @@ namespace MusicProject.Repositories
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("Name", name);
+                        command.Parameters.AddWithValue("Title", title);
 
                         connection.Open();
 

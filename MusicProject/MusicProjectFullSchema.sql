@@ -298,7 +298,7 @@ GO
 
 --fetches the album from the database
 CREATE OR ALTER PROCEDURE MusicProject.FetchAlbum
-   @Name NVARCHAR(128)
+   @Title NVARCHAR(128)
 AS
 
 SELECT A.AlbumTitle, A.ReleaseDate, Ar.ArtistName, S.SongName,
@@ -312,7 +312,7 @@ INNER JOIN MusicProject.Producer P ON P.ProducerID = Pa.ProducerID
 INNER JOIN MusicProject.RecordLabel R ON R.RecordLabelID = A.RecordLabelID
 INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
 INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
-WHERE A.AlbumTitle = @Name;
+WHERE A.AlbumTitle = @Title;
 
 GO
 
