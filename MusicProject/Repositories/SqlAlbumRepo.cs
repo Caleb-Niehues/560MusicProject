@@ -29,7 +29,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateAlbum", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateOrUpdateAlbum", connection))
                     {
                         //check for param existence
                         command.CommandType = CommandType.StoredProcedure;

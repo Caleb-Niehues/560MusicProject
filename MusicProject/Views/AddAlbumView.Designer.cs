@@ -198,7 +198,7 @@ namespace MusicProject.Views
             this.uxNewSongButton.Name = "uxNewSongButton";
             this.uxNewSongButton.Size = new System.Drawing.Size(131, 28);
             this.uxNewSongButton.TabIndex = 19;
-            this.uxNewSongButton.Text = "New Song";
+            this.uxNewSongButton.Text = "Add/Edit Song";
             this.uxNewSongButton.UseVisualStyleBackColor = true;
             this.uxNewSongButton.Click += new System.EventHandler(this.uxNewSongButton_Click);
             // 
@@ -248,7 +248,6 @@ namespace MusicProject.Views
             this.Controls.Add(this.uxReleaseDate);
             this.Name = "AddAlbumView";
             this.Text = "AddAlbum";
-            //this.Load += new System.EventHandler(this.AddAlbumView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

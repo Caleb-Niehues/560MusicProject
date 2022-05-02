@@ -26,7 +26,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateSong", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateOrUpdateSong", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 

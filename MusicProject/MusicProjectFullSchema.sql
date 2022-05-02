@@ -149,20 +149,26 @@ GO
 * Stored Procedures      *
 **************************
 *************************/
---creates/adds an artist
-CREATE OR ALTER PROCEDURE MusicProject.AddArtist
+--Creates a new artist if they aren't already in the DB
+CREATE OR ALTER PROCEDURE MusicProject.CreateArtist
    @ArtistName NVARCHAR(128)
 AS
 
-INSERT MusicProject.Artist(ArtistName)
-VALUES(@ArtistName);
+MERGE MusicProject.Artist A 
+USING (VALUES(@ArtistName)) NEW (ArtistName)
+	ON NEW.ArtistName = A.ArtistName
+WHEN NOT MATCHED THEN
+	INSERT (ArtistName)
+	VALUES(NEW.ArtistName);
+
 GO
 
---creates an album
-CREATE OR ALTER PROCEDURE MusicProject.CreateAlbum 
+--If album already exists under @AlbumTitle and @ArtistName, updates the album, otherwise creates a new one
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateAlbum 
  @AlbumTitle NVARCHAR(128), @ReleaseDate DATE, @ArtistName NVARCHAR(128),
 	@RecordLabelName NVARCHAR(128), @CertificationName NVARCHAR(64)
 AS
+
 DECLARE @ArtistID INT =
 (
 	SELECT A.ArtistID
@@ -181,66 +187,89 @@ DECLARE @CertificationID INT =
 	FROM MusicProject.Certification C
 	WHERE C.CertificationName = @CertificationName
 )
-INSERT MusicProject.Album(AlbumTitle, ReleaseDate, ArtistID, RecordLabelID, CertificationID)
-VALUES (@AlbumTitle, @ReleaseDate, @ArtistID, @RecordLabelID, @CertificationID)
+
+MERGE MusicProject.Album A
+USING (VALUES(@ArtistID, @AlbumTitle)) NEW (ArtistID, AlbumTitle)
+	ON NEW.ArtistID = A.ArtistID AND NEW.AlbumTitle = A.AlbumTitle
+WHEN NOT MATCHED THEN
+	INSERT (AlbumTitle, ReleaseDate, ArtistID, RecordLabelID, CertificationID)
+	VALUES (@AlbumTitle, @ReleaseDate, @ArtistID, @RecordLabelID, @CertificationID)
+WHEN MATCHED THEN
+	UPDATE SET 
+		A.ReleaseDate = @ReleaseDate,
+		A.RecordLabelID = @RecordLabelID,
+		A.CertificationID = @CertificationID;
+
 GO
 
---creates a producer
+--Creates a producer if they aren't already in the DB
 CREATE OR ALTER PROCEDURE MusicProject.CreateProducer
    @Name NVARCHAR(128)
 AS
+
 MERGE MusicProject.Producer P
 USING (VALUES (@Name)) NEW(ProducerName)
 	ON New.ProducerName = P.ProducerName
 WHEN NOT MATCHED THEN
 	INSERT (ProducerName)
 	VALUES (@Name);
+
 GO
 
---creates a record label
-CREATE OR ALTER PROCEDURE MusicProject.CreateRecordLabel
+--If record label already exists under @Name, updates the record label, otherwise creates a new one
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateRecordLabel
    @Name NVARCHAR(128),
    @DateFounded DATE,
    @DateClosed DATE,
    @Location NVARCHAR(64)
 AS
-INSERT MusicProject.RecordLabel(RecordLabelName, DateFounded, DateClosed, RecordLabelLocation)
-SELECT R.RecordLabelName, R.DateFounded, R.DateClosed, R.RecordLabelLocation
-FROM
-	(
-		VALUES
-			(@Name, @DateFounded, @DateFounded, @Location))
-			R(RecordLabelName, DateFounded, DateClosed, RecordLabelLocation)
+
+MERGE MusicProject.RecordLabel RL
+USING (VALUES(@Name)) NEW ([Name])
+	ON NEW.[Name] = RL.RecordLabelName
+WHEN MATCHED THEN
+	UPDATE SET
+		RL.DateFounded = @DateFounded,
+		RL.DateClosed = @DateClosed,
+		RL.RecordLabelLocation = @Location
+WHEN NOT MATCHED THEN
+	INSERT (RecordLabelName, DateFounded, DateClosed, RecordLabelLocation)
+	VALUES (NEW.[Name], @DateFounded, @DateClosed, @Location);
 
 GO
 
---creates a review
+--Creates a review if it isn't already in the DB
 CREATE OR ALTER PROCEDURE MusicProject.CreateReview
 	@UserName NVARCHAR(32),
 	@AlbumTitle NVARCHAR(128),
 	@Comment NVARCHAR(400),
 	@Rating DECIMAL
 AS
-INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateAdded, DateDeleted)
-	VALUES (
-	(
-		SELECT U.UserID
-		FROM MusicProject.[User] U
-		WHERE U.UserName = @UserName
-	),
-	(
-		SELECT A.AlbumId
-		FROM MusicProject.Album A
-		WHERE A.AlbumTitle = @AlbumTitle
-	),
-	@Comment, @Rating, 
-	SYSDATETIMEOFFSET(),
-	NULL
-);
+
+DECLARE @UserID INT =
+(
+	SELECT UserID
+	FROM MusicProject.[User] U
+	WHERE U.UserName = @UserName
+)
+DECLARE @AlbumID INT =
+(
+	SELECT AlbumID
+	FROM MusicProject.Album A
+	WHERE A.AlbumTitle = @AlbumTitle
+)
+
+MERGE MusicProject.Review R
+USING (VALUES(@UserID, @AlbumID)) NEW (UserID, AlbumID)
+	ON NEW.UserID = R.UserID AND NEW.AlbumID = R.AlbumID
+WHEN NOT MATCHED THEN
+INSERT (UserID, AlbumID, AlbumComment, AlbumRating, DateAdded, DateDeleted)
+VALUES (@UserID, @AlbumID, @Comment, @Rating, SYSDATETIMEOFFSET(), NULL);
+
 GO
 
---creates a song
-CREATE OR ALTER PROCEDURE MusicProject.CreateSong
+--If song already exists under @SongName and @AlbumTitle, updates the song, otherwise creates a new one
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateSong
    @SongName NVARCHAR(64),
    @AlbumTitle NVARCHAR(128),
    @GenreName NVARCHAR(64),
@@ -248,20 +277,33 @@ CREATE OR ALTER PROCEDURE MusicProject.CreateSong
    @TrackNumber INT
 AS
 
-INSERT MusicProject.Song(SongName, AlbumID, GenreID, [Length], TrackNumber)
-SELECT S.SongName, A.AlbumID, G.GenreID, S.[Length], S.TrackNumber
-FROM
-	(
-		VALUES
-			(@SongName, @AlbumTitle, @GenreName, @Length, @TrackNumber))
-			S(SongName, AlbumName, GenreName, [Length], TrackNumber)
-INNER JOIN MusicProject.Album A ON A.AlbumTitle = S.AlbumName
-INNER JOIN MusicProject.Genre G ON G.GenreName = S.GenreName; 
+DECLARE @AlbumID INT = (
+	SELECT A.AlbumID
+	FROM MusicProject.Album A
+	WHERE A.AlbumTitle = @AlbumTitle
+)
+DECLARE @GenreID INT = (
+	SELECT GenreID
+	FROM MusicProject.Genre G
+	WHERE G.GenreName = @GenreName
+)
+
+MERGE MusicProject.Song S
+USING (VALUES(@SongName, @AlbumID)) NEW (SongName, AlbumID)
+	ON NEW.SongName = S.SongName AND NEW.AlbumID = S.AlbumID
+WHEN NOT MATCHED THEN
+	INSERT (SongName, AlbumID, GenreID, [Length], TrackNumber)
+	VALUES (NEW.SongName, NEW.AlbumID, @GenreID, @Length, @TrackNumber)
+WHEN MATCHED THEN
+	UPDATE SET
+	S.GenreID = @GenreID,
+	S.[Length] = @Length,
+	S.TrackNumber = @TrackNumber;
 
 GO
 
 --If user doesn't exist, a new user is created, otherwise updates the user's Weight and DateDeleted columns
-CREATE OR ALTER PROCEDURE MusicProject.CreateUser
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateUser
    @Name NVARCHAR(32),
    @Password NVARCHAR(32),
    @Weight INT
@@ -276,6 +318,7 @@ WHEN NOT MATCHED THEN
 WHEN MATCHED THEN UPDATE SET
 	U.DateDeleted = NULL,
 	U.UserWeight = @Weight;
+
 GO
 
 --Flags user a being deleted by entering a non-null value for its DateDeleted column
@@ -293,10 +336,10 @@ USING
 WHEN MATCHED THEN
 	UPDATE SET
 		DateDeleted = SYSDATETIMEOFFSET();
---WHEN NOT MATCHED THEN 
+
 GO
 
---fetches the album from the database
+--Fetches the album under @Title from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchAlbum
    @Title NVARCHAR(128)
 AS
@@ -305,18 +348,18 @@ SELECT A.AlbumTitle, A.ReleaseDate, Ar.ArtistName, S.SongName,
 	S.[Length], P.ProducerName, R.RecordLabelName, C.CertificationName, 
 	G.GenreName, R.DateFounded, R.DateClosed, R.RecordLabelLocation
 FROM MusicProject.Album A
-INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
-INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
-INNER JOIN MusicProject.ProducerAlbum Pa ON Pa.AlbumID = A.AlbumID
-INNER JOIN MusicProject.Producer P ON P.ProducerID = Pa.ProducerID
-INNER JOIN MusicProject.RecordLabel R ON R.RecordLabelID = A.RecordLabelID
-INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
-INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
+	INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
+	INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
+	INNER JOIN MusicProject.ProducerAlbum Pa ON Pa.AlbumID = A.AlbumID
+	INNER JOIN MusicProject.Producer P ON P.ProducerID = Pa.ProducerID
+	INNER JOIN MusicProject.RecordLabel R ON R.RecordLabelID = A.RecordLabelID
+	INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
+	INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 WHERE A.AlbumTitle = @Title;
 
 GO
 
---fetches the artist from the database
+--Fetches the artist under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchArtist
    @Name NVARCHAR(128)
 AS
@@ -327,7 +370,9 @@ WHERE Ar.ArtistName = @Name;
 
 GO
 
---fetches the password from the database
+--Fetches the password of for the user under @Name
+-- double stupid method here - password should be hashed, and client should not get that hash, 
+--but things would have been fine if there was just a username used to track user and no password so IDC
 CREATE OR ALTER PROCEDURE MusicProject.FetchPassword
 	@Name NVARCHAR(32)
 AS
@@ -335,9 +380,10 @@ AS
 SELECT U.[Password]
 FROM MusicProject.[User] U
 WHERE U.UserName = @Name
+
 GO
 
---fetches the producer from the database
+--Fetches the producer under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchProducer
    @Name NVARCHAR(128)
 AS
@@ -348,7 +394,7 @@ WHERE P.ProducerName = @Name;
 
 GO
 
---fetches the record label from the database
+--Fetches the record label under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchRecordLabel
    @Name NVARCHAR(128)
 AS
@@ -360,7 +406,7 @@ WHERE R.RecordLabelName = @Name;
 
 GO
 
---fetches the reviews from the database
+--Fetches the review left by @UserName on @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.FetchReview
    @UserName NVARCHAR(32),
    @AlbumTitle NVARCHAR(32)
@@ -373,21 +419,21 @@ FROM MusicProject.Review R
 WHERE U.UserName = @UserName AND A.AlbumTitle = @AlbumTitle
 GO
 
---fetches the song from the database
+--Fetches the song under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchSong
    @Name NVARCHAR(32)
 AS
 
 SELECT S.SongName, A.AlbumTitle, Ar.ArtistName, G.GenreName, S.[Length]
 FROM MusicProject.Song S
-INNER JOIN MusicProject.Album A ON A.AlbumID = S.AlbumID
-INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
-INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
+	INNER JOIN MusicProject.Album A ON A.AlbumID = S.AlbumID
+	INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
+	INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 WHERE S.SongName = @Name;
 
 GO
 
---fetches the user from the database
+--Fetches the user under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchUser
 	@Name NVARCHAR(32)
 AS
@@ -397,7 +443,8 @@ FROM MusicProject.[User] U
 WHERE U.UserName = @Name AND U.DateDeleted IS NULL
 GO
 
---gets an album from the record label
+--Aggregating Query that gets a coutn of the total albums released by @LabelName in a period between @StartYear and @EndYear,
+--as well as how many were certified
 CREATE OR ALTER PROCEDURE MusicProject.GetAlbumsWithRecordLabel
    @StartYear DATE,
    @EndYear DATE,
@@ -414,34 +461,8 @@ WHERE R.RecordLabelName = @RecordLabelName AND A.ReleaseDate BETWEEN @StartYear 
 GROUP BY R.RecordLabelName
 
 GO
---EXEC MusicProject.GetRecordLabelsAlbums @StartYear = '1950', @EndYear = '1970', @RecordLabelName = 'Justo Institute'
 
---gets artists in the same window
-CREATE OR ALTER PROCEDURE MusicProject.GetArtistsInWindow
-   @LabelName NVARCHAR(128),
-   @StartYear DATE,
-   @EndYear DATE
-AS
-
-SELECT A.ArtistName
-FROM MusicProject.Artist A
-INNER JOIN MusicProject.Album Al ON Al.ArtistID = A.ArtistID
-INNER JOIN MusicProject.RecordLabel R ON R.RecordLabelID = Al.RecordLabelID
-WHERE R.RecordLabelName = @LabelName AND 
-	Al.ReleaseDate >= @StartYear AND
-	Al.ReleaseDate <= @EndYear;
-
-GO
-
---retrieves an artist
-CREATE OR ALTER PROCEDURE MusicProject.RetrieveArtists
-AS
-
-SELECT A.ArtistID, A.ArtistName
-FROM MusicProject.Artist A;
-GO
-
---retrives a review
+--Retrieves all reviews under @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.RetrieveReviewsByAlbum
 	@AlbumTitle NVARCHAR(128)
 AS
@@ -453,7 +474,7 @@ FROM MusicProject.Review R
 WHERE A.AlbumTitle = @AlbumTitle;
 GO
 
---Retrieves song by song name
+--Retrieves all songs under @Name
 CREATE OR ALTER PROCEDURE MusicProject.RetrieveSongsByName
    @Name NVARCHAR(64)
 AS
@@ -466,16 +487,16 @@ INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 WHERE S.SongName = @Name;
 GO
 
---Retrieves songs by album title
+--Retrieves all songs under @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.RetrieveSongsByAlbum
    @AlbumTitle NVARCHAR(32)
 AS
 
 SELECT A.AlbumTitle, S.SongName, Ar.ArtistName, G.GenreName, S.[Length]
 FROM MusicProject.Album A
-INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
-INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
-INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
+	INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
+	INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
+	INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 WHERE A.AlbumTitle = @AlbumTitle;
 
 GO
@@ -493,9 +514,9 @@ SELECT U.UserID,
 	   U.UserWeight, 
 	   COUNT(R.AlbumComment) AS CommentCount
 FROM MusicProject.Review R
-INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID
-INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
-INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
+	INNER JOIN MusicProject.[User] U ON U.UserID = R.UserID
+	INNER JOIN MusicProject.Album A ON A.AlbumID = R.AlbumID
+	INNER JOIN MusicProject.Artist Ar ON Ar.ArtistID = A.ArtistID
 WHERE Ar.ArtistID IN 
 	(
 		SELECT Ar.ArtistID
@@ -506,7 +527,7 @@ GROUP BY U.UserID, U.UserName, U.UserWeight
 ORDER BY UserScore DESC
 GO
 
---saves the review
+-- NEEDS DEPRECATION [can rework as CreateOrUpdateReview]- updates a review left by @UserName on @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.SaveReview
    @UserName NVARCHAR(32),
    @AlbumTitle NVARCHAR(128),
@@ -571,7 +592,7 @@ DECLARE @TrackCount INT = (
 );
 WITH CTE(GenreID, GenrePercentage) AS (
 	SELECT DISTINCT S.GenreID, ROUND(CAST(COUNT(S.SongID) AS FLOAT)/@TrackCount, 3) AS GenrePercentage
-	From MusicProject.Album A 
+	FROM MusicProject.Album A 
 		INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
 		INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
 	GROUP BY S.GenreID
@@ -579,30 +600,31 @@ WITH CTE(GenreID, GenrePercentage) AS (
 SELECT TOP(@Filter) WITH TIES CAST(SUM(Als.CertificationCount) AS FLOAT) AS GenreCertificationScore, G.GenreID, G.GenreName,
 	RANK() OVER (ORDER BY CAST(SUM(Als.CertificationCount) AS FLOAT) DESC) AS Ranking
 FROM (
-	SELECT A.AlbumID, A.AlbumTitle, 
-		SUM(
-			CASE
-				WHEN C.CertificationName = 'Diamond' THEN 100 * CTE.GenrePercentage
-				WHEN C.CertificationName = 'MultiPlatinum' THEN 10 * CTE.GenrePercentage
-				WHEN C.CertificationName = 'Platinum' THEN 5 * CTE.GenrePercentage
-				WHEN C.CertificationName = 'Gold' THEN 1 * CTE.GenrePercentage
-				ELSE 0
-			END
-		) AS CertificationCount
-	FROM MusicProject.Album A
-		INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
-		INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
-		INNER JOIN CTE ON CTE.GenreID = G.GenreID
-		INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
-	WHERE A.ReleaseDate BETWEEN @StartYear AND @EndYear
-	GROUP BY A.AlbumID, A.AlbumTitle
-) AS Als
-INNER JOIN MusicProject.Song S ON S.AlbumID = Als.AlbumID
-INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
+		SELECT A.AlbumID, A.AlbumTitle, 
+			SUM(
+				CASE
+					WHEN C.CertificationName = 'Diamond' THEN 100 * CTE.GenrePercentage
+					WHEN C.CertificationName = 'MultiPlatinum' THEN 10 * CTE.GenrePercentage
+					WHEN C.CertificationName = 'Platinum' THEN 5 * CTE.GenrePercentage
+					WHEN C.CertificationName = 'Gold' THEN 1 * CTE.GenrePercentage
+					ELSE 0
+				END
+			) AS CertificationCount
+		FROM MusicProject.Album A
+			INNER JOIN MusicProject.Song S ON S.AlbumID = A.AlbumID
+			INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
+			INNER JOIN CTE ON CTE.GenreID = G.GenreID
+			INNER JOIN MusicProject.Certification C ON C.CertificationID = A.CertificationID
+		WHERE A.ReleaseDate BETWEEN @StartYear AND @EndYear
+		GROUP BY A.AlbumID, A.AlbumTitle
+	) AS Als
+	INNER JOIN MusicProject.Song S ON S.AlbumID = Als.AlbumID
+	INNER JOIN MusicProject.Genre G ON G.GenreID = S.GenreID
 GROUP BY G.GenreID, G.GenreName, Als.CertificationCount
 ORDER BY CAST(SUM(Als.CertificationCount) AS FLOAT) DESC;
 GO
 
+--Populates the ProducerAlbum bridge table by adding @ProducerName to the list of producers on @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.UpdateProducerAlbum
    @ProducerName NVARCHAR(128),
    @AlbumTitle NVARCHAR(128)
