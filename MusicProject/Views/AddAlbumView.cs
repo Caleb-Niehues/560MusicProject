@@ -44,6 +44,9 @@ namespace MusicProject.Views
                 producers = album.Producers;
                 label = album.RecordLabel;
 
+                foreach (SongModel song in songs)
+                    length += song.Length;
+
                 uxTitleBox.Text = title;
                 uxTitleBox.ReadOnly = true;
 
@@ -113,7 +116,11 @@ namespace MusicProject.Views
         {
             if (songs.Contains(song))
             {
-                songs[songs.IndexOf(song)] = song;
+                var index = songs.IndexOf(song);
+                length -= songs[index].Length;
+                length += song.Length;
+                songs[index] = song;
+                
                 MessageBox.Show($"Updated {song.Name}");
             }
             else
