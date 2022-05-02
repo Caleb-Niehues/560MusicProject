@@ -462,23 +462,6 @@ GROUP BY R.RecordLabelName
 
 GO
 
---[POSSIBLY DEPRECATED] Aggregating Query that gets all artists that released an album with @LabelName in a period between @StartYear and @EndYear
-CREATE OR ALTER PROCEDURE MusicProject.GetArtistsInWindow
-   @LabelName NVARCHAR(128),
-   @StartYear DATE,
-   @EndYear DATE
-AS
-
-SELECT A.ArtistName
-FROM MusicProject.Artist A
-	INNER JOIN MusicProject.Album Al ON Al.ArtistID = A.ArtistID
-	INNER JOIN MusicProject.RecordLabel R ON R.RecordLabelID = Al.RecordLabelID
-WHERE R.RecordLabelName = @LabelName AND 
-	Al.ReleaseDate >= @StartYear AND
-	Al.ReleaseDate <= @EndYear;
-
-GO
-
 --Retrieves all reviews under @AlbumTitle
 CREATE OR ALTER PROCEDURE MusicProject.RetrieveReviewsByAlbum
 	@AlbumTitle NVARCHAR(128)
