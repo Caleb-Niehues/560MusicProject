@@ -158,8 +158,8 @@ INSERT MusicProject.Artist(ArtistName)
 VALUES(@ArtistName);
 GO
 
---creates an album
-CREATE OR ALTER PROCEDURE MusicProject.CreateAlbum 
+--If album already exists under name and artist, updates the album, otherwise creates a new one
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateAlbum 
  @AlbumTitle NVARCHAR(128), @ReleaseDate DATE, @ArtistName NVARCHAR(128),
 	@RecordLabelName NVARCHAR(128), @CertificationName NVARCHAR(64)
 AS
@@ -181,8 +181,17 @@ DECLARE @CertificationID INT =
 	FROM MusicProject.Certification C
 	WHERE C.CertificationName = @CertificationName
 )
-INSERT MusicProject.Album(AlbumTitle, ReleaseDate, ArtistID, RecordLabelID, CertificationID)
-VALUES (@AlbumTitle, @ReleaseDate, @ArtistID, @RecordLabelID, @CertificationID)
+MERGE MusicProject.Album A
+USING (VALUES(@ArtistID, @AlbumTitle)) NEW (ArtistID, AlbumTitle)
+	ON NEW.ArtistID = A.ArtistID AND NEW.AlbumTitle = A.AlbumTitle
+WHEN NOT MATCHED THEN
+	INSERT (AlbumTitle, ReleaseDate, ArtistID, RecordLabelID, CertificationID)
+	VALUES (@AlbumTitle, @ReleaseDate, @ArtistID, @RecordLabelID, @CertificationID)
+WHEN MATCHED THEN
+	UPDATE SET 
+		A.ReleaseDate = @ReleaseDate,
+		A.RecordLabelID = @RecordLabelID,
+		A.CertificationID = @CertificationID;
 GO
 
 --creates a producer
@@ -239,8 +248,8 @@ INSERT MusicProject.Review (UserID, AlbumID, AlbumComment, AlbumRating, DateAdde
 );
 GO
 
---creates a song
-CREATE OR ALTER PROCEDURE MusicProject.CreateSong
+--If song already exists under name and album, updates the song, otherwise creates a new one
+CREATE OR ALTER PROCEDURE MusicProject.CreateOrUpdateSong
    @SongName NVARCHAR(64),
    @AlbumTitle NVARCHAR(128),
    @GenreName NVARCHAR(64),
@@ -248,15 +257,28 @@ CREATE OR ALTER PROCEDURE MusicProject.CreateSong
    @TrackNumber INT
 AS
 
-INSERT MusicProject.Song(SongName, AlbumID, GenreID, [Length], TrackNumber)
-SELECT S.SongName, A.AlbumID, G.GenreID, S.[Length], S.TrackNumber
-FROM
-	(
-		VALUES
-			(@SongName, @AlbumTitle, @GenreName, @Length, @TrackNumber))
-			S(SongName, AlbumName, GenreName, [Length], TrackNumber)
-INNER JOIN MusicProject.Album A ON A.AlbumTitle = S.AlbumName
-INNER JOIN MusicProject.Genre G ON G.GenreName = S.GenreName; 
+DECLARE @AlbumID INT = (
+	SELECT A.AlbumID
+	FROM MusicProject.Album A
+	WHERE A.AlbumTitle = @AlbumTitle
+)
+DECLARE @GenreID INT = (
+	SELECT GenreID
+	FROM MusicProject.Genre G
+	WHERE G.GenreName = @GenreName
+)
+
+MERGE MusicProject.Song S
+USING (VALUES(@SongName, @AlbumID)) NEW (SongName, AlbumID)
+	ON NEW.SongName = S.SongName AND NEW.AlbumID = S.AlbumID
+WHEN NOT MATCHED THEN
+	INSERT (SongName, AlbumID, GenreID, [Length], TrackNumber)
+	VALUES (NEW.SongName, NEW.AlbumID, @GenreID, @Length, @TrackNumber)
+WHEN MATCHED THEN
+	UPDATE SET
+	S.GenreID = @GenreID,
+	S.[Length] = @Length,
+	S.TrackNumber = @TrackNumber;
 
 GO
 
