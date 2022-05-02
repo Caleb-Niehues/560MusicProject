@@ -27,7 +27,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.AddArtist", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateArtist", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -133,26 +133,6 @@ namespace MusicProject.Repositories
             }
 
             return artists;
-        }
-
-        /// <summary>
-        /// test - don't think this is actually necessary
-        /// </summary>
-        /// <returns></returns>
-        public IReadOnlyList<ArtistModel> RetrieveArtists()
-        {
-            using (var connection = new SqlConnection(connectionString))
-            {
-                using (var command = new SqlCommand("MusicProject.RetrieveArtists", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    connection.Open();
-
-                    using (var reader = command.ExecuteReader())
-                        return TranslateArtists(reader);
-                }
-            }
         }
 
         /// <summary>

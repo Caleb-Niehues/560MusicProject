@@ -33,7 +33,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateUser", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateOrUpdateUser", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 

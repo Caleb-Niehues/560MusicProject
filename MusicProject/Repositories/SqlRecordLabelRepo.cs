@@ -22,7 +22,7 @@ namespace MusicProject.Repositories
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    using (var command = new SqlCommand("MusicProject.CreateRecordLabel", connection))
+                    using (var command = new SqlCommand("MusicProject.CreateOrUpdateRecordLabel", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
