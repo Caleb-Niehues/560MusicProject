@@ -31,12 +31,12 @@ namespace MusicProject.Models
         /// <summary>
         /// 
         /// </summary>
-        private string _albumName;
+        private string _albumTitle;
 
         /// <summary>
         /// album from where the song comes from, perhaps have a list of songs in the album class instead?
         /// </summary>
-        public string AlbumName => _albumName;
+        public string AlbumTitle => _albumTitle;
 
         /// <summary>
         /// 
@@ -79,7 +79,7 @@ namespace MusicProject.Models
         public SongModel(string name, string album, string artist, Genre genre, TimeSpan length)
         {
             this._name = name;
-            this._albumName = album;
+            this._albumTitle = album;
             this._artist = artist;
             this._genre = genre;
             this._length = length;
@@ -87,8 +87,19 @@ namespace MusicProject.Models
 
         public override string ToString()
         {
-            return $"{Name} - {AlbumName} - " +
+            return $"{Name} - {AlbumTitle} - " +
                 $"{Artist} - {Enum.GetName(typeof(Genre), this.Genre)} - {Length}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            if (obj is SongModel)
+            {
+                var temp = (SongModel)obj;
+                equals = _name.Equals(temp.Name) && _albumTitle.Equals(temp.AlbumTitle);
+            }
+            return equals;
         }
     }
 }

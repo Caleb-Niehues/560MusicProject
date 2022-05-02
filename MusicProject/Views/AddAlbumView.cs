@@ -55,6 +55,9 @@ namespace MusicProject.Views
                 uxCertificationCombo.SelectedIndex = (int)album.Certification;
 
                 uxLabelLabel.Text = $"Record label: {label.Name}";
+
+                uxFinishButton.Enabled = isFinished();
+                uxNewSongButton.Enabled = true;
             }
 
             uxProducerList.DataSource = producers;
@@ -108,7 +111,14 @@ namespace MusicProject.Views
 
         private void updateSongs(SongModel song)
         {
-            songs.Add(song);
+            if (songs.Contains(song))
+            {
+                songs[songs.IndexOf(song)] = song;
+                MessageBox.Show($"Updated {song.Name}");
+            }
+            else
+                songs.Add(song);
+
             length += song.Length;
             uxSongList.DataSource = null;
             uxSongList.DataSource = songs;
