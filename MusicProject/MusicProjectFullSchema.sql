@@ -1191,6 +1191,7 @@ WITH CTE(RecordLabelName, DateFounded, DateClosed, RecordLabelLocation) AS
 		FROM
 			(
 			VALUES
+ (N'TDE', N'1999', NULL, N'California'),
  (N'Eu Limited', N'1925', N'1946', N'Western Cape'),
  (N'Justo Institute', N'1909', N'1949', N'Volgograd Oblast'),
  (N'Erat Associates', N'1921', N'1995', N'Viken'),
@@ -2076,6 +2077,7 @@ WITH CTE(ProducerName) AS
 		FROM
 			(
 			VALUES
+(N'DJ Drama'),
 (N'Maxwell Davidson'),
 (N'Macy Kelley'),
 (N'Brandon Moreno'),
