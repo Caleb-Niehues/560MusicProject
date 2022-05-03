@@ -394,6 +394,17 @@ WHERE P.ProducerName = @Name;
 
 GO
 
+--Retrieves all producers under @Name
+CREATE OR ALTER PROCEDURE MusicProject.RetrieveProducersByName
+	@Name NVARCHAR(128)
+AS
+
+SELECT P.ProducerName
+FROM MusicProject.Producer P
+WHERE P.ProducerName = @Name;
+
+GO
+
 --Fetches the record label under @Name from the DB
 CREATE OR ALTER PROCEDURE MusicProject.FetchRecordLabel
    @Name NVARCHAR(128)
